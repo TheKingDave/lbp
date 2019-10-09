@@ -1,19 +1,30 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:lbp/api/Api.dart';
+import 'package:lbp/api/ApiResponse.dart';
+import 'package:lbp/api/login/LoginRespsone.dart';
 import 'package:lbp/helpers.dart';
 
-Future<bool> login(String username, String password) async {
+Future<ApiResponse<LoginResponse>> login(String username, String password) async {
   final sendObj = {
     "username": encode(username),
     "password": encode(password),
   };
 
-  cPrint("Send msg");
+  var res;
 
-  var res = await http.post("https://lb-planer.tgm.ac.at/api/v1/login",
-      body: sendObj);
+  try {
+    res = await http.post(Api.get().getApiUrl("login"),
+        body: sendObj);
+  } on Exception catch(e) {
+    cPrint(e.toString());
+    return ApiResponse<LoginResponse>.error("network_err");
+  }
 
-  cPrint("Status ${res.statusCode}");
-  cPrint(res.body);
+  if(res.statusCode != 200) {
+    return ApiResponse<LoginResponse>.error("network_err");
+  }
 
-  return true;
+  return ApiResponse<LoginResponse>.fromJson(jsonDecode(res.body));
 }
