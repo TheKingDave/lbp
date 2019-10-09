@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:lbp/api/login/LoginRespsone.dart';
 import 'package:lbp/api/strings/Strings.dart';
 import 'package:lbp/helpers.dart';
@@ -28,6 +30,16 @@ class ApiResponse<T extends ApiResponses> {
       error = parsedJson['err'];
     } else {
       resp = ApiResponses.create(T, parsedJson);
+    }
+  }
+
+  factory ApiResponse.fromRawJson(String rawJson) {
+    try {
+      Map<String, dynamic> parsedJson = jsonDecode(rawJson);
+      return ApiResponse<T>.fromJson(parsedJson);
+    } on Exception catch(e) {
+      cPrint("ApiResponse.fromRawJson " + e.toString());
+      return ApiResponse<T>.error("UNKNOWN_ERROR");
     }
   }
 

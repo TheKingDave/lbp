@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lbp/api/login/LoginApi.dart';
+import 'package:lbp/api/Api.dart';
+import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/strings/Strings.dart';
 import 'package:lbp/helpers.dart';
 
@@ -77,27 +78,29 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
                 Padding(padding: EdgeInsets.only(top: 16.0)),
                 ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: double.infinity),
+                    constraints:
+                        const BoxConstraints(minWidth: double.infinity),
                     child: RaisedButton(
                       padding: EdgeInsets.all(16),
-                  onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      final un = _usernameController.text;
-                      final pw = _passwordController.text;
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          final un = _usernameController.text;
+                          final pw = _passwordController.text;
 
-                      final res = await login(un, pw);
-                      cPrint(res.toString());
+                          final res = await Api.get()
+                              .login(LoginRequest(username: un, password: pw));
+                          cPrint("RES: " + res.toString());
 
-                      if (res.hasError) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text(res.error),
-                          backgroundColor: Color(0xffc83b2e),
-                        ));
-                      }
-                    }
-                  },
-                  child: Text(Strings.getCapitalize("login")),
-                )),
+                          if (res.hasError) {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(res.error),
+                              backgroundColor: Color(0xffc83b2e),
+                            ));
+                          }
+                        }
+                      },
+                      child: Text(Strings.getCapitalize("login")),
+                    )),
               ],
             )));
   }
