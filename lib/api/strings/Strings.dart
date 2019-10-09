@@ -3,8 +3,8 @@ import 'package:lbp/helpers.dart';
 class Strings {
   static final Map<String, String> strings = {};
 
-  static String getString(String short) {
-    return strings[short] ?? "?";
+  static String getString(String short, [def = "?"]) {
+    return strings[short] ?? def;
   }
 
   static String getCapitalize(String short) {
