@@ -1,5 +1,3 @@
-import 'package:lbp/helpers.dart';
-
 class Strings {
   static final Map<String, String> strings = {};
 

@@ -35,22 +35,3 @@ class PostRequest<T extends ApiResponses, S extends ApiRequest>
     return ApiResponse<T>.fromRawJson(res.body);
   }
 }
-
-/*
-http.Response res;
-    try {
-      res = await http.post(Api.get().getApiUrl(url),
-          headers: headers, body: body, encoding: encoding);
-    } on Exception catch (e) {
-      cPrint(e.toString());
-      return ApiResponse<T>.error("network_err");
-    }
-
-    if (res.statusCode != 200) {
-      cPrint("Wrong status code. ${res.statusCode}");
-      return ApiResponse<T>.error("network_err");
-    }
-
-    return ApiResponse<T>.fromRawJson(res.body);
-  }
- */
