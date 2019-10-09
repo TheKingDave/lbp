@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Lernbüro Planer',
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
+        '/': (context) => LoginScreenScaffold(),
       },
       theme: ThemeData(
         brightness: Brightness.light,
