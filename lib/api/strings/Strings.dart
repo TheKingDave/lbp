@@ -1,10 +1,15 @@
 import 'package:lbp/helpers.dart';
 
 class Strings {
-  static final strings = {};
+  static final Map<String, String> strings = {};
 
   static String getString(String short) {
     return strings[short] ?? "?";
+  }
+
+  static String getCapitalize(String short) {
+    final s = Strings.getString(short);
+    return '${s[0].toUpperCase()}${s.substring(1)}';
   }
 
   static void setString(String short, String string) {
