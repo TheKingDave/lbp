@@ -16,9 +16,7 @@ class Api {
     return _api;
   }
 
-  final data = {
-    ApiData.loginData: null,
-  };
+  final Map<ApiData, ApiResponses> data = {};
 
   void setData(ApiData dataName, ApiResponse response) {
     if(!response.hasError()) {
