@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
+import 'package:lbp/screens/DefaultScaffold.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 
 void main() => runApp(MyApp());
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreenScaffold(),
+        '/overview': (context) => DefaultScaffold(),
       },
       theme: ThemeData(
         brightness: Brightness.light,

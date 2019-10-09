@@ -89,13 +89,14 @@ class LoginScreenState extends State<LoginScreen> {
 
                           final res = await Api.get()
                               .login(LoginRequest(username: un, password: pw));
-                          cPrint("RES: " + res.toString());
 
                           if (res.hasError()) {
                             Scaffold.of(context).showSnackBar(SnackBar(
                               content: Text(res.error),
                               backgroundColor: Color(0xffc83b2e),
                             ));
+                          } else {
+                            Navigator.pushNamed(context, "/overview");
                           }
                         }
                       },
