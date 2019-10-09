@@ -91,7 +91,7 @@ class LoginScreenState extends State<LoginScreen> {
                               .login(LoginRequest(username: un, password: pw));
                           cPrint("RES: " + res.toString());
 
-                          if (res.hasError) {
+                          if (res.hasError()) {
                             Scaffold.of(context).showSnackBar(SnackBar(
                               content: Text(res.error),
                               backgroundColor: Color(0xffc83b2e),

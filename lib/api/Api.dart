@@ -1,3 +1,4 @@
+import 'package:lbp/api/ApiData.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/requests/PostRequest.dart';
@@ -15,12 +16,37 @@ class Api {
     return _api;
   }
 
+  final data = {
+    ApiData.loginData: null,
+  };
+
+  void setData(ApiData dataName, ApiResponse response) {
+    if(!response.hasError()) {
+      data[dataName] = response.resp;
+    }
+  }
+
+  dynamic getData(ApiData dataName) {
+    return data[dataName];
+  }
+
+  bool existData(ApiData dataName) {
+    return data.containsKey(dataName);
+  }
+
   String getApiUrl([String extension = ""]) {
     return "https://lb-planer.tgm.ac.at/api/v1/$extension";
     //return "http://redt6a.thekingdave.com:3001/api/v1/$extension";
   }
 
   Future<ApiResponse<LoginResponse>> login(LoginRequest req) async {
-    return await _requests['login'].send(req);
+    final res = await _requests['login'].send(req);
+    setData(ApiData.loginData, res);
+    return res;
   }
+
+  bool isLoggedIn() {
+    return existData(ApiData.loginData);
+  }
+
 }

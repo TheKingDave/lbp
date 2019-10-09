@@ -43,7 +43,7 @@ class ApiResponse<T extends ApiResponses> {
     }
   }
 
-  bool get hasError {
+  bool hasError() {
     return _error != null;
   }
 
@@ -55,7 +55,7 @@ class ApiResponse<T extends ApiResponses> {
 
   @override
   String toString() {
-    if(hasError) {
+    if(hasError()) {
       return "ApiResponse<$T>{error: $error}";
     } else {
       return "ApiResponse<$T>{resp: $resp}";
