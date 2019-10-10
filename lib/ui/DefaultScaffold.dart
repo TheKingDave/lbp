@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lbp/helpers.dart';
 import 'package:lbp/ui/NavDrawer.dart';
 
 class DefaultScaffold extends StatelessWidget {
