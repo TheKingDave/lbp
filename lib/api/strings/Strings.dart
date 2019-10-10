@@ -22,4 +22,16 @@ class Strings {
   static void overrideMany(Map<String, String> strings) {
     strings.forEach((k, v) => Strings.strings[k] = v);
   }
+
+  static const Map<int, String> numberWeekdayMap = {
+    1: "monday",
+    2: "tuesday",
+    3: "wednesday",
+    4: "thursday",
+    5: "friday",
+  };
+
+  static String getWeekdayString(int weekday) {
+    return getCapitalize(numberWeekdayMap[weekday]);
+  }
 }

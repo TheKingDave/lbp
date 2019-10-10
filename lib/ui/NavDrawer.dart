@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lbp/api/Api.dart';
 import 'package:lbp/api/ApiData.dart';
 import 'package:lbp/api/login/LoginRespsone.dart';
-import 'package:lbp/helpers.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/ui/UserAvatar.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -11,7 +11,6 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     Api api = Api.get();
     LoginResponse data = api.getData(ApiData.loginData);
-    cPrint(data.photo);
 
     return Drawer(
         child: ListView(
@@ -24,16 +23,31 @@ class NavDrawer extends StatelessWidget {
           title: Text("Overview"),
           onTap: () => cPrint("NAV: Overview"),
         ),
+        Divider(),
+
         ListTile(
-          title: Text("Item 2"),
-          onTap: () => cPrint("NAV: Item 2"),
+          title: Text("Tuesday"),
+          onTap: () => cPrint("NAV: Tuesday"),
         ),
-        Align(
-            alignment: Alignment.bottomLeft,
-            child: ListTile(
-              title: Text("Settings"),
-              onTap: () => cPrint("NAV: Settings"),
-            ))
+        ListTile(
+          title: Text("Wendesday"),
+          onTap: () => cPrint("NAV: Wendesday"),
+        ),
+        ListTile(
+          title: Text("Thursday"),
+          onTap: () => cPrint("NAV: Thursday"),
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.feedback),
+          title: Text("Send feedback"),
+          onTap: () => cPrint("NAV: Issue"),
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text("Settings"),
+          onTap: () => Navigator.pushNamed(context, "/settings"),
+        ),
       ],
     ));
   }

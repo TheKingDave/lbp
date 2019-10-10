@@ -12,6 +12,11 @@ class DefaultStrings {
       "LOGIN_FAILED_NOT_AUTHORIZED": "You are not authorized to login 😓",
       "UNKNOWN_ERROR": "An unknown error has occurred",
       "network_err": "Network error",
+      "monday": "monday",
+      "tuesday": "tuesday",
+      "wednesday": "wednesday",
+      "thursday": "thursday",
+      "friday": "friday",
     };
 
     Strings.overrideMany(strings);

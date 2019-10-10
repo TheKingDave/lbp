@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/api/ApiRequest.dart';
-import 'package:lbp/helpers.dart';
+import 'package:lbp/etc/helpers.dart';
 
 class LoginRequest implements ApiRequest {
   String username;

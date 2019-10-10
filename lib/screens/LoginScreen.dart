@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lbp/api/Api.dart';
 import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/strings/Strings.dart';
-import 'package:lbp/helpers.dart';
+import 'package:lbp/etc/helpers.dart';
 
-class LoginScreenScaffold extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
+  static const String routeName = "/";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,12 +15,17 @@ class LoginScreenScaffold extends StatelessWidget {
           border: Border(
               top: BorderSide(
                   width: 20.0, color: Theme.of(context).primaryColor))),
-      child: LoginScreen(),
+      child: _LoginScreen(),
     ));
   }
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class _LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<_LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _usernameController = TextEditingController();
@@ -105,9 +112,4 @@ class LoginScreenState extends State<LoginScreen> {
               ],
             )));
   }
-}
-
-class LoginScreen extends StatefulWidget {
-  @override
-  LoginScreenState createState() => LoginScreenState();
 }

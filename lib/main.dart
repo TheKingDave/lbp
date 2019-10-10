@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
+import 'package:lbp/screens/OverviewScreen.dart';
+import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 
@@ -13,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Lernbüro Planer',
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreenScaffold(),
-        '/overview': (context) => DefaultScaffold(),
+        '/': (context) => LoginScreen(),
+        '/overview': (context) => DefaultScaffold(name: "Overview", child: OverviewScreen()),
+        '/settings': (context) => DefaultScaffold(name: "Settings", child: SettingsScreen()),
       },
       theme: ThemeData(
         brightness: Brightness.light,

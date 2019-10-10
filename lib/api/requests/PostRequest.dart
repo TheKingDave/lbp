@@ -5,7 +5,7 @@ import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/Request.dart';
 import 'package:http/http.dart' as http;
 
-import '../../helpers.dart';
+import '../../etc/helpers.dart';
 import '../Api.dart';
 
 class PostRequest<T extends ApiResponses, S extends ApiRequest>
