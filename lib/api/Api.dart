@@ -32,8 +32,12 @@ class Api {
     return data.containsKey(dataName);
   }
 
+  String getUrl([String extension = ""]) {
+    return "https://lb-planer.tgm.ac.at/$extension";
+  }
+
   String getApiUrl([String extension = ""]) {
-    return "https://lb-planer.tgm.ac.at/api/v1/$extension";
+    return "${getUrl()}api/v1/$extension";
     //return "http://redt6a.thekingdave.com:3001/api/v1/$extension";
   }
 

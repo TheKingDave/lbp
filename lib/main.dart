@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
-import 'package:lbp/screens/DefaultScaffold.dart';
+import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 
 void main() => runApp(MyApp());
