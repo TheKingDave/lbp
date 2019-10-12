@@ -10,18 +10,14 @@ import '../Api.dart';
 
 class PostRequest<T extends ApiResponses, S extends ApiRequest>
     implements Request {
-  String url;
-  Map<String, String> headers;
-  Encoding encoding;
-
-  PostRequest(this.url, {this.headers, this.encoding});
-
   @override
-  Future<ApiResponse<ApiResponses>> send([ApiRequest req]) async {
+  Future<ApiResponse<T>> send(ApiRequest req) async {
     http.Response res;
     try {
-      res = await http.post(Api.get().getApiUrl(url),
-          headers: headers, body: req?.getBody(), encoding: encoding);
+      res = await http.post(Api.get().getApiUrl(req.getEndpoint()),
+          headers: req.getHeaders(),
+          body: req?.getBody(),
+          encoding: req.getEncoding());
     } on Exception catch (e) {
       cPrint("${this} " + e.toString());
       return ApiResponse<T>.error("network_err");

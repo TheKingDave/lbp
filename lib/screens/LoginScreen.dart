@@ -60,10 +60,10 @@ class _LoginScreenState extends State<_LoginScreen> {
                   ),
                   validator: (value) {
                     if (value.contains('@')) {
-                      return 'Please enter your shorthand. Not your email';
+                      return 'Please enter your shorthand. Not your email.';
                     }
                     if (value.isEmpty) {
-                      return 'Please enter your username';
+                      return 'Please enter your username.';
                     }
                     return null;
                   },

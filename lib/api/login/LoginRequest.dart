@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/etc/helpers.dart';
 
-class LoginRequest implements ApiRequest {
+class LoginRequest extends ApiRequest {
   String username;
   String password;
 
@@ -25,5 +25,15 @@ class LoginRequest implements ApiRequest {
   @override
   String getBody() {
     return jsonEncode(this.toJson());
+  }
+
+  @override
+  String getEndpoint() {
+    return "login";
+  }
+
+  @override
+  String toString() {
+    return 'LoginRequest{username: $username, password: <hidden>}';
   }
 }

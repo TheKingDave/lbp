@@ -1,6 +1,5 @@
 import 'package:lbp/api/ApiData.dart';
 import 'package:lbp/api/ApiResponse.dart';
-import 'package:lbp/api/etc/Languages.dart';
 import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/requests/PostRequest.dart';
 import 'package:lbp/data/LoginData.dart';
@@ -10,8 +9,7 @@ class Api {
   static final Api _api = new Api();
 
   static final _requests = {
-    "login": PostRequest<LoginData, LoginRequest>("login",
-        headers: {"content-type": "application/json"}),
+    "login": PostRequest<LoginData, LoginRequest>(),
   };
 
   static Api get() {
