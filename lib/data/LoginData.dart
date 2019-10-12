@@ -1,6 +1,6 @@
 import 'package:lbp/api/ApiResponse.dart';
 
-class LoginResponse extends ApiResponses {
+class LoginData extends ApiResponses {
   String $class;
   String fullName;
   String email;
@@ -10,7 +10,7 @@ class LoginResponse extends ApiResponses {
   bool isTeacher;
   String photo;
 
-  LoginResponse(
+  LoginData(
       {this.$class,
       this.fullName,
       this.email,
@@ -20,7 +20,7 @@ class LoginResponse extends ApiResponses {
       this.isTeacher,
       this.photo});
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  LoginData.fromJson(Map<String, dynamic> json) {
     $class = json['class'];
     fullName = json['FullName'];
     email = json['email'];

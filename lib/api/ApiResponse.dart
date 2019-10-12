@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:lbp/api/login/LoginRespsone.dart';
+import 'package:lbp/data/LoginData.dart';
 import 'package:lbp/api/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 
 class ApiResponses {
   static final _constructors = {
-    LoginResponse: (Map<String, dynamic> json) => LoginResponse.fromJson(json),
+    LoginData: (Map<String, dynamic> json) => LoginData.fromJson(json),
   };
 
   static ApiResponses create(Type type, Map<String, dynamic> json) {

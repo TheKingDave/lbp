@@ -1,14 +1,16 @@
 import 'package:lbp/api/ApiData.dart';
 import 'package:lbp/api/ApiResponse.dart';
+import 'package:lbp/api/etc/Languages.dart';
 import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/requests/PostRequest.dart';
-import 'package:lbp/api/login/LoginRespsone.dart';
+import 'package:lbp/data/LoginData.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static final Api _api = new Api();
 
   static final _requests = {
-    "login": PostRequest<LoginResponse, LoginRequest>("login",
+    "login": PostRequest<LoginData, LoginRequest>("login",
         headers: {"content-type": "application/json"}),
   };
 
@@ -17,6 +19,13 @@ class Api {
   }
 
   final Map<ApiData, ApiResponses> data = {};
+  SharedPreferences settings;
+
+  init() async {
+    settings = await SharedPreferences.getInstance();
+    // TODO: remove clear
+    settings.clear();
+  }
 
   void setData(ApiData dataName, ApiResponse response) {
     if(!response.hasError()) {
@@ -41,7 +50,7 @@ class Api {
     //return "http://redt6a.thekingdave.com:3001/api/v1/$extension";
   }
 
-  Future<ApiResponse<LoginResponse>> login(LoginRequest req) async {
+  Future<ApiResponse<LoginData>> login(LoginRequest req) async {
     final res = await _requests['login'].send(req);
     setData(ApiData.loginData, res);
     return res;

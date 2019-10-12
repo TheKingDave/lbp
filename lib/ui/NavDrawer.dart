@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lbp/api/Api.dart';
 import 'package:lbp/api/ApiData.dart';
-import 'package:lbp/api/login/LoginRespsone.dart';
+import 'package:lbp/data/LoginData.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/ui/UserAvatar.dart';
 
@@ -10,7 +10,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Api api = Api.get();
-    LoginResponse data = api.getData(ApiData.loginData);
+    LoginData data = api.getData(ApiData.loginData);
 
     return Drawer(
         child: ListView(
