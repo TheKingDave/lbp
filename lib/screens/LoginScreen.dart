@@ -4,6 +4,7 @@ import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/strings/Strings.dart';
 import 'package:lbp/data/LoginData.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/states/FetchState.dart';
 import 'package:lbp/ui/ErrorNotifier.dart';
@@ -95,11 +96,8 @@ class _LoginScreenState extends State<_LoginScreen> {
                     child: new StoreConnector<AppState, _LoginScreenModel>(
                       converter: (store) => _LoginScreenModel(
                           state: store.state.login,
-                          login: (username, password) => store.dispatch(
-                              FetchDataAction<LoginData, LoginRequest>(
-                                  LoginRequest(
-                                      username: username,
-                                      password: password)))),
+                          login: (un, pw) => store.dispatch(
+                              ApiLoginAction(username: un, password: pw))),
                       builder: (context, model) {
                         final loading = model.state.loading;
 
@@ -113,14 +111,6 @@ class _LoginScreenState extends State<_LoginScreen> {
                                     final pw = _passwordController.text;
 
                                     model.login(un, pw);
-
-                                    /*
-                                    Scaffold.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(res.error),
-                                        backgroundColor: Color(0xffc83b2e),
-                                      ));
-                                     */
 
                                     // Navigator.pushNamed(context, "/overview");
                                   }

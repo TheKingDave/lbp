@@ -5,19 +5,14 @@ import 'package:lbp/api/strings/DefaultStrings.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
+import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
+import 'package:lbp/redux/middleware/LogginMiddleware.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:redux/redux.dart';
-
-loggingMiddleware(Store<AppState> store, action, NextDispatcher next) {
-  cPrint('loggingMiddleware $action');
-
-  next(action);
-  // cPrint('loggingMiddleware ${store.state.login}');
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,12 +22,14 @@ void main() async {
 
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware
-  final store =
-      new Store(rootReducer, initialState: AppState.initial(), middleware: [
-    loggingMiddleware,
-    fetchMiddleware,
-    loggingMiddleware,
-  ]);
+  final store = new Store<AppState>(rootReducer,
+      initialState: AppState.initial(), middleware: [
+        LoggingMiddleware("1"),
+        ApiMiddleware<AppState>(),
+        LoggingMiddleware("2"),
+        fetchMiddleware,
+        LoggingMiddleware("3"),
+      ]);
   await Api.get().init();
 
   runApp(LBPApp(store: store));
