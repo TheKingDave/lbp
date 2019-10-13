@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lbp/api/Api.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/api/login/LoginRequest.dart';
 import 'package:lbp/api/strings/Strings.dart';
-import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/FetchAction.dart';
+import 'package:lbp/redux/states/FetchState.dart';
+import 'package:lbp/ui/ErrorNotifier.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "/";
@@ -10,13 +14,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: ErrorNotifier(
+            child: Container(
       decoration: BoxDecoration(
           border: Border(
               top: BorderSide(
                   width: 20.0, color: Theme.of(context).primaryColor))),
       child: _LoginScreen(),
-    ));
+    )));
   }
 }
 
@@ -87,29 +92,60 @@ class _LoginScreenState extends State<_LoginScreen> {
                 ConstrainedBox(
                     constraints:
                         const BoxConstraints(minWidth: double.infinity),
-                    child: RaisedButton(
-                      padding: EdgeInsets.all(16),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          final un = _usernameController.text;
-                          final pw = _passwordController.text;
+                    child: new StoreConnector<AppState, _LoginScreenModel>(
+                      converter: (store) => _LoginScreenModel(
+                          state: store.state.login,
+                          login: (username, password) => store.dispatch(
+                              FetchDataAction<LoginData, LoginRequest>(
+                                  LoginRequest(
+                                      username: username,
+                                      password: password)))),
+                      builder: (context, model) {
+                        final loading = model.state.loading;
 
-                          final res = await Api.get()
-                              .login(LoginRequest(username: un, password: pw));
+                        return RaisedButton(
+                          padding: EdgeInsets.all(loading ? 8 : 16),
+                          onPressed: loading
+                              ? null
+                              : () async {
+                                  if (_formKey.currentState.validate()) {
+                                    final un = _usernameController.text;
+                                    final pw = _passwordController.text;
 
-                          if (res.hasError()) {
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text(res.error),
-                              backgroundColor: Color(0xffc83b2e),
-                            ));
-                          } else {
-                            Navigator.pushNamed(context, "/overview");
-                          }
-                        }
+                                    model.login(un, pw);
+
+                                    /*
+                                    Scaffold.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(res.error),
+                                        backgroundColor: Color(0xffc83b2e),
+                                      ));
+                                     */
+
+                                    // Navigator.pushNamed(context, "/overview");
+                                  }
+                                },
+                          child: loading
+                              ? SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 3,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
+                                  ))
+                              : Text(Strings.getCapitalize("login")),
+                        );
                       },
-                      child: Text(Strings.getCapitalize("login")),
                     )),
               ],
             )));
   }
+}
+
+class _LoginScreenModel {
+  final FetchState<LoginData> state;
+  final void Function(String username, String password) login;
+
+  _LoginScreenModel({this.state, this.login});
 }

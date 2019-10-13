@@ -10,7 +10,5 @@ class FetchState<T> {
     return "FetchState<$T> {loading: $loading, error: $error, data: $data}";
   }
 
-  static FetchState<T> initial<T>() {
-    return FetchState<T>(null, false, null);
-  }
+  factory FetchState.initial() => FetchState<T>(null, false, null);
 }
