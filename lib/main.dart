@@ -36,7 +36,7 @@ void main() async {
 }
 
 class LBPApp extends StatelessWidget {
-  Store store;
+  final Store store;
 
   LBPApp({@required this.store});
 
