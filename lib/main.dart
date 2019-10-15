@@ -8,10 +8,10 @@ import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
+import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
-import 'package:lbp/screens/LoginScreen.dart';
 import 'package:redux/redux.dart';
 
 void main() async {

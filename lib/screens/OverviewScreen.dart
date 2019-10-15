@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lbp/api/lessons/Lesson.dart';
 import 'package:lbp/api/lessons/Period.dart';
 import 'package:lbp/etc/HexColor.dart';
 

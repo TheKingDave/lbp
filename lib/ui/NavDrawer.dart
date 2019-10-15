@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:lbp/data/LoginData.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:lbp/ui/UserAvatar.dart';
 
 class NavDrawer extends StatelessWidget {
