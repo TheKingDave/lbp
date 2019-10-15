@@ -23,15 +23,15 @@ class LoginData extends ApiResponses {
     if (email == "NULL") email = null;
   }
 
-  factory LoginData.fromOther(LoginData other,
-          {$class,
-          fullName,
-          email,
-          darkMode,
-          language,
-          sessionKey,
-          isTeacher,
-          photo}) =>
+  factory LoginData.copy(LoginData other,
+          {String $class,
+          String fullName,
+          String  email,
+          bool darkMode,
+          String language,
+          String sessionKey,
+          bool isTeacher,
+          String photo}) =>
       LoginData(
         $class: $class ?? other.$class,
         fullName: fullName ?? other.fullName,
