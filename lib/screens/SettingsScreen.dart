@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lbp/api/Api.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/api/etc/Languages.dart';
-import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/selectors/UserSelectors.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -10,35 +11,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _darkMode = Api
-      .get()
-      .settings
-      .getBool("darkmode") ?? false;
-
-  Language _language = Language(Api
-      .get()
-      .settings
-      .getString("language") ?? "en");
-
   void _setDarkMode(bool value) {
-    setState(() {
-      _darkMode = value;
-      Api
-          .get()
-          .settings
-          .setBool("darkmode", value);
-    });
+
   }
 
   void _setLanguage(Language lang) {
     if(lang == null) return;
-    setState(() {
-      _language = lang;
-      Api
-          .get()
-          .settings
-          .setString("language", lang.short);
-    });
+
   }
 
   Future<void> _selectLanguage() async {
@@ -63,25 +42,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          title: Text("Dark mode"),
-          leading: Icon(Icons.brightness_2),
-          onTap: () => _setDarkMode(!_darkMode),
-          trailing: Switch(
-            value: _darkMode,
-            onChanged: _setDarkMode,
-          ),
-        ),
-        ListTile(
-          title: Text("Language"),
-          subtitle: Text(_language.name),
-          leading: Icon(Icons.language),
-          onTap: _selectLanguage,
-        ),
-      ],
+    return StoreConnector<AppState, _State>(
+      converter: (store) => _State(
+        language: languageSelector(store.state),
+        darkMode: darkModeSelector(store.state),
+      ),
+      builder: (context, state) {
+        return ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Dark mode"),
+              leading: Icon(Icons.brightness_2),
+              onTap: () => _setDarkMode(!state.darkMode),
+              trailing: Switch(
+                value: state.darkMode,
+                onChanged: _setDarkMode,
+              ),
+            ),
+            ListTile(
+              title: Text("Language"),
+              subtitle: Text(state.language.name),
+              leading: Icon(Icons.language),
+              onTap: _selectLanguage,
+            ),
+          ],
+        );
+      },
     );
   }
+}
 
+class _State {
+  Language language;
+  bool darkMode;
+
+  _State({this.language, this.darkMode});
 }
