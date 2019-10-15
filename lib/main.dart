@@ -11,6 +11,7 @@ import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
+import 'package:lbp/settings/Themes.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
 
@@ -35,7 +36,7 @@ void main() async {
   runApp(LBPApp(store: store));
 }
 
-final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class LBPApp extends StatelessWidget {
   final Store store;
@@ -46,21 +47,24 @@ class LBPApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
-      child: MaterialApp(
-        title: 'Lernbüro Planer',
-        initialRoute: '/login',
-        navigatorKey: navigatorKey,
-        routes: {
-          RouteNames.login: (context) => LoginScreen(),
-          RouteNames.overview: (context) =>
-              DefaultScaffold(name: "Overview", child: OverviewScreen()),
-          RouteNames.settings: (context) =>
-              DefaultScaffold(name: "Settings", child: SettingsScreen()),
-        },
-        theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor: Color(0xFF2A47E4),
-        ),
+      child: StoreConnector<AppState, bool>(
+        converter: (store) => store.state.login?.data?.darkMode ?? false,
+        distinct: true,
+        builder: (context, darkMode) {
+          return MaterialApp(
+            title: 'Lernbüro Planer',
+            initialRoute: '/login',
+            navigatorKey: navigatorKey,
+            routes: {
+              RouteNames.login: (context) => LoginScreen(),
+              RouteNames.overview: (context) =>
+                  DefaultScaffold(name: "Overview", child: OverviewScreen()),
+              RouteNames.settings: (context) =>
+                  DefaultScaffold(name: "Settings", child: SettingsScreen()),
+            },
+            theme: darkMode ? Themes.darkTheme : Themes.lightTheme,
+          );
+        }
       ),
     );
   }
