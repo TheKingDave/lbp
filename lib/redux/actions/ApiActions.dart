@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lbp/api/login/LoginRequest.dart';
-import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/data/login/LoginRequest.dart';
+import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:redux/redux.dart';

@@ -2,9 +2,9 @@ import 'package:http/http.dart' as http;
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/Request.dart';
+import 'package:lbp/settings/Api.dart';
 
 import '../../etc/helpers.dart';
-import '../Api.dart';
 
 class PostRequest<T extends ApiResponses, S extends ApiRequest>
     implements Request {
@@ -12,7 +12,7 @@ class PostRequest<T extends ApiResponses, S extends ApiRequest>
   Future<ApiResponse<T>> send(ApiRequest req) async {
     http.Response res;
     try {
-      res = await http.post(Api.get().getApiUrl(req.getEndpoint()),
+      res = await http.post(Api.getApiUrl(req.getEndpoint()),
           headers: req.getHeaders(),
           body: req?.getBody(),
           encoding: req.getEncoding());

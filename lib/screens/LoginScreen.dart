@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lbp/api/strings/Strings.dart';
-import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/states/FetchState.dart';

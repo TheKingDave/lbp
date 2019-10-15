@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lbp/api/etc/Language.dart';
+import 'package:lbp/data/Language.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/UserSelectors.dart';

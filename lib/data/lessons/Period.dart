@@ -1,4 +1,5 @@
-import 'package:lbp/api/strings/Strings.dart';
+
+import 'package:lbp/data/strings/Strings.dart';
 
 class Period {
   DateTime begin;

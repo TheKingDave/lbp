@@ -1,4 +1,4 @@
-import 'package:lbp/api/strings/Strings.dart';
+import 'Strings.dart';
 
 class DefaultStrings {
   static void setDefaultString() {

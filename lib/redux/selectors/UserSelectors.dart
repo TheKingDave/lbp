@@ -1,4 +1,4 @@
-import 'package:lbp/api/etc/Language.dart';
+import 'package:lbp/data/Language.dart';
 import 'package:lbp/redux/AppState.dart';
 
 String userPhotoSelector(AppState state) => state.login.data.photo == null

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:lbp/api/strings/Strings.dart';
-import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 
 class ApiResponses {

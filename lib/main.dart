@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
-import 'package:lbp/api/strings/DefaultStrings.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
@@ -14,6 +13,8 @@ import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
+
+import 'data/strings/DefaultStrings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

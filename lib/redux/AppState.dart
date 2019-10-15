@@ -1,4 +1,4 @@
-import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/redux/states/ConfigState.dart';
 import 'package:lbp/redux/states/FetchState.dart';
 

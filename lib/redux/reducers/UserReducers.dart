@@ -1,4 +1,4 @@
-import 'package:lbp/data/LoginData.dart';
+import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:redux/redux.dart';
 
