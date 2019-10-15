@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserAvatar extends StatelessWidget {
-  static const defaultImg = "/api/v1/avatars/default-avatar.png";
-
   final String url;
 
   UserAvatar(this.url) : super();
@@ -11,6 +9,8 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-        backgroundImage: url != null ? NetworkImage(url) : null);
+        backgroundImage: url == null
+            ? AssetImage("assets/img/default-avatar.png")
+            : NetworkImage(url));
   }
 }
