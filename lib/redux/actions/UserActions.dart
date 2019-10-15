@@ -1,4 +1,4 @@
-import 'package:lbp/api/etc/Languages.dart';
+import 'package:lbp/api/etc/Language.dart';
 
 class SetDarkModeAction {
   bool value;

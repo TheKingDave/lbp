@@ -8,7 +8,7 @@ final Reducer<LoginData> userReducer = combineReducers<LoginData>([
 ]);
 
 final _setLanguageReducer = (LoginData state, SetLanguageAction action) =>
-    LoginData.fromOther(state, language: action.value);
+    LoginData.copy(state, language: action.value.short);
 
 final _setDarkModeReducer = (LoginData state, SetDarkModeAction action) =>
-    LoginData.fromOther(state, darkMode: action.value);
+    LoginData.copy(state, darkMode: action.value);
