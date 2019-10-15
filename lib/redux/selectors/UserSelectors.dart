@@ -1,15 +1,16 @@
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/settings/Api.dart';
 
 String userPhotoSelector(AppState state) => state.login.data.photo == null
     ? null
-    : urlSelector(state, state.login.data.photo);
+    : Api.getUrl(state.login.data.photo);
 
 String urlSelector(AppState state, [extension = ""]) =>
-    "${state.config.webUrl}$extension";
+    Api.getUrl(extension);
 
 String apiUrlSelector(AppState state, [extension = ""]) =>
-    "${state.config.webUrl}/${state.config.apiUrl}$extension";
+    Api.getApiUrl(extension);
 
 Language languageSelector(AppState state) =>
     Language(state.login.data.language);
