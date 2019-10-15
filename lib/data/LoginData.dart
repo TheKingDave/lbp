@@ -1,4 +1,5 @@
 import 'package:lbp/api/ApiResponse.dart';
+import 'package:lbp/etc/helpers.dart';
 
 class LoginData extends ApiResponses {
   String $class;
@@ -22,16 +23,16 @@ class LoginData extends ApiResponses {
     if (email == "NULL") email = null;
   }
 
-  LoginData.fromJson(Map<String, dynamic> json) {
-    $class = json['class'];
-    fullName = json['FullName'];
-    email = json['email'];
-    theme = json['theme'];
-    language = json['language'];
-    sessionKey = json['session_key'];
-    isTeacher = json['isTeacher'];
-    photo = json['photo'];
-  }
+  factory LoginData.fromJson(Map<String, dynamic> json) => LoginData(
+        $class: json['class'],
+        fullName: json['FullName'],
+        email: json['email'],
+        theme: json['theme'],
+        language: json['language'],
+        sessionKey: json['session_key'],
+        isTeacher: json['isTeacher'],
+        photo: json['photo'],
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
