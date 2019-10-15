@@ -1,8 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:lbp/RouteNames.dart';
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/RouteActions.dart';
+import 'package:redux/redux.dart';
 
 class LoginRequest extends ApiRequest {
   String username;
@@ -35,5 +39,9 @@ class LoginRequest extends ApiRequest {
   @override
   String toString() {
     return 'LoginRequest{username: $username, password: <hidden>}';
+  }
+
+  void onSuccess(Store<AppState> store, NextDispatcher next) {
+    next(NavigateReplaceAction(RouteNames.overview));
   }
 }

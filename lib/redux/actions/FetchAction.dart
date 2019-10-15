@@ -1,6 +1,9 @@
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/PostRequest.dart';
+import 'package:redux/redux.dart';
+
+import '../AppState.dart';
 
 class FetchAction<T> {}
 
@@ -14,12 +17,16 @@ class FetchDataAction<T extends ApiResponses, REQ extends ApiRequest>
     return FetchActionStart<T>();
   }
 
-  Future<FetchAction<T>> fetchData() async {
+  fetchData(Store<AppState> store, NextDispatcher next) async {
+    next(getStartAction());
     final res = await PostRequest<T, REQ>().send(request);
     if(res.hasError()) {
-      return FetchActionFailure(Exception(res.error));
+      next(FetchActionFailure<T>(Exception(res.error)));
+      request.onFailure(store, next);
+    } else {
+      next(FetchActionSuccess<T>(res.resp));
+      request.onSuccess(store, next);
     }
-    return FetchActionSuccess(res.resp);
   }
 }
 

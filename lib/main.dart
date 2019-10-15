@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/RouteNames.dart';
 import 'package:lbp/api/Api.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
-import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
+import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
@@ -29,11 +30,14 @@ void main() async {
         LoggingMiddleware("2"),
         fetchMiddleware,
         LoggingMiddleware("3"),
+        RouteMiddleware(),
       ]);
   await Api.get().init();
 
   runApp(LBPApp(store: store));
 }
+
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class LBPApp extends StatelessWidget {
   final Store store;
@@ -46,12 +50,13 @@ class LBPApp extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Lernbüro Planer',
-        initialRoute: '/',
+        initialRoute: '/login',
+        navigatorKey: navigatorKey,
         routes: {
-          '/': (context) => LoginScreen(),
-          '/overview': (context) =>
+          RouteNames.login: (context) => LoginScreen(),
+          RouteNames.overview: (context) =>
               DefaultScaffold(name: "Overview", child: OverviewScreen()),
-          '/settings': (context) =>
+          RouteNames.settings: (context) =>
               DefaultScaffold(name: "Settings", child: SettingsScreen()),
         },
         theme: ThemeData(
