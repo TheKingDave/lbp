@@ -14,4 +14,4 @@ String apiUrlSelector(AppState state, [extension = ""]) =>
 Language languageSelector(AppState state) =>
     Language(state.login.data.language);
 
-bool darkModeSelector(AppState state) => state.login.data.theme == "dark";
+bool darkModeSelector(AppState state) => state.login.data.darkMode;
