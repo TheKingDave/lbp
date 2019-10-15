@@ -18,7 +18,9 @@ class LoginData extends ApiResponses {
       this.language,
       this.sessionKey,
       this.isTeacher,
-      this.photo});
+      this.photo}) {
+    if (email == "NULL") email = null;
+  }
 
   LoginData.fromJson(Map<String, dynamic> json) {
     $class = json['class'];
