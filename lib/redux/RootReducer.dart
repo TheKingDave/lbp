@@ -6,4 +6,5 @@ import 'package:lbp/redux/reducers/FetchReducer.dart';
 AppState rootReducer(AppState state, action) => AppState(
   login: fetchReducer<LoginData>(state.login, action),
   error: errorReducer(state.error, action),
+  config: state.config,
 );
