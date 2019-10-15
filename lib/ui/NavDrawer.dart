@@ -25,7 +25,7 @@ class NavDrawer extends StatelessWidget {
                   currentAccountPicture: UserAvatar(state.photoUrl)),
               ListTile(
                 title: Text("Overview"),
-                onTap: () => cPrint("NAV: Overview"),
+                onTap: () => Navigator.pushNamed(context, "/overview"),
               ),
               Divider(),
               ListTile(
