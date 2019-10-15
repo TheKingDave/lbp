@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
-import 'package:lbp/api/Api.dart';
 import 'package:lbp/api/strings/DefaultStrings.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
@@ -32,7 +31,6 @@ void main() async {
         LoggingMiddleware("3"),
         RouteMiddleware(),
       ]);
-  await Api.get().init();
 
   runApp(LBPApp(store: store));
 }
