@@ -13,4 +13,9 @@ class Language {
   final String name;
 
   Language(this.short) : name = nameMap[short];
+
+  @override
+  String toString() {
+    return 'Language{short: $short, name: $name}';
+  }
 }
