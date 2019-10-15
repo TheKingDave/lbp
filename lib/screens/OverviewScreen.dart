@@ -69,26 +69,4 @@ class _LessonOverview extends StatelessWidget {
           ),
         ));
   }
-
-  @override
-  Widget build_(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Material(
-        type: MaterialType.card,
-        color: Theme.of(context).cardColor,
-        elevation: 1.0,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4.0))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(data.period.toString(), style: bigText),
-            Text("${data.subject} ${data.room}", style: mediumText),
-            Text(data.note, style: mediumText),
-          ],
-        ),
-      ),
-    );
-  }
 }

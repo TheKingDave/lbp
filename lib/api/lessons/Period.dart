@@ -26,6 +26,6 @@ class Period {
     DateTime b = begin.toLocal();
     DateTime e = end.toLocal();
 
-    return "${Strings.getWeekdayString(b.weekday)} ${b.hour}:${b.minute} - ${b.hour}:${b.minute}";
+    return "${Strings.getWeekdayString(b.weekday)} ${b.hour}:${b.minute} - ${e.hour}:${e.minute}";
   }
 }
