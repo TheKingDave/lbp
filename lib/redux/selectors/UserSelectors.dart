@@ -13,6 +13,8 @@ String apiUrlSelector(AppState state, [extension = ""]) =>
     Api.getApiUrl(extension);
 
 Language languageSelector(AppState state) =>
-    Language(state.login.data.language);
+    Language(state.login.data?.language);
 
-bool darkModeSelector(AppState state) => state.login.data.darkMode;
+bool darkModeSelector(AppState state) => state.login?.data?.darkMode;
+
+String sessKeySelector(AppState state) => state.login?.data?.sessionKey;
