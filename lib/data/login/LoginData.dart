@@ -44,7 +44,6 @@ class LoginData extends ApiResponses {
       );
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
-    cPrint("theme ${json['theme']} ${json['theme'] == "dark"}");
     return LoginData(
       $class: json['class'],
       fullName: json['FullName'],
