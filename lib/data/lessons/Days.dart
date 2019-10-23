@@ -8,7 +8,7 @@ class Days extends ApiResponses {
   Days({this.days});
 
   Days.fromJson(List<dynamic> json) {
-    days = List<Day>.from(json[0].map((d) => Day.fromJson(d)));
+    days = List<Day>.from(json.map((d) => Day.fromJson(d[0])));
   }
 
   @override

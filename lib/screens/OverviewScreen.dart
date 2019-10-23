@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/Period.dart';
 import 'package:lbp/etc/HexColor.dart';
+import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/redux/AppState.dart';
 
 class OverviewScreen extends StatelessWidget {
   final data = _LessonOverviewData(
@@ -18,15 +22,40 @@ class OverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return StoreConnector<AppState, _OverviewData>(
+      converter: (store) => _OverviewData(lessons:
+          List<_LessonOverviewData>.from(store.state.days.data.days.map((d) {
+        Lesson l = d.getSelectedLesson();
+        return _LessonOverviewData(
+          color: l?.color ?? '#000000',
+          period: d.period,
+          note: d.note.isEmpty ? "Note" : d.note,
+          room: l?.room ?? 'Raum',
+          subject: l?.subject ?? 'Gegenstand',
+        );
+      }))),
+      builder: (context, model) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: model.lessons.map((l) => _LessonOverview(l)).toList(),
+        );
+      },
+    );
+    /*return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         _LessonOverview(data),
         _LessonOverview(data),
         _LessonOverview(data),
       ],
-    );
+    );*/
   }
+}
+
+class _OverviewData {
+  List<_LessonOverviewData> lessons;
+
+  _OverviewData({this.lessons});
 }
 
 class _LessonOverviewData {

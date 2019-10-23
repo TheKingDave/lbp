@@ -38,10 +38,6 @@ void main() async {
         RouteMiddleware(),
       ]);
 
-  store.dispatch(FetchDataAction<Days, DaysRequest>(DaysRequest(
-      sess_key:
-          "9FBE1F9353B772E4FA4F75852E6321BCBBB6C28A03756447C3716BEC477D82918FCB70ABDFF742386F8B9BB5FFC24F32CE17F74DCC5CAFD6695986BDE37ABF6A")));
-
   runApp(LBPApp(store: store));
 }
 

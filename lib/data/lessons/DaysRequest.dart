@@ -28,7 +28,7 @@ class DaysRequest extends ApiRequest {
   }
 
   void onSuccess(Store<AppState> store, NextDispatcher next) {
-    cPrint("Success ${store.state.days.data}");
+    cPrint("Success ${store.state.days.data.days.length}");
   }
 
 

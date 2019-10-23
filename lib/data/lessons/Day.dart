@@ -27,6 +27,16 @@ class Day extends ApiResponses {
     return data;
   }
 
+  Lesson getSelectedLesson() {
+    for(final l in lessons) {
+      if(l.selected) {
+        return l;
+      }
+    }
+
+    return null;
+  }
+
   @override
   String toString() {
     return 'Day{lessons: $lessons, note: $note, period: $period, visible: $visible}';
