@@ -48,24 +48,18 @@ class LBPApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
-      child: StoreConnector<AppState, bool>(
-        converter: (store) => store.state.login?.data?.darkMode ?? false,
-        distinct: true,
-        builder: (context, darkMode) {
-          return MaterialApp(
-            title: 'Lernbüro Planer',
-            initialRoute: '/login',
-            navigatorKey: navigatorKey,
-            routes: {
-              RouteNames.login: (context) => LoginScreen(),
-              RouteNames.overview: (context) =>
-                  DefaultScaffold(name: "Overview", child: OverviewScreen()),
-              RouteNames.settings: (context) =>
-                  DefaultScaffold(name: "Settings", child: SettingsScreen()),
-            },
-            theme: darkMode ? Themes.darkTheme : Themes.lightTheme,
-          );
-        }
+      child: MaterialApp(
+        title: 'Lernbüro Planer',
+        initialRoute: '/login',
+        navigatorKey: navigatorKey,
+        routes: {
+          RouteNames.login: (context) => LoginScreen(),
+          RouteNames.overview: (context) =>
+              DefaultScaffold(name: "Overview", child: OverviewScreen()),
+          RouteNames.settings: (context) =>
+              DefaultScaffold(name: "Settings", child: SettingsScreen()),
+        },
+        theme: Themes.lightTheme,
       ),
     );
   }
