@@ -15,6 +15,10 @@ class NavDrawer extends StatelessWidget {
             loginData: store.state.login.data,
             photoUrl: userPhotoSelector(store.state)),
         builder: (context, state) {
+          String route = ModalRoute.of(context).settings.name;
+
+          Function(String path) isCurrentPath = (path) => path == route;
+
           LoginData loginData = state.loginData;
           return Drawer(
               child: ListView(
@@ -26,6 +30,7 @@ class NavDrawer extends StatelessWidget {
               ListTile(
                 title: Text("Overview"),
                 onTap: () => Navigator.pushNamed(context, "/overview"),
+                selected: isCurrentPath("/overview"),
               ),
               Divider(),
               ListTile(
@@ -49,6 +54,7 @@ class NavDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text("Settings"),
+                selected: isCurrentPath("/settings"),
                 onTap: () => Navigator.pushNamed(context, "/settings"),
               ),
             ],
