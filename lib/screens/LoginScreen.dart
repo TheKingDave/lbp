@@ -49,87 +49,93 @@ class _LoginScreenState extends State<_LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Guten Nachmitag',
-                    style:
-                        TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold)),
-                Padding(padding: EdgeInsets.only(top: 16.0)),
-                TextFormField(
-                  controller: _usernameController,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  focusNode: _usernameFocus,
-                  decoration: InputDecoration(
-                    labelText: Strings.getCapitalize("username"),
-                    border: OutlineInputBorder(),
-                  ),
-                  onFieldSubmitted: (term) {
-                    _usernameFocus.unfocus();
-                    FocusScope.of(context).requestFocus(_passwordFocus);
-                  },
-                  validator: (value) {
-                    if (value.contains('@')) {
-                      return 'Please enter your shorthand. Not your email.';
-                    }
-                    if (value.isEmpty) {
-                      return 'Please enter your username.';
-                    }
-                    return null;
-                  },
-                ),
-                Padding(padding: EdgeInsets.only(top: 16.0)),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  focusNode: _passwordFocus,
-                  decoration: InputDecoration(
-                    labelText: Strings.getCapitalize("password"),
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
-                Padding(padding: EdgeInsets.only(top: 16.0)),
-                ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(minWidth: double.infinity),
-                    child: new StoreConnector<AppState, _LoginScreenModel>(
-                      converter: (store) => _LoginScreenModel(
-                          state: store.state.login,
-                          login: (un, pw) => store.dispatch(
-                              ApiLoginAction(username: un, password: pw))),
-                      builder: (context, model) {
-                        final loading = model.state.loading;
+    return StoreConnector<AppState, _LoginScreenModel>(
+      converter: (store) => _LoginScreenModel(
+          state: store.state.login,
+          login: (un, pw) =>
+              store.dispatch(ApiLoginAction(username: un, password: pw))),
+      builder: (context, model) {
+        final loading = model.state.loading;
 
-                        return LoadingButton(
+        final _login = ([dynamic _]) {
+          if (loading) {
+            return;
+          }
+          if (_formKey.currentState.validate()) {
+            final un = _usernameController.text;
+            final pw = _passwordController.text;
+
+            model.login(un, pw);
+          }
+        };
+
+        return Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Guten Nachmitag',
+                        style: TextStyle(
+                            fontSize: 32.0, fontWeight: FontWeight.bold)),
+                    Padding(padding: EdgeInsets.only(top: 16.0)),
+                    TextFormField(
+                      controller: _usernameController,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      focusNode: _usernameFocus,
+                      decoration: InputDecoration(
+                        labelText: Strings.getCapitalize("username"),
+                        border: OutlineInputBorder(),
+                      ),
+                      onFieldSubmitted: (term) {
+                        _usernameFocus.unfocus();
+                        FocusScope.of(context).requestFocus(_passwordFocus);
+                      },
+                      validator: (value) {
+                        if (value.contains('@')) {
+                          return 'Please enter your shorthand. Not your email.';
+                        }
+                        if (value.isEmpty) {
+                          return 'Please enter your username.';
+                        }
+                        return null;
+                      },
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 16.0)),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      textInputAction: TextInputAction.done,
+                      focusNode: _passwordFocus,
+                      onFieldSubmitted: _login,
+                      decoration: InputDecoration(
+                        labelText: Strings.getCapitalize("password"),
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 16.0)),
+                    ConstrainedBox(
+                        constraints:
+                            const BoxConstraints(minWidth: double.infinity),
+                        child: LoadingButton(
                           loading: loading,
                           padding: EdgeInsets.all(loading ? 8 : 16),
-                          onPressed: () async {
-                                  if (_formKey.currentState.validate()) {
-                                    final un = _usernameController.text;
-                                    final pw = _passwordController.text;
-
-                                    model.login(un, pw);
-                                  }
-                                },
+                          onPressed: _login,
                           child: Text(Strings.getCapitalize("login")),
-                        );
-                      },
-                    )),
-              ],
-            )));
+                        )),
+                  ],
+                )));
+      },
+    );
   }
 }
 
@@ -142,14 +148,11 @@ class _LoginScreenModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _LoginScreenModel &&
-              runtimeType == other.runtimeType &&
-              state == other.state &&
-              login == other.login;
+      other is _LoginScreenModel &&
+          runtimeType == other.runtimeType &&
+          state == other.state &&
+          login == other.login;
 
   @override
-  int get hashCode =>
-      state.hashCode ^
-      login.hashCode;
-
+  int get hashCode => state.hashCode ^ login.hashCode;
 }
