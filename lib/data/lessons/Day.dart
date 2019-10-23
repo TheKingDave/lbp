@@ -11,7 +11,8 @@ class Day extends ApiResponses {
   Day({this.lessons, this.note, this.period, this.visible});
 
   Day.fromJson(Map<String, dynamic> json) {
-    lessons = json['lessons'].map((_json) => Lesson.fromJson(_json));
+    lessons = List<Lesson>.from(
+        json['lessons'].map((_json) => Lesson.fromJson(_json)));
     note = json['note'];
     period = Period.fromJson(json['period']);
     visible = json['visible'];
@@ -19,7 +20,7 @@ class Day extends ApiResponses {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lessons'] = lessons.map((l) => l.toJson());
+    data['lessons'] = lessons.map((l) => l.toJson()).toList();
     data['note'] = note;
     data['period'] = period.toJson();
     data['visible'] = visible;

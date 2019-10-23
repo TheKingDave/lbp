@@ -7,19 +7,25 @@ import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 
 class ApiResponses {
-  static final _constructors = {
+  static final Map<dynamic, Function(Map<String, dynamic>)> _constructorsMap = {
     LoginData: (Map<String, dynamic> json) => LoginData.fromJson(json),
     Day: (Map<String, dynamic> json) => Day.fromJson(json),
-    Days: (Map<String, dynamic> json) => Days.fromJson(json),
   };
 
-  static ApiResponses create(Type type, Map<String, dynamic> json) {
-    return _constructors[type](json);
+  static final Map<dynamic, Function(List<dynamic> json)> _constructorsList = {
+    Days: (List<dynamic> json) => Days.fromJson(json),
+  };
+
+  static ApiResponses createMap(Type type, Map<String, dynamic> json) {
+    return _constructorsMap[type](json);
+  }
+
+  static ApiResponses createList(Type type, List<dynamic> json) {
+    return _constructorsList[type](json);
   }
 }
 
 class ApiResponse<T extends ApiResponses> {
-
   String _error;
   T resp;
 
@@ -29,19 +35,26 @@ class ApiResponse<T extends ApiResponses> {
 
   ApiResponse.ok(this.resp);
 
-  ApiResponse.fromJson(Map<String, dynamic> parsedJson) {
-    if(parsedJson.containsKey("err")) {
-      error = parsedJson['err'];
-    } else {
-      resp = ApiResponses.create(T, parsedJson);
+  ApiResponse.fromJson(dynamic parsedJson) {
+    cPrint("fromJson $parsedJson");
+    if (parsedJson is Map<String, dynamic>) {
+      parsedJson = parsedJson as Map<String, dynamic>;
+      if (parsedJson.containsKey("err")) {
+        error = parsedJson['err'];
+      } else {
+        resp = ApiResponses.createMap(T, parsedJson);
+      }
+    } else if (parsedJson is List<dynamic>) {
+      parsedJson = parsedJson as List<dynamic>;
+      resp = ApiResponses.createList(T, parsedJson);
     }
   }
 
   factory ApiResponse.fromRawJson(String rawJson) {
     try {
-      Map<String, dynamic> parsedJson = jsonDecode(rawJson);
+      dynamic parsedJson = jsonDecode(rawJson);
       return ApiResponse<T>.fromJson(parsedJson);
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       cPrint("ApiResponse.fromRawJson " + e.toString());
       return ApiResponse<T>.error("UNKNOWN_ERROR");
     }
@@ -59,11 +72,10 @@ class ApiResponse<T extends ApiResponses> {
 
   @override
   String toString() {
-    if(hasError()) {
+    if (hasError()) {
       return "ApiResponse<$T>{error: $error}";
     } else {
       return "ApiResponse<$T>{resp: $resp}";
     }
   }
-
 }

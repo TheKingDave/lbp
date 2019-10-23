@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
+import 'package:lbp/data/lessons/Days.dart';
+import 'package:lbp/data/lessons/DaysRequest.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
+import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
@@ -25,7 +28,8 @@ void main() async {
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware
   final store = new Store<AppState>(rootReducer,
-      initialState: AppState.initial(), middleware: [
+      initialState: AppState.initial(),
+      middleware: [
         LoggingMiddleware("1"),
         ApiMiddleware<AppState>(),
         LoggingMiddleware("2"),
@@ -33,6 +37,10 @@ void main() async {
         LoggingMiddleware("3"),
         RouteMiddleware(),
       ]);
+
+  store.dispatch(FetchDataAction<Days, DaysRequest>(DaysRequest(
+      sess_key:
+          "9FBE1F9353B772E4FA4F75852E6321BCBBB6C28A03756447C3716BEC477D82918FCB70ABDFF742386F8B9BB5FFC24F32CE17F74DCC5CAFD6695986BDE37ABF6A")));
 
   runApp(LBPApp(store: store));
 }

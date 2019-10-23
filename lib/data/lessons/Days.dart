@@ -7,13 +7,7 @@ class Days extends ApiResponses {
 
   Days({this.days});
 
-  Days.fromJson(Map<String, dynamic> json) {
-    days = json[0].map((d) => Day.fromJson(d));
-  }
-
-  List<List<Map<String, dynamic>>> toJson() {
-    final List<List<Map<String, dynamic>>> data = new List<List<Map<String, dynamic>>>();
-    data[0] = days.map((d) => d.toJson());
-    return data;
+  Days.fromJson(List<dynamic> json) {
+    days = List<Day>.from(json[0].map((d) => Day.fromJson(d)));
   }
 }
