@@ -41,6 +41,7 @@ class _LoginScreenState extends State<_LoginScreen> {
   final FocusNode _usernameFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
+  bool _formCommitted = false;
   bool _autoFillCommitted = false;
 
   @override
@@ -67,6 +68,7 @@ class _LoginScreenState extends State<_LoginScreen> {
           if (loading) {
             return;
           }
+          _formCommitted = true;
           if (_formKey.currentState.validate()) {
             final un = _usernameController.text;
             final pw = _passwordController.text;
@@ -111,7 +113,9 @@ class _LoginScreenState extends State<_LoginScreen> {
                             _usernameFocus.unfocus();
                             FocusScope.of(context).requestFocus(_passwordFocus);
                           },
+                          autovalidate: true,
                           validator: (value) {
+                            if(!_formCommitted) return null;
                             if (value.contains('@')) {
                               return 'Please enter your shorthand. Not your email.';
                             }
@@ -142,7 +146,9 @@ class _LoginScreenState extends State<_LoginScreen> {
                             labelText: Strings.getCapitalize("password"),
                             border: OutlineInputBorder(),
                           ),
+                          autovalidate: true,
                           validator: (value) {
+                            if(!_formCommitted) return null;
                             if (value.isEmpty) {
                               return 'Please enter your password';
                             }
