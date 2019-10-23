@@ -45,11 +45,12 @@ class _LoginScreenState extends State<_LoginScreen> {
   bool _autoFillCommitted = false;
 
   @override
-  void dispose() async {
+  void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
-    if(!_autoFillCommitted) {
-      await FlutterAutofill.cancel();
+    if (!_autoFillCommitted) {
+      // Potential error source. In original docs called with `await`
+      FlutterAutofill.cancel();
     }
     super.dispose();
   }
@@ -92,10 +93,10 @@ class _LoginScreenState extends State<_LoginScreen> {
                     Padding(padding: EdgeInsets.only(top: 16.0)),
                     Autofill(
                         onAutofilled: (val) {
+                          cPrint("autofill username $val");
                           _usernameController.value = TextEditingValue(
-                              text: val,
-                              selection: TextSelection.fromPosition(
-                                  TextPosition(offset: val.lenght)));
+                            text: val,
+                          );
                         },
                         autofillHints: [FlutterAutofill.AUTOFILL_HINT_USERNAME],
                         autofillType: FlutterAutofill.AUTOFILL_TYPE_TEXT,
@@ -115,7 +116,7 @@ class _LoginScreenState extends State<_LoginScreen> {
                           },
                           autovalidate: true,
                           validator: (value) {
-                            if(!_formCommitted) return null;
+                            if (!_formCommitted) return null;
                             if (value.contains('@')) {
                               return 'Please enter your shorthand. Not your email.';
                             }
@@ -128,10 +129,10 @@ class _LoginScreenState extends State<_LoginScreen> {
                     Padding(padding: EdgeInsets.only(top: 16.0)),
                     Autofill(
                         onAutofilled: (val) {
+                          cPrint("autofill password $val");
                           _passwordController.value = TextEditingValue(
-                              text: val,
-                              selection: TextSelection.fromPosition(
-                                  TextPosition(offset: val.lenght)));
+                            text: val,
+                          );
                         },
                         autofillHints: [FlutterAutofill.AUTOFILL_HINT_PASSWORD],
                         autofillType: FlutterAutofill.AUTOFILL_TYPE_TEXT,
@@ -148,7 +149,7 @@ class _LoginScreenState extends State<_LoginScreen> {
                           ),
                           autovalidate: true,
                           validator: (value) {
-                            if(!_formCommitted) return null;
+                            if (!_formCommitted) return null;
                             if (value.isEmpty) {
                               return 'Please enter your password';
                             }
