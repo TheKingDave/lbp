@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/states/FetchState.dart';
 import 'package:lbp/ui/ErrorNotifier.dart';
+import 'package:lbp/ui/LoadingButton.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = "/";
@@ -35,6 +37,9 @@ class _LoginScreenState extends State<_LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  final FocusNode _usernameFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -58,10 +63,17 @@ class _LoginScreenState extends State<_LoginScreen> {
                 Padding(padding: EdgeInsets.only(top: 16.0)),
                 TextFormField(
                   controller: _usernameController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  focusNode: _usernameFocus,
                   decoration: InputDecoration(
                     labelText: Strings.getCapitalize("username"),
                     border: OutlineInputBorder(),
                   ),
+                  onFieldSubmitted: (term) {
+                    _usernameFocus.unfocus();
+                    FocusScope.of(context).requestFocus(_passwordFocus);
+                  },
                   validator: (value) {
                     if (value.contains('@')) {
                       return 'Please enter your shorthand. Not your email.';
@@ -76,6 +88,8 @@ class _LoginScreenState extends State<_LoginScreen> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _passwordFocus,
                   decoration: InputDecoration(
                     labelText: Strings.getCapitalize("password"),
                     border: OutlineInputBorder(),
@@ -99,30 +113,18 @@ class _LoginScreenState extends State<_LoginScreen> {
                       builder: (context, model) {
                         final loading = model.state.loading;
 
-                        return RaisedButton(
+                        return LoadingButton(
+                          loading: loading,
                           padding: EdgeInsets.all(loading ? 8 : 16),
-                          onPressed: loading
-                              ? null
-                              : () async {
+                          onPressed: () async {
                                   if (_formKey.currentState.validate()) {
                                     final un = _usernameController.text;
                                     final pw = _passwordController.text;
 
                                     model.login(un, pw);
-
-                                    // Navigator.pushNamed(context, "/overview");
                                   }
                                 },
-                          child: loading
-                              ? SizedBox(
-                                  width: 24,
-                                  height: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 3,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
-                                  ))
-                              : Text(Strings.getCapitalize("login")),
+                          child: Text(Strings.getCapitalize("login")),
                         );
                       },
                     )),
@@ -136,4 +138,18 @@ class _LoginScreenModel {
   final void Function(String username, String password) login;
 
   _LoginScreenModel({this.state, this.login});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is _LoginScreenModel &&
+              runtimeType == other.runtimeType &&
+              state == other.state &&
+              login == other.login;
+
+  @override
+  int get hashCode =>
+      state.hashCode ^
+      login.hashCode;
+
 }
