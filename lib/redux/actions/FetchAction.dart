@@ -7,9 +7,9 @@ import '../AppState.dart';
 
 class FetchAction<T> {}
 
-class FetchDataAction<T extends ApiResponses, REQ extends ApiRequest>
+class FetchDataAction<T extends ApiResponses>
     implements FetchAction<T> {
-  REQ request;
+  ApiRequest request;
 
   FetchDataAction(this.request);
 
@@ -19,7 +19,7 @@ class FetchDataAction<T extends ApiResponses, REQ extends ApiRequest>
 
   fetchData(Store<AppState> store, NextDispatcher next) async {
     next(getStartAction());
-    final res = await PostRequest<T, REQ>().send(request);
+    final res = await PostRequest<T>().send(request);
     if(res.hasError()) {
       next(FetchActionFailure<T>(Exception(res.error)));
       request.onFailure(store, next);

@@ -45,7 +45,7 @@ class LoginRequest extends ApiRequest {
   }
 
   void onSuccess(Store<AppState> store, NextDispatcher next) {
-    store.dispatch(FetchDataAction<Days, DaysRequest>(
+    store.dispatch(FetchDataAction<Days>(
         DaysRequest(sess_key: store.state.login.data.sessionKey)));
     next(NavigateReplaceAction(RouteNames.overview));
   }

@@ -15,7 +15,7 @@ class ApiLoginAction extends ApiActionWithApiCall<AppState> {
 
   @override
   void call(Store<AppState> store, NextDispatcher next) {
-    next(FetchDataAction<LoginData, LoginRequest>(
+    next(FetchDataAction<LoginData>(
         LoginRequest(username: username, password: password)));
   }
 }

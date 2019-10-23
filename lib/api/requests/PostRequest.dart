@@ -6,7 +6,7 @@ import 'package:lbp/settings/Api.dart';
 
 import '../../etc/helpers.dart';
 
-class PostRequest<T extends ApiResponses, S extends ApiRequest>
+class PostRequest<T extends ApiResponses>
     implements Request {
   @override
   Future<ApiResponse<T>> send(ApiRequest req) async {
