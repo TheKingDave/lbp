@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:lbp/data/lessons/Day.dart';
+import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
@@ -9,6 +10,7 @@ class ApiResponses {
   static final _constructors = {
     LoginData: (Map<String, dynamic> json) => LoginData.fromJson(json),
     Day: (Map<String, dynamic> json) => Day.fromJson(json),
+    Days: (Map<String, dynamic> json) => Days.fromJson(json),
   };
 
   static ApiResponses create(Type type, Map<String, dynamic> json) {
