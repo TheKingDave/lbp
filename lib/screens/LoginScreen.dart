@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_autofill/flutter_autofill.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
@@ -40,10 +41,15 @@ class _LoginScreenState extends State<_LoginScreen> {
   final FocusNode _usernameFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
+  bool _autoFillCommitted = false;
+
   @override
-  void dispose() {
+  void dispose() async {
     _usernameController.dispose();
     _passwordController.dispose();
+    if(!_autoFillCommitted) {
+      await FlutterAutofill.cancel();
+    }
     super.dispose();
   }
 
@@ -57,7 +63,7 @@ class _LoginScreenState extends State<_LoginScreen> {
       builder: (context, model) {
         final loading = model.state.loading;
 
-        final _login = ([dynamic _]) {
+        final _login = ([dynamic _]) async {
           if (loading) {
             return;
           }
@@ -65,6 +71,7 @@ class _LoginScreenState extends State<_LoginScreen> {
             final un = _usernameController.text;
             final pw = _passwordController.text;
 
+            await FlutterAutofill.commit();
             model.login(un, pw);
           }
         };
@@ -81,47 +88,67 @@ class _LoginScreenState extends State<_LoginScreen> {
                         style: TextStyle(
                             fontSize: 32.0, fontWeight: FontWeight.bold)),
                     Padding(padding: EdgeInsets.only(top: 16.0)),
-                    TextFormField(
-                      controller: _usernameController,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      focusNode: _usernameFocus,
-                      decoration: InputDecoration(
-                        labelText: Strings.getCapitalize("username"),
-                        border: OutlineInputBorder(),
-                      ),
-                      onFieldSubmitted: (term) {
-                        _usernameFocus.unfocus();
-                        FocusScope.of(context).requestFocus(_passwordFocus);
-                      },
-                      validator: (value) {
-                        if (value.contains('@')) {
-                          return 'Please enter your shorthand. Not your email.';
-                        }
-                        if (value.isEmpty) {
-                          return 'Please enter your username.';
-                        }
-                        return null;
-                      },
-                    ),
+                    Autofill(
+                        onAutofilled: (val) {
+                          _usernameController.value = TextEditingValue(
+                              text: val,
+                              selection: TextSelection.fromPosition(
+                                  TextPosition(offset: val.lenght)));
+                        },
+                        autofillHints: [FlutterAutofill.AUTOFILL_HINT_USERNAME],
+                        autofillType: FlutterAutofill.AUTOFILL_TYPE_TEXT,
+                        textController: _usernameController,
+                        child: TextFormField(
+                          controller: _usernameController,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          focusNode: _usernameFocus,
+                          decoration: InputDecoration(
+                            labelText: Strings.getCapitalize("username"),
+                            border: OutlineInputBorder(),
+                          ),
+                          onFieldSubmitted: (term) {
+                            _usernameFocus.unfocus();
+                            FocusScope.of(context).requestFocus(_passwordFocus);
+                          },
+                          validator: (value) {
+                            if (value.contains('@')) {
+                              return 'Please enter your shorthand. Not your email.';
+                            }
+                            if (value.isEmpty) {
+                              return 'Please enter your username.';
+                            }
+                            return null;
+                          },
+                        )),
                     Padding(padding: EdgeInsets.only(top: 16.0)),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      textInputAction: TextInputAction.done,
-                      focusNode: _passwordFocus,
-                      onFieldSubmitted: _login,
-                      decoration: InputDecoration(
-                        labelText: Strings.getCapitalize("password"),
-                        border: OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                    ),
+                    Autofill(
+                        onAutofilled: (val) {
+                          _passwordController.value = TextEditingValue(
+                              text: val,
+                              selection: TextSelection.fromPosition(
+                                  TextPosition(offset: val.lenght)));
+                        },
+                        autofillHints: [FlutterAutofill.AUTOFILL_HINT_PASSWORD],
+                        autofillType: FlutterAutofill.AUTOFILL_TYPE_TEXT,
+                        textController: _passwordController,
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          textInputAction: TextInputAction.done,
+                          focusNode: _passwordFocus,
+                          onFieldSubmitted: _login,
+                          decoration: InputDecoration(
+                            labelText: Strings.getCapitalize("password"),
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                        )),
                     Padding(padding: EdgeInsets.only(top: 16.0)),
                     ConstrainedBox(
                         constraints:
