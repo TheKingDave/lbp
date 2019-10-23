@@ -3,12 +3,14 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/DaysRequest.dart';
+import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
+import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
@@ -35,6 +37,8 @@ void main() async {
         LoggingMiddleware("2"),
         fetchMiddleware,
         LoggingMiddleware("3"),
+        LogicMiddleware(logic: logics),
+        LoggingMiddleware("4"),
         RouteMiddleware(),
       ]);
 
