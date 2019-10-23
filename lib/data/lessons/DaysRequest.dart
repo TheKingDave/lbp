@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/api/ApiRequest.dart';
+import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/redux/AppState.dart';
+import 'package:redux/redux.dart';
 
 class DaysRequest extends ApiRequest {
   String sess_key;
@@ -23,4 +26,10 @@ class DaysRequest extends ApiRequest {
   String getEndpoint() {
     return "getData";
   }
+
+  void onSuccess(Store<AppState> store, NextDispatcher next) {
+    cPrint("Success ${store.state.days.data}");
+  }
+
+
 }

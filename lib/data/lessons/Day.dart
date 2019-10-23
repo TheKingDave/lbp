@@ -26,4 +26,9 @@ class Day extends ApiResponses {
     data['visible'] = visible;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'Day{lessons: $lessons, note: $note, period: $period, visible: $visible}';
+  }
 }

@@ -41,4 +41,9 @@ class Lesson {
     data['room'] = this.room;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'Lesson{subject: $subject, teacher: $teacher, color: $color, maxStudents: $maxStudents, username: $username, currentStudents: $currentStudents, selected: $selected, room: $room}';
+  }
 }

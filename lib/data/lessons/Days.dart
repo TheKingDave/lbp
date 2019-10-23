@@ -10,4 +10,9 @@ class Days extends ApiResponses {
   Days.fromJson(List<dynamic> json) {
     days = List<Day>.from(json[0].map((d) => Day.fromJson(d)));
   }
+
+  @override
+  String toString() {
+    return 'Days{days: $days}';
+  }
 }
