@@ -36,7 +36,6 @@ class ApiResponse<T extends ApiResponses> {
   ApiResponse.ok(this.resp);
 
   ApiResponse.fromJson(dynamic parsedJson) {
-    cPrint("fromJson $parsedJson");
     if (parsedJson is Map<String, dynamic>) {
       parsedJson = parsedJson as Map<String, dynamic>;
       if (parsedJson.containsKey("err")) {
