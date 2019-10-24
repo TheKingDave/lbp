@@ -25,6 +25,11 @@ class TimeFrame {
     return p.toString().padLeft(2, '0');
   }
 
+  String getDate() {
+    DateTime b = begin.toLocal();
+    return "${b.day}.${b.month}";
+  }
+
   String getWeekDay() {
     return Strings.getWeekdayString(begin.toLocal().weekday);
   }
