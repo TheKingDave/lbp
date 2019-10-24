@@ -44,6 +44,7 @@ class OverviewScreen extends StatelessWidget {
           build: (context) {
             return Padding(
               padding: const EdgeInsets.all(4.0),
+              // For refresh indicator: https://github.com/brianegan/flutter_redux/issues/6
               child: ListView(
                 children: model.days.map((d) => _DayOverview(data: d)).toList(),
               ),
