@@ -1,14 +1,14 @@
 
 import 'package:lbp/data/strings/Strings.dart';
 
-class Period {
+class TimeFrame {
   DateTime begin;
   DateTime end;
   String name;
 
-  Period({this.begin, this.end, this.name});
+  TimeFrame({this.begin, this.end, this.name});
 
-  Period.fromJson(Map<String, dynamic> json) {
+  TimeFrame.fromJson(Map<String, dynamic> json) {
     begin = DateTime.parse(json['begin']);
     end = DateTime.parse(json['end']);
     name = json['name'];

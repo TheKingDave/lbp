@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
-import 'package:lbp/data/lessons/Period.dart';
+import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -51,7 +51,7 @@ class _OverviewData {
 }
 
 class _LessonOverviewData {
-  final Period period;
+  final TimeFrame period;
   final String color;
   final String subject;
   final String room;
