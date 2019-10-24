@@ -1,5 +1,8 @@
+import 'package:lbp/data/strings/LessonStrings.dart';
+
 class Strings {
   static final Map<String, String> strings = {};
+  static LessonStrings lessons = LessonStrings();
 
   static String getString(String short, [def = "?"]) {
     return strings[short] ?? def;
