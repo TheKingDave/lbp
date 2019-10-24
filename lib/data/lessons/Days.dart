@@ -25,6 +25,10 @@ class Day {
   factory Day.fromJson(List<dynamic> json) =>
       Day(classes: List<Class>.from(json.map((d) => Class.fromJson(d))));
 
+  String getWeekDay() {
+    return classes.first.period.getWeekDay();
+  }
+
   @override
   String toString() {
     return 'Day{classes: $classes}';
