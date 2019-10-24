@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -25,17 +26,20 @@ class NavDrawer extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                   accountName: Text(loginData.fullName),
-                  accountEmail: loginData.email == null ? null : Text(loginData.email),
+                  accountEmail:
+                      loginData.email == null ? null : Text(loginData.email),
                   currentAccountPicture: UserAvatar(state.photoUrl)),
               ListTile(
                 title: Text("Overview"),
-                onTap: () => Navigator.pushNamed(context, "/overview"),
-                selected: isCurrentPath("/overview"),
+                onTap: () => Navigator.pushNamed(context, RouteNames.overview),
+                selected: isCurrentPath(RouteNames.overview),
               ),
               Divider(),
               ListTile(
                 title: Text("Tuesday"),
-                onTap: () => cPrint("NAV: Tuesday"),
+                onTap: () => Navigator.pushNamed(context, RouteNames.day,
+                    arguments: "tuesday"),
+                selected: isCurrentPath(RouteNames.day),
               ),
               ListTile(
                 title: Text("Wendesday"),
@@ -54,8 +58,8 @@ class NavDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text("Settings"),
-                selected: isCurrentPath("/settings"),
-                onTap: () => Navigator.pushNamed(context, "/settings"),
+                selected: isCurrentPath(RouteNames.settings),
+                onTap: () => Navigator.pushNamed(context, RouteNames.settings),
               ),
             ],
           ));
