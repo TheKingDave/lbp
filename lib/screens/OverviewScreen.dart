@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/data/lessons/Class.dart';
+import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
@@ -12,29 +14,39 @@ class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _OverviewData>(
-      converter: (store) => _OverviewData(
-          loading: store.state.days.loading,
-          lessons: store.state.days.data == null
-              ? List<_LessonOverviewData>()
-              : List<_LessonOverviewData>.from(
-                  store.state.days.data.days.map((d) {
-                  Lesson l = d.getSelectedLesson();
-                  return _LessonOverviewData(
-                    color: l?.color,
-                    period: d.period,
-                    note: d.note,
-                    room: l?.room,
-                    subject: Strings.lessons.getLessonLong(l?.subject),
-                    // subject: l?.subject,
-                  );
-                }))),
+      converter: (store) {
+        var _days = List<_DayOverviewData>();
+        if (store.state.days.data != null) {
+          Days days = store.state.days.data;
+          _days = List<_DayOverviewData>.from(days.days.map((Day d) {
+            return _DayOverviewData(
+              weekDay: d.classes.first.period.getWeekDay(),
+              classes: List.from(d.classes.map((Class c) {
+                Lesson l = c.getSelectedLesson();
+                return _ClassOverviewData(
+                  color: l?.color,
+                  period: c.period.toString(),
+                  note: c.note,
+                  room: l?.room,
+                  subject: Strings.lessons.getLessonLong(l?.subject),
+                );
+              })),
+            );
+          }));
+        }
+
+        return _OverviewData(loading: store.state.days.loading, days: _days);
+      },
       builder: (context, model) {
         return Loader(
           loading: model.loading,
           build: (context) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: model.lessons.map((l) => _LessonOverview(l)).toList(),
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: model.days.map((d) => _DayOverview(data: d)).toList(),
+              ),
             );
           },
         );
@@ -44,20 +56,51 @@ class OverviewScreen extends StatelessWidget {
 }
 
 class _OverviewData {
-  List<_LessonOverviewData> lessons;
+  List<_DayOverviewData> days;
   bool loading;
 
-  _OverviewData({this.lessons, this.loading});
+  _OverviewData({this.days, this.loading});
 }
 
-class _LessonOverviewData {
-  final TimeFrame period;
+class _DayOverviewData {
+  final String weekDay;
+  final List<_ClassOverviewData> classes;
+
+  _DayOverviewData({this.weekDay, this.classes});
+}
+
+class _DayOverview extends StatelessWidget {
+  static const bigText = TextStyle(fontSize: 28.0);
+
+  final _DayOverviewData data;
+
+  _DayOverview({this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    var children = <Widget>[
+      Text(data.weekDay, style: bigText),
+    ];
+
+    for (_ClassOverviewData cod in data.classes) {
+      children.add(_ClassOverview(cod));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
+    );
+  }
+}
+
+class _ClassOverviewData {
+  final String period;
   final String color;
   final String subject;
   final String room;
   final String note;
 
-  _LessonOverviewData(
+  _ClassOverviewData(
       {this.period, String color, String subject, String room, String note})
       : this.color = color ?? "#000000",
         this.subject = subject ?? "Gegenstand",
@@ -65,18 +108,17 @@ class _LessonOverviewData {
         this.note = note.isEmpty ? "Note" : note;
 }
 
-class _LessonOverview extends StatelessWidget {
+class _ClassOverview extends StatelessWidget {
   static const bigText = TextStyle(fontSize: 24.0);
   static const mediumText = TextStyle(fontSize: 16.0);
 
-  final _LessonOverviewData data;
+  final _ClassOverviewData data;
 
-  _LessonOverview(this.data);
+  _ClassOverview(this.data);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        // margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         clipBehavior: Clip.hardEdge,
         child: Container(
           padding: EdgeInsets.all(8.0),
@@ -87,8 +129,13 @@ class _LessonOverview extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(data.period.toString(), style: bigText),
-              Text("${data.subject} ${data.room}", style: mediumText),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text("${data.subject} ${data.room}", style: mediumText),
+                  Text(data.period, style: bigText),
+                ],
+              ),
               Text(data.note, style: mediumText),
             ],
           ),

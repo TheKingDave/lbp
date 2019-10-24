@@ -1,4 +1,3 @@
-
 import 'package:lbp/data/strings/Strings.dart';
 
 class TimeFrame {
@@ -22,11 +21,19 @@ class TimeFrame {
     return data;
   }
 
+  String pad(dynamic p) {
+    return p.toString().padLeft(2, '0');
+  }
+
+  String getWeekDay() {
+    return Strings.getWeekdayString(begin.toLocal().weekday);
+  }
+
   @override
   String toString() {
     DateTime b = begin.toLocal();
     DateTime e = end.toLocal();
 
-    return "${Strings.getWeekdayString(b.weekday)} ${b.hour}:${b.minute} - ${e.hour}:${e.minute}";
+    return "${b.hour}:${pad(b.minute)} - ${e.hour}:${pad(e.minute)}";
   }
 }
