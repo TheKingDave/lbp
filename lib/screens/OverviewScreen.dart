@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
+import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -18,8 +19,9 @@ class OverviewScreen extends StatelessWidget {
         if (store.state.days.data != null) {
           Days days = store.state.days.data;
           _days = List<_DayOverviewData>.from(days.days.map((Day d) {
+            TimeFrame p = d.classes.first.period;
             return _DayOverviewData(
-              weekDay: d.classes.first.period.getWeekDay(),
+              weekDay: "${p.getWeekDay()} ${p.getDate()}",
               classes: List.from(d.classes.map((Class c) {
                 Lesson l = c.getSelectedLesson();
                 return _ClassOverviewData(
@@ -131,7 +133,16 @@ class _ClassOverview extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("${data.subject} ${data.room}", style: mediumText),
+                  Row(
+                    children: <Widget>[
+                      SingleChildScrollView(
+                          child: Text(data.subject, style: mediumText)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                        child: Text(data.room, style: mediumText),
+                      ),
+                    ],
+                  ),
                   Text(data.period, style: bigText),
                 ],
               ),
