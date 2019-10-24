@@ -17,7 +17,9 @@ class DefaultScaffold extends StatelessWidget {
         title: name != null ? Text(name) : null,
         actions: <Widget>[Image(image: AssetImage("assets/img/icon.jpg"))],
       ),
-      body: child,
+      body: SingleChildScrollView(
+        child: child,
+      ),
     );
   }
 }

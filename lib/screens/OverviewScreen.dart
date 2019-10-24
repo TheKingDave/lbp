@@ -4,7 +4,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
-import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/redux/AppState.dart';
