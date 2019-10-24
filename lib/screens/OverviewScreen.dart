@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/Period.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/ui/Loader.dart';
@@ -23,7 +24,8 @@ class OverviewScreen extends StatelessWidget {
                     period: d.period,
                     note: d.note,
                     room: l?.room,
-                    subject: l?.subject,
+                    subject: Strings.lessons.getLessonLong(l?.subject),
+                    // subject: l?.subject,
                   );
                 }))),
       builder: (context, model) {
