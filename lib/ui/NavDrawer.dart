@@ -5,6 +5,7 @@ import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:lbp/ui/UserAvatar.dart';
 
@@ -14,7 +15,9 @@ class NavDrawer extends StatelessWidget {
     return StoreConnector<AppState, _State>(
         converter: (store) => _State(
             loginData: store.state.login.data,
-            photoUrl: userPhotoSelector(store.state)),
+            photoUrl: userPhotoSelector(store.state),
+            logout: () => store.dispatch(LogoutAction()),
+        ),
         builder: (context, state) {
           String route = ModalRoute.of(context).settings.name;
 
@@ -61,6 +64,11 @@ class NavDrawer extends StatelessWidget {
                 selected: isCurrentPath(RouteNames.settings),
                 onTap: () => Navigator.pushNamed(context, RouteNames.settings),
               ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Logout'),
+                onTap: state.logout,
+              ),
             ],
           ));
         });
@@ -70,6 +78,7 @@ class NavDrawer extends StatelessWidget {
 class _State {
   LoginData loginData;
   String photoUrl;
+  Function() logout;
 
-  _State({this.loginData, this.photoUrl});
+  _State({this.loginData, this.photoUrl, this.logout});
 }
