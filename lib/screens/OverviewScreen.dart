@@ -44,8 +44,7 @@ class OverviewScreen extends StatelessWidget {
           build: (context) {
             return Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: ListView(
                 children: model.days.map((d) => _DayOverview(data: d)).toList(),
               ),
             );
