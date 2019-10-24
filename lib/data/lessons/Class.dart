@@ -2,15 +2,15 @@ import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 
-class Day extends ApiResponses {
+class Class extends ApiResponses {
   List<Lesson> lessons;
   String note;
   TimeFrame period;
   bool visible;
 
-  Day({this.lessons, this.note, this.period, this.visible});
+  Class({this.lessons, this.note, this.period, this.visible});
 
-  Day.fromJson(Map<String, dynamic> json) {
+  Class.fromJson(Map<String, dynamic> json) {
     lessons = List<Lesson>.from(
         json['lessons'].map((_json) => Lesson.fromJson(_json)));
     note = json['note'];

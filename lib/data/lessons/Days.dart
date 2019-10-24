@@ -1,14 +1,14 @@
 import 'package:lbp/api/ApiResponse.dart';
 
-import 'Day.dart';
+import 'Class.dart';
 
 class Days extends ApiResponses {
-  List<Day> days;
+  List<Class> days;
 
   Days({this.days});
 
   Days.fromJson(List<dynamic> json) {
-    days = List<Day>.from(json.map((d) => Day.fromJson(d[0])));
+    days = List<Class>.from(json.map((d) => Class.fromJson(d[0])));
   }
 
   @override
