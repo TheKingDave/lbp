@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
-import 'package:lbp/data/lessons/Days.dart';
-import 'package:lbp/data/lessons/DaysRequest.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
-import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
@@ -21,6 +18,7 @@ import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
 
 import 'data/strings/DefaultStrings.dart';
+import 'data/strings/Strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,10 +63,12 @@ class LBPApp extends StatelessWidget {
           RouteNames.login: (context) => LoginScreen(),
           RouteNames.overview: (context) =>
               DefaultScaffold(name: "Overview", child: OverviewScreen()),
-          RouteNames.settings: (context) => DefaultScaffold(
-              name: "Settings", child: SettingsScreen()),
-          RouteNames.day: (context) =>
-              DefaultScaffold(name: "Day", child: DayScreen()),
+          RouteNames.settings: (context) =>
+              DefaultScaffold(name: "Settings", child: SettingsScreen()),
+          RouteNames.day: (context) => DefaultScaffold(
+              name: Strings.getWeekdayString(
+                  ModalRoute.of(context).settings.arguments),
+              child: DayScreen()),
         },
         theme: Themes.lightTheme,
       ),
