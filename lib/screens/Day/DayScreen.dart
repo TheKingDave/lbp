@@ -60,9 +60,13 @@ class _LessonOverview extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    Strings.lessons.getLessonLong(lesson.subject),
-                    style: mediumText,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Text(
+                        Strings.lessons.getLessonLong(lesson.subject),
+                        style: mediumText,
+                      ),
+                    ),
                   ),
                   Text(lesson.room, style: bigText),
                 ],
