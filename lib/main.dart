@@ -9,11 +9,11 @@ import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
-import 'package:lbp/screens/DayScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
+import 'package:lbp/ui/DayScaffold.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
 
@@ -65,10 +65,7 @@ class LBPApp extends StatelessWidget {
               DefaultScaffold(name: "Overview", child: OverviewScreen()),
           RouteNames.settings: (context) =>
               DefaultScaffold(name: "Settings", child: SettingsScreen()),
-          RouteNames.day: (context) => DefaultScaffold(
-              name: Strings.getWeekdayString(
-                  ModalRoute.of(context).settings.arguments),
-              child: DayScreen()),
+          RouteNames.day: (context) => DayScaffold(),
         },
         theme: Themes.lightTheme,
       ),
