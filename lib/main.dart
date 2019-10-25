@@ -13,12 +13,11 @@ import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
-import 'package:lbp/ui/DayScaffold.dart';
+import 'package:lbp/ui/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
 
 import 'data/strings/DefaultStrings.dart';
-import 'data/strings/Strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +64,7 @@ class LBPApp extends StatelessWidget {
               DefaultScaffold(name: "Overview", child: OverviewScreen()),
           RouteNames.settings: (context) =>
               DefaultScaffold(name: "Settings", child: SettingsScreen()),
-          RouteNames.day: (context) => DayScaffold(),
+          RouteNames.day: (context) => DayContainer(),
         },
         theme: Themes.lightTheme,
       ),
