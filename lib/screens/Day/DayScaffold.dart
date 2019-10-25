@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/logic/DayRouteData.dart';
+import 'package:lbp/screens/Day/DayScreen.dart';
 import 'package:lbp/ui/NavDrawer.dart';
 
 class DayScaffold extends StatefulWidget {
@@ -35,6 +36,8 @@ class _DayScaffoldState extends State<DayScaffold>
 
   @override
   Widget build(BuildContext context) {
+    int index = 0;
+
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
@@ -48,9 +51,10 @@ class _DayScaffoldState extends State<DayScaffold>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: List.from(classes.map((c) => Center(
-                child: Text(c.period.toString()),
-              ))),
+          children: List.from(classes.map((c) => DayScreen(
+            weekDay: data.day,
+            $class: index++,
+          ))),
         ));
   }
 }
