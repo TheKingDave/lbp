@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -11,7 +12,19 @@ class DayScreen extends StatelessWidget {
     return StoreConnector<AppState, _DayScreenData>(
       converter: (store) => _DayScreenData(),
       builder: (context, model) {
-        return Text(Strings.getWeekdayString(day));
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Text("08:00 AM - 10:40 AM"),
+                Text("10:40 AM - 01:20 AM"),
+              ],
+            ),
+            Container(color: Colors.green, padding: EdgeInsets.all(30))
+          ],
+        );
       },
     );
   }
