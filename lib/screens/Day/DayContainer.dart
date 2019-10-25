@@ -4,8 +4,9 @@ import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
-import 'package:lbp/ui/DayScaffold.dart';
 import 'package:redux/redux.dart';
+
+import 'DayScaffold.dart';
 
 class DayContainer extends StatelessWidget {
   @override
@@ -22,7 +23,4 @@ class DayContainer extends StatelessWidget {
       },
     );
   }
-
-
-
 }

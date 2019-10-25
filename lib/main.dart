@@ -13,7 +13,7 @@ import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
-import 'package:lbp/ui/DayContainer.dart';
+import 'package:lbp/screens/Day/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:redux/redux.dart';
 
