@@ -21,7 +21,8 @@ class OverviewScreen extends StatelessWidget {
           _days = List<_DayOverviewData>.from(days.days.map((Day d) {
             TimeFrame p = d.classes.first.period;
             return _DayOverviewData(
-              weekDay: "${p.getWeekDay()} ${p.getDate()}",
+              weekDay: Strings.getWeekdayString(p.getWeekDay()),
+              date: p.getDate(),
               classes: List.from(d.classes.map((Class c) {
                 Lesson l = c.getSelectedLesson();
                 return _ClassOverviewData(
@@ -63,13 +64,14 @@ class _OverviewData {
 
 class _DayOverviewData {
   final String weekDay;
+  final String date;
   final List<_ClassOverviewData> classes;
 
-  _DayOverviewData({this.weekDay, this.classes});
+  _DayOverviewData({this.weekDay, this.date, this.classes});
 }
 
 class _DayOverview extends StatelessWidget {
-  static const bigText = TextStyle(fontSize: 28.0);
+  static const titleText = TextStyle(fontSize: 28.0);
 
   final _DayOverviewData data;
 
@@ -78,7 +80,16 @@ class _DayOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var children = <Widget>[
-      Text(data.weekDay, style: bigText),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text(data.weekDay, style: titleText),
+          Padding(
+            padding: const EdgeInsets.only(left: 4),
+            child: Text(data.date),
+          ),
+        ],
+      )
     ];
 
     for (_ClassOverviewData cod in data.classes) {

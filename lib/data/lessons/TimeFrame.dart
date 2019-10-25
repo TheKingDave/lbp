@@ -30,8 +30,8 @@ class TimeFrame {
     return "${b.day}.${b.month}";
   }
 
-  String getWeekDay() {
-    return Strings.getWeekdayString(begin.toLocal().weekday);
+  int getWeekDay() {
+    return begin.toLocal().weekday;
   }
 
   @override
