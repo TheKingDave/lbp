@@ -1,5 +1,4 @@
 import 'package:lbp/api/ApiResponse.dart';
-import 'package:lbp/etc/helpers.dart';
 
 class LoginData extends ApiResponses {
   String $class;
@@ -73,4 +72,30 @@ class LoginData extends ApiResponses {
   String toString() {
     return 'LoginResponse{"class": ${$class}, fullName: $fullName, email: $email, darkMode: $darkMode, language: $language, sessionKey: $sessionKey, isTeacher: $isTeacher, photo: $photo}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is LoginData &&
+              runtimeType == other.runtimeType &&
+              $class == other.$class &&
+              fullName == other.fullName &&
+              email == other.email &&
+              darkMode == other.darkMode &&
+              language == other.language &&
+              sessionKey == other.sessionKey &&
+              isTeacher == other.isTeacher &&
+              photo == other.photo;
+
+  @override
+  int get hashCode =>
+      $class.hashCode ^
+      fullName.hashCode ^
+      email.hashCode ^
+      darkMode.hashCode ^
+      language.hashCode ^
+      sessionKey.hashCode ^
+      isTeacher.hashCode ^
+      photo.hashCode;
+
 }
