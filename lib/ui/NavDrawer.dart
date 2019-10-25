@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
@@ -11,9 +12,12 @@ import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:lbp/ui/UserAvatar.dart';
 
 class NavDrawer extends StatelessWidget {
+  NavDrawer({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _State>(
+        distinct: true,
         converter: (store) => _State(
               loginData: store.state.login.data,
               photoUrl: userPhotoSelector(store.state),
@@ -22,19 +26,17 @@ class NavDrawer extends StatelessWidget {
                   daysListSelector(store.state).map((d) => d.getWeekDay())),
             ),
         builder: (context, state) {
-          String route = ModalRoute.of(context).settings.name;
-
-          Function(String path) isCurrentPath = (path) => path == route;
-
           LoginData loginData = state.loginData;
 
-
+          String routeName = ModalRoute.of(context).settings.name;
+          dynamic routeArgs = ModalRoute.of(context).settings.arguments;
+          Function(String path) isCurrentPath = (path) => path == routeName;
 
           final children = <Widget>[
             UserAccountsDrawerHeader(
                 accountName: Text(loginData.fullName),
                 accountEmail:
-                loginData.email == null ? null : Text(loginData.email),
+                    loginData.email == null ? null : Text(loginData.email),
                 currentAccountPicture: UserAvatar(state.photoUrl)),
             ListTile(
               title: Text("Overview"),
@@ -44,16 +46,17 @@ class NavDrawer extends StatelessWidget {
             Divider(),
           ];
 
-          for(String wd in state.weekdays) {
+          for (int wd in state.weekdays) {
             children.add(ListTile(
-              title: Text(wd),
-              onTap: () => Navigator.pushNamed(context, RouteNames.day,
-                  arguments: wd),
-              selected: isCurrentPath(RouteNames.day),
+              title: Text(Strings.getWeekdayString(wd)),
+              onTap: () =>
+                  Navigator.pushNamed(context, RouteNames.day, arguments: wd),
+              selected: isCurrentPath(RouteNames.day) && routeArgs == wd,
             ));
           }
 
-          children.addAll([Divider(),
+          children.addAll([
+            Divider(),
             ListTile(
               leading: Icon(Icons.feedback),
               title: Text("Send feedback"),
@@ -73,7 +76,8 @@ class NavDrawer extends StatelessWidget {
               leading: Icon(Icons.exit_to_app),
               title: Text('Logout'),
               onTap: state.logout,
-            )]);
+            )
+          ]);
 
           return Drawer(
               child: ListView(
@@ -87,7 +91,20 @@ class _State {
   final LoginData loginData;
   final String photoUrl;
   final Function() logout;
-  final List<String> weekdays;
+  final List<int> weekdays;
 
   _State({this.loginData, this.photoUrl, this.logout, this.weekdays});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _State &&
+          runtimeType == other.runtimeType &&
+          loginData == other.loginData &&
+          photoUrl == other.photoUrl &&
+          weekdays == other.weekdays;
+
+  @override
+  int get hashCode =>
+      loginData.hashCode ^ photoUrl.hashCode ^ weekdays.hashCode;
 }
