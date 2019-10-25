@@ -1,5 +1,7 @@
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
+import 'package:lbp/data/lessons/Lesson.dart';
+import 'package:lbp/etc/helpers.dart';
 
 import '../AppState.dart';
 
@@ -14,5 +16,9 @@ List<Class> classesOfDaySelector(AppState state, int weekDay) {
     }
   }
 
-  return null;
+  return List();
+}
+
+List<Lesson> lessonsOfDayAndClass(AppState state, int weekDay, int $class) {
+  return classesOfDaySelector(state, weekDay)[$class].lessons;
 }
