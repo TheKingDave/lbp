@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
+import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/ui/Loader.dart';
 
@@ -20,12 +23,15 @@ class OverviewScreen extends StatelessWidget {
           Days days = store.state.days.data;
           _days = List<_DayOverviewData>.from(days.days.map((Day d) {
             TimeFrame p = d.classes.first.period;
+            int index = 0;
             return _DayOverviewData(
               weekDay: Strings.getWeekdayString(p.getWeekDay()),
               date: p.getDate(),
               classes: List.from(d.classes.map((Class c) {
                 Lesson l = c.getSelectedLesson();
                 return _ClassOverviewData(
+                  dayRouteData:
+                      DayRouteData(d.getWeekDay(), initialLesson: index++),
                   color: l?.color,
                   period: c.period.toString(),
                   note: c.note,
@@ -104,6 +110,7 @@ class _DayOverview extends StatelessWidget {
 }
 
 class _ClassOverviewData {
+  final DayRouteData dayRouteData;
   final String period;
   final String color;
   final String subject;
@@ -111,7 +118,12 @@ class _ClassOverviewData {
   final String note;
 
   _ClassOverviewData(
-      {this.period, String color, String subject, String room, String note})
+      {@required this.dayRouteData,
+      @required this.period,
+      String color,
+      String subject,
+      String room,
+      String note})
       : this.color = color ?? "#000000",
         this.subject = subject ?? "Gegenstand",
         this.room = room ?? "Raum",
@@ -130,34 +142,41 @@ class _ClassOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         clipBehavior: Clip.hardEdge,
-        child: Container(
-          padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              border: Border(
-            left: BorderSide(width: 10.0, color: HexColor(data.color)),
-          )),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: InkWell(
+            onTap: () {
+              cPrint("press ${data.dayRouteData}");
+              Navigator.of(context)
+                  .pushNamed(RouteNames.day, arguments: data.dayRouteData);
+            },
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border(
+                left: BorderSide(width: 10.0, color: HexColor(data.color)),
+              )),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      SingleChildScrollView(
-                          child: Text(data.subject, style: mediumText)),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                        child: Text(data.room, style: mediumText),
+                      Row(
+                        children: <Widget>[
+                          SingleChildScrollView(
+                              child: Text(data.subject, style: mediumText)),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 4.0, right: 4.0),
+                            child: Text(data.room, style: mediumText),
+                          ),
+                        ],
                       ),
+                      Text(data.period, style: bigText),
                     ],
                   ),
-                  Text(data.period, style: bigText),
+                  Text(data.note, style: mediumText),
                 ],
               ),
-              Text(data.note, style: mediumText),
-            ],
-          ),
-        ));
+            )));
   }
 }
