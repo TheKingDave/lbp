@@ -1,40 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/logic/DayRouteData.dart';
-import 'package:lbp/redux/AppState.dart';
-import 'package:lbp/redux/selectors/DaysSelectors.dart';
 import 'package:lbp/ui/NavDrawer.dart';
-import 'package:redux/redux.dart';
 
 class DayScaffold extends StatefulWidget {
-  const DayScaffold({Key key}) : super(key: key);
+  final List<Class> classes;
+  final DayRouteData data;
+
+  const DayScaffold({Key key, @required this.classes, @required this.data})
+      : super(key: key);
 
   @override
-  _DayScaffoldState createState() => _DayScaffoldState();
+  _DayScaffoldState createState() =>
+      _DayScaffoldState(classes: classes, data: data);
 }
 
 class _DayScaffoldState extends State<DayScaffold>
     with SingleTickerProviderStateMixin {
+  final List<Class> classes;
+  final DayRouteData data;
+
   TabController _tabController;
+
+  _DayScaffoldState({@required this.classes, @required this.data});
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 1);
+    _tabController = TabController(
+        initialIndex: data.initialLesson, vsync: this, length: classes.length);
   }
 
   @override
   Widget build(BuildContext context) {
-    DayRouteData data = ModalRoute.of(context).settings.arguments;
-    _tabController.animateTo(data.initialLesson);
-
-    Store<AppState> store = StoreProvider.of<AppState>(context);
-
-    List<Class> classes = classesOfDaySelector(store.state, data.day);
-
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
