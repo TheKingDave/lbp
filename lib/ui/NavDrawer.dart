@@ -5,6 +5,7 @@ import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
+import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
@@ -49,9 +50,9 @@ class NavDrawer extends StatelessWidget {
           for (int wd in state.weekdays) {
             children.add(ListTile(
               title: Text(Strings.getWeekdayString(wd)),
-              onTap: () =>
-                  Navigator.pushNamed(context, RouteNames.day, arguments: wd),
-              selected: isCurrentPath(RouteNames.day) && routeArgs == wd,
+              onTap: () => Navigator.pushNamed(context, RouteNames.day,
+                  arguments: DayRouteData(wd)),
+              selected: isCurrentPath(RouteNames.day) && routeArgs.day == wd,
             ));
           }
 
