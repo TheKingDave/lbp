@@ -1,16 +1,21 @@
+import 'package:lbp/data/strings/DayTimeStrings.dart';
 import 'package:lbp/data/strings/LessonStrings.dart';
 
 class Strings {
   static final Map<String, String> strings = {};
   static LessonStrings lessons = LessonStrings();
+  static DayTimeStrings dayTimes = DayTimeStrings();
 
   static String getString(String short, [def = "?"]) {
     return strings[short] ?? def;
   }
 
+  static String capitalize(String str) {
+    return '${str[0].toUpperCase()}${str.substring(1)}';
+  }
+
   static String getCapitalize(String short) {
-    final s = Strings.getString(short);
-    return '${s[0].toUpperCase()}${s.substring(1)}';
+    return capitalize(Strings.getString(short));
   }
 
   static void setString(String short, String string) {
@@ -36,5 +41,9 @@ class Strings {
 
   static String getWeekdayString(int weekday) {
     return getCapitalize(numberWeekdayMap[weekday]);
+  }
+
+  static String getGreetingString(int hour) {
+    return "${capitalize(dayTimes.getGood())} ${capitalize(Strings.dayTimes.getTimeForHour(hour))}";
   }
 }

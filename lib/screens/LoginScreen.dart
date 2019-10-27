@@ -87,7 +87,8 @@ class _LoginScreenState extends State<_LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Guten Nachmitag',
+                    Text(
+                        Strings.getGreetingString(TimeOfDay.now().hour),
                         style: TextStyle(
                             fontSize: 32.0, fontWeight: FontWeight.bold)),
                     Padding(padding: EdgeInsets.only(top: 16.0)),

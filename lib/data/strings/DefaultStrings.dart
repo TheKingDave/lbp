@@ -1,3 +1,4 @@
+import 'package:lbp/data/strings/DayTimeStrings.dart';
 import 'package:lbp/data/strings/LessonStrings.dart';
 
 import 'Strings.dart';
@@ -55,6 +56,13 @@ class DefaultStrings {
       "aiit2": ["Informatik", "AIIT"],
       "amhet": ["Mathematics (ONLY HET!!!)", "AM (HET)"],
       "amhit": ["Mathematics (ONLY HIT!!!)", "AM (HIT)"]
+    });
+
+    Strings.dayTimes = DayTimeStrings.fromJson({
+      "afternoon": "afternoon",
+      "evening": "evening",
+      "good": "good",
+      "morning": "morning",
     });
   }
 }
