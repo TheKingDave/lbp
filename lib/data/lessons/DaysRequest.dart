@@ -1,19 +1,10 @@
 import 'dart:convert';
+import 'package:lbp/api/ApiRequestWithKey.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:lbp/api/ApiRequest.dart';
-import 'package:lbp/etc/helpers.dart';
-import 'package:lbp/redux/AppState.dart';
-import 'package:redux/redux.dart';
-
-class DaysRequest extends ApiRequest {
-  String sess_key;
-
-  DaysRequest({@required this.sess_key});
-
+class DaysRequest extends ApiRequestWithKey {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sess_key'] = this.sess_key;
+    data['sess_key'] = this.sessKey;
     return data;
   }
 
@@ -26,10 +17,5 @@ class DaysRequest extends ApiRequest {
   String getEndpoint() {
     return "getData";
   }
-
-  void onSuccess(Store<AppState> store, NextDispatcher next) {
-    cPrint("Success ${store.state.days.data.days.length}");
-  }
-
 
 }

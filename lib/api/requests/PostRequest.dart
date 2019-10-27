@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:lbp/api/ApiRequest.dart';
+import 'package:lbp/api/ApiRequestWithKey.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/Request.dart';
 import 'package:lbp/settings/Api.dart';
@@ -9,8 +10,11 @@ import '../../etc/helpers.dart';
 class PostRequest<T extends ApiResponses>
     implements Request {
   @override
-  Future<ApiResponse<T>> send(ApiRequest req) async {
+  Future<ApiResponse<T>> send(ApiRequest req, String sessKey) async {
     http.Response res;
+    if(req is ApiRequestWithKey) {
+      req.setSesKey(sessKey);
+    }
     try {
       res = await http.post(Api.getApiUrl(req.getEndpoint()),
           headers: req.getHeaders(),

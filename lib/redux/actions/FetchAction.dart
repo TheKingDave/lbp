@@ -19,7 +19,7 @@ class FetchDataAction<T extends ApiResponses>
 
   fetchData(Store<AppState> store, NextDispatcher next) async {
     next(getStartAction());
-    final res = await PostRequest<T>().send(request);
+    final res = await PostRequest<T>().send(request, store.state.login.data?.sessionKey);
     if(res.hasError()) {
       next(FetchActionFailure<T>(Exception(res.error)));
       request.onFailure(store, next);
