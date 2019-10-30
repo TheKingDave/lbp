@@ -16,12 +16,17 @@ import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
 import 'package:lbp/screens/Day/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
+import 'package:package_info/package_info.dart';
 import 'package:redux/redux.dart';
 
 import 'data/strings/DefaultStrings.dart';
 
+PackageInfo packageInfo;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  packageInfo = await PackageInfo.fromPlatform();
 
   // TODO: load data from disk/preferences
   DefaultStrings.setDefaultString();
@@ -67,7 +72,7 @@ class LBPApp extends StatelessWidget {
               DefaultScaffold(name: "Settings", child: SettingsScreen()),
           RouteNames.day: (context) => DayContainer(),
           RouteNames.about: (context) =>
-              DefaultScaffold(name: "About", child: AboutScreen()),
+              DefaultScaffold(name: "About", child: AboutScreen(packageInfo)),
         },
         theme: Themes.lightTheme,
       ),
