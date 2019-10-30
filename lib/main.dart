@@ -11,6 +11,7 @@ import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/screens/AboutScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
+import 'package:lbp/screens/OpenSourceLicenseScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
@@ -72,6 +73,11 @@ class LBPApp extends StatelessWidget {
           RouteNames.day: (context) => DayContainer(),
           RouteNames.about: (context) =>
               DefaultScaffold(name: "About", child: AboutScreen(packageInfo)),
+          RouteNames.openSourceLicenses: (context) => DefaultScaffold(
+                name: "Open source licenses",
+                drawer: false,
+                child: OpenSourceLicenseScreen(),
+              )
         },
         theme: Themes.lightTheme,
       ),
