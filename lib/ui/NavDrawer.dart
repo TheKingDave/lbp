@@ -7,6 +7,7 @@ import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
 import 'package:lbp/redux/selectors/UserSelectors.dart';
@@ -23,6 +24,7 @@ class NavDrawer extends StatelessWidget {
               loginData: store.state.login.data,
               photoUrl: userPhotoSelector(store.state),
               logout: () => store.dispatch(LogoutAction()),
+              push: (route) => store.dispatch(NavigatePushAction(route)),
               weekdays: List.from(
                   daysListSelector(store.state).map((d) => d.getWeekDay())),
             ),
@@ -41,7 +43,7 @@ class NavDrawer extends StatelessWidget {
                 currentAccountPicture: UserAvatar(state.photoUrl)),
             ListTile(
               title: Text("Overview"),
-              onTap: () => Navigator.pushNamed(context, RouteNames.overview),
+              onTap: () => state.push(RouteNames.overview),
               selected: isCurrentPath(RouteNames.overview),
             ),
             Divider(),
@@ -67,11 +69,12 @@ class NavDrawer extends StatelessWidget {
               leading: Icon(Icons.settings),
               title: Text("Settings"),
               selected: isCurrentPath(RouteNames.settings),
-              onTap: () => Navigator.pushNamed(context, RouteNames.settings),
+              onTap: () => state.push(RouteNames.settings),
             ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text('About'),
+              onTap: () => state.push(RouteNames.about),
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
@@ -92,9 +95,10 @@ class _State {
   final LoginData loginData;
   final String photoUrl;
   final Function() logout;
+  final Function(String route) push;
   final List<int> weekdays;
 
-  _State({this.loginData, this.photoUrl, this.logout, this.weekdays});
+  _State({this.loginData, this.photoUrl, this.logout, this.push, this.weekdays});
 
   @override
   bool operator ==(Object other) =>
