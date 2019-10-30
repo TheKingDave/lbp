@@ -22,6 +22,7 @@ class AboutScreen extends StatelessWidget {
             store.dispatch(NavigatePushAction(RouteNames.openSourceLicenses)),
       },
       builder: (context, state) => ListView(
+        physics: ClampingScrollPhysics(),
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.person_outline),
