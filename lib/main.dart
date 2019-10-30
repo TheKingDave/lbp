@@ -21,12 +21,8 @@ import 'package:redux/redux.dart';
 
 import 'data/strings/DefaultStrings.dart';
 
-PackageInfo packageInfo;
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  packageInfo = await PackageInfo.fromPlatform();
 
   // TODO: load data from disk/preferences
   DefaultStrings.setDefaultString();
@@ -46,15 +42,18 @@ void main() async {
         RouteMiddleware(),
       ]);
 
-  runApp(LBPApp(store: store));
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  runApp(LBPApp(store: store, packageInfo: packageInfo));
 }
 
 GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class LBPApp extends StatelessWidget {
   final Store store;
+  final PackageInfo packageInfo;
 
-  LBPApp({@required this.store});
+  LBPApp({@required this.store, this.packageInfo});
 
   @override
   Widget build(BuildContext context) {
