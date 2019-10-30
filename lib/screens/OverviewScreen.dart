@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/lessons/Class.dart';
@@ -144,7 +145,6 @@ class _ClassOverview extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
             onTap: () {
-              cPrint("press ${data.dayRouteData}");
               Navigator.of(context)
                   .pushNamed(RouteNames.day, arguments: data.dayRouteData);
             },
@@ -160,21 +160,23 @@ class _ClassOverview extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SingleChildScrollView(
-                              child: Text(data.subject, style: mediumText)),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: Text(data.room, style: mediumText),
-                          ),
-                        ],
+                      Expanded(
+                          child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(data.subject, style: mediumText))),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Text(data.period, style: bigText),
                       ),
-                      Text(data.period, style: bigText),
                     ],
                   ),
-                  Text(data.note, style: mediumText),
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Expanded(child: Text(data.note, style: mediumText)),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(data.room, style: mediumText),
+                    )
+                  ]),
                 ],
               ),
             )));
