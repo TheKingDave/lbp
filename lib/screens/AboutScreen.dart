@@ -12,12 +12,19 @@ class AboutScreen extends StatelessWidget {
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text("Version name"),
-          subtitle: Text(packageInfo.version),
+          leading: Icon(Icons.info),
+          title: Text("App version"),
+          subtitle: Text("${packageInfo.version}+${packageInfo.buildNumber}"),
         ),
         ListTile(
-          title: Text("Build number"),
-          subtitle: Text(packageInfo.buildNumber),
+          leading: Icon(Icons.person_outline),
+          title: Text("Developer"),
+          subtitle: Text("David Langheiter"),
+        ),
+        ListTile(
+          leading: Icon(Icons.cake),
+          title: Text("Buy me a cake"),
+          subtitle: Text("paypal.me/DavidLangheiter"),
         ),
       ],
     );
