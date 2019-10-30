@@ -16,9 +16,14 @@ class DayTimeStrings {
 
     for(var i = 0; i < ent.length; i++) {
       if(!(hour >= ent[i].key)) {
-        return entries[ent[i-1].value];
+        return entries[ent[_priorIndex(i, ent.length)].value];
       }
     }
     return entries[ent[ent.length-1].value];
+  }
+
+  _priorIndex(int t, int len, [int e = 1]) {
+    final n = t - e;
+    return n >= 0 ? n : len - (e - t);
   }
 }
