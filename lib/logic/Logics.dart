@@ -22,6 +22,6 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 }
 
 void _logout(Store<AppState> store, NextDispatcher next, action) {
-  next(NavigateReplaceAction(RouteNames.login));
+  next(NavigatePushNamedAndRemoveUntilAction(RouteNames.login));
   next(InitAction());
 }

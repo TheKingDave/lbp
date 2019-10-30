@@ -4,13 +4,16 @@ class RouteAction {
   RouteAction(this.routeName);
 }
 
-class NavigateReplaceAction extends RouteAction{
+class NavigateReplaceAction extends RouteAction {
   NavigateReplaceAction(routeName) : super(routeName);
 }
 
-class NavigatePushAction extends RouteAction{
+class NavigatePushAction extends RouteAction {
   NavigatePushAction(routeName) : super(routeName);
 }
 
-class NavigatePopAction{
+class NavigatePushNamedAndRemoveUntilAction extends RouteAction {
+  NavigatePushNamedAndRemoveUntilAction(routeName) : super(routeName);
 }
+
+class NavigatePopAction {}
