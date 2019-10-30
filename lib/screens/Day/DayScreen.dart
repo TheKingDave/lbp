@@ -68,12 +68,12 @@ class _LessonOverview extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(lesson.room, style: bigText),
+                  Text("${lesson.currentStudents}/${lesson.maxStudents}", style: bigText),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  Text("${lesson.currentStudents}/${lesson.maxStudents}",
+                  Text(lesson.room,
                       style: mediumText),
                   Expanded(
                     child: Padding(
