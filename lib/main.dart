@@ -66,7 +66,8 @@ class LBPApp extends StatelessWidget {
           RouteNames.settings: (context) =>
               DefaultScaffold(name: "Settings", child: SettingsScreen()),
           RouteNames.day: (context) => DayContainer(),
-          RouteNames.about: (context) => AboutScreen(),
+          RouteNames.about: (context) =>
+              DefaultScaffold(name: "About", child: AboutScreen()),
         },
         theme: Themes.lightTheme,
       ),
