@@ -62,14 +62,19 @@ class _LessonOverview extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: SingleChildScrollView(
+                      physics: ClampingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
                       child: Text(
                         Strings.lessons.getLessonLong(lesson.subject),
                         style: mediumText,
                       ),
                     ),
                   ),
-                  Text("${lesson.currentStudents}/${lesson.maxStudents}",
-                      style: bigText),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text("${lesson.currentStudents}/${lesson.maxStudents}",
+                        style: bigText),
+                  ),
                 ],
               ),
               Row(

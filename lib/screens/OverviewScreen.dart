@@ -162,6 +162,7 @@ class _ClassOverview extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                           child: SingleChildScrollView(
+                              physics: ClampingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               child: Text(data.subject, style: mediumText))),
                       Padding(
