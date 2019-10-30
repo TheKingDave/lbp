@@ -4,5 +4,6 @@ class RouteNames {
   static const overview = "/overview";
   static const settings = "/settings";
   static const day = "/day";
+  static const about = "/about";
 
 }
