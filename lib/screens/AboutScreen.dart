@@ -58,7 +58,7 @@ class AboutScreen extends StatelessWidget {
         if (await canLaunch(url)) {
           await launch(url);
         } else {
-          error(Exception(Strings.getCapitalize("A_COULD_NOT_OPEN_LINK")));
+          error(Exception(Strings.getCapitalize("a_COULD_NOT_OPEN_LINK")));
         }
       };
 }
