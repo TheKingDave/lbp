@@ -18,4 +18,18 @@ class Language {
   String toString() {
     return 'Language{short: $short, name: $name}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Language &&
+              runtimeType == other.runtimeType &&
+              short == other.short &&
+              name == other.name;
+
+  @override
+  int get hashCode =>
+      short.hashCode ^
+      name.hashCode;
+
 }

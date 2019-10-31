@@ -2,21 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/Language.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/UserSelectors.dart';
 
 class SettingsScreen extends StatelessWidget {
-  Future<Language> _selectLanguage(BuildContext context) {
+  Future<Language> _selectLanguage(BuildContext context, Language current) {
     return showDialog<Language>(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
             title: Text("Select Langauge"),
             children: Language.languages.map((lang) {
-              return ListTile(
+              return RadioListTile<Language>(
                 title: Text(lang.name),
-                onTap: () {
+                value: lang,
+                groupValue: current,
+                onChanged: (lang) {
                   Navigator.pop(context, lang);
                 },
               );
@@ -47,11 +50,11 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text("Language"),
+              title: Text(Strings.getCapitalize("language")),
               subtitle: Text(state.language.name),
               leading: Icon(Icons.language),
               onTap: () async {
-                final lang = await _selectLanguage(context);
+                final lang = await _selectLanguage(context, state.language);
                 if (lang != null) state.setLanguage(lang);
               },
             ),
