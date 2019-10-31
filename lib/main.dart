@@ -56,6 +56,43 @@ class LBPApp extends StatelessWidget {
 
   LBPApp({@required this.store, this.packageInfo});
 
+  Route<dynamic> _generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case RouteNames.login:
+        return MaterialPageRoute(
+            maintainState: false, builder: (_) => LoginScreen());
+      case RouteNames.overview:
+        return MaterialPageRoute(
+            maintainState: false,
+            builder: (_) => DefaultScaffold(
+                name: Strings.getCapitalize("overview"),
+                child: OverviewScreen()));
+      case RouteNames.day:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) => DayContainer(settings.arguments),
+        );
+      case RouteNames.settings:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) => DefaultScaffold(
+              name: Strings.getCapitalize("settings"), child: SettingsScreen()),
+        );
+      case RouteNames.about:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) => DefaultScaffold(
+              name: Strings.getCapitalize("about"),
+              child: AboutScreen(packageInfo)),
+        );
+      case RouteNames.openSourceLicenses:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) => LicensePage(),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
@@ -64,17 +101,7 @@ class LBPApp extends StatelessWidget {
         title: 'Lernbüro Planer',
         initialRoute: '/login',
         navigatorKey: navigatorKey,
-        routes: {
-          RouteNames.login: (context) => LoginScreen(),
-          RouteNames.overview: (context) =>
-              DefaultScaffold(name: Strings.getCapitalize("overview"), child: OverviewScreen()),
-          RouteNames.settings: (context) =>
-              DefaultScaffold(name: Strings.getCapitalize("settings"), child: SettingsScreen()),
-          RouteNames.day: (context) => DayContainer(),
-          RouteNames.about: (context) =>
-              DefaultScaffold(name: Strings.getCapitalize("about"), child: AboutScreen(packageInfo)),
-          RouteNames.openSourceLicenses: (context) => LicensePage(),
-        },
+        onGenerateRoute: _generateRoute,
         theme: Themes.lightTheme,
       ),
     );

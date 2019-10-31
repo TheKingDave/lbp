@@ -9,16 +9,19 @@ import 'package:redux/redux.dart';
 import 'DayScaffold.dart';
 
 class DayContainer extends StatelessWidget {
+  final DayRouteData dayRouteData;
+
+  DayContainer(this.dayRouteData);
+
   @override
   Widget build(BuildContext context) {
     return StoreBuilder<AppState>(
       builder: (BuildContext context, Store<AppState> store) {
-        DayRouteData data = ModalRoute.of(context).settings.arguments;
-        List<Class> classes = classesOfDaySelector(store.state, data.day);
+        List<Class> classes = classesOfDaySelector(store.state, dayRouteData.day);
 
         return DayScaffold(
           classes: classes,
-          data: data,
+          data: dayRouteData,
         );
       },
     );
