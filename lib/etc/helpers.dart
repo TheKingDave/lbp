@@ -6,6 +6,6 @@ String encode(String s, [int e = 1337]) {
   return o;
 }
 
-void cPrint(String msg) {
-  print("c-log $msg");
+void cPrint(dynamic msg) {
+  print("c-log ${msg.toString()}");
 }
