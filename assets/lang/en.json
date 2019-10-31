@@ -1,0 +1,190 @@
+{
+  "username": "username",
+  "password": "password",
+  "settings": "settings",
+  "queue": "queue",
+  "chat": "chat",
+  "friends": "friends",
+  "overview": "overview",
+  "monday": "monday",
+  "tuesday": "tuesday",
+  "wednesday": "wednesday",
+  "thursday": "thursday",
+  "friday": "friday",
+  "morning": "morning",
+  "afternoon": "afternoon",
+  "hello": "hello",
+  "information": "information",
+  "error": "error",
+  "success": "success",
+  "submit": "submit",
+  "select_subject": "select subject",
+  "sign_out": "sign out",
+  "language": "language",
+  "theme": "theme",
+  "feedback": "feedback",
+  "your_feedback": "Your feedback",
+  "login": "login",
+  "LOGIN_FAILED": "Login failed, check your username and password again 🤔",
+  "LOGIN_FAILED_SERVER_SIDE": "The server isn't able to connect to the authentication service 🤬",
+  "LOGIN_FAILED_NOT_AUTHORIZED": "You are not authorized to login 😓",
+  "feedback_suc": "Your feedback has been sent sucessfully",
+  "feedback_err": "An error has uccured while sending your feedback",
+  "network_err": "Network error",
+  "not_loaded": "The main application has not fully loaded yet. One moment please.",
+  "currently_offline": "You are currently offline",
+  "lesson_set_err": "Sorry, you may not sign up for this open learning hub anymore",
+  "note": "note",
+  "noLBS_currently": "At this time there are no active LB sessions.",
+  "beta_text": "This is a beta version of the LBPlaner",
+  "search_students": "Search here for Students...",
+  "comming_soon": "Comming soon...",
+  "dayTimes": {
+    "good": "good",
+    "morning": "morning",
+    "afternoon": "afternoon",
+    "evening": "evening"
+  },
+  "subject": {
+    "subject": [
+      "Subject",
+      "SUBJ"
+    ],
+    "ger": [
+      "German",
+      "D"
+    ],
+    "am": [
+      "Mathematics",
+      "AM"
+    ],
+    "am2": [
+      "Mathematics",
+      "AM"
+    ],
+    "eng": [
+      "English",
+      "E"
+    ],
+    "sew": [
+      "Software Development",
+      "SEW"
+    ],
+    "sew2": [
+      "Software Development",
+      "SEW"
+    ],
+    "nwtk": [
+      "Networking Technology",
+      "NWTK"
+    ],
+    "syte": [
+      "System Technology Electronics",
+      "SYTE"
+    ],
+    "syteahit": [
+      "System Technology Electronics (Only AHIT)",
+      "SYTE"
+    ],
+    "sytebhit": [
+      "System Technology Electronics (Only BHIT)",
+      "SYTE"
+    ],
+    "syti": [
+      "System Technology Computer Science ",
+      "SYTI"
+    ],
+    "sytit": [
+      "System Technology Computer Science (Theory)",
+      "SYTI"
+    ],
+    "sytit2": [
+      "System Technology Computer Science (Theory)",
+      "SYTI"
+    ],
+    "syt": [
+      "System Technology",
+      "SYT"
+    ],
+    "syt2": [
+      "System Technology",
+      "SYT"
+    ],
+    "syt3": [
+      "System Technology",
+      "SYT"
+    ],
+    "itsi": [
+      "IT Security",
+      "ITSI"
+    ],
+    "ai": [
+      "AI / Data Science",
+      "AI"
+    ],
+    "insy": [
+      "Information Systems",
+      "INSY"
+    ],
+    "itp": [
+      "Projectmanagment",
+      "ITP"
+    ],
+    "nw": [
+      "Natural Sciences",
+      "NW"
+    ],
+    "medt": [
+      "Media technology",
+      "MEDT"
+    ],
+    "medt3d": [
+      "3D & Game Development",
+      "3DG"
+    ],
+    "medtmm": [
+      "Multimedia",
+      "MM"
+    ],
+    "medtweb": [
+      "Web Development",
+      "WE"
+    ],
+    "es1": [
+      "Energiesysteme",
+      "ES"
+    ],
+    "aiit": [
+      "Informatik",
+      "AIIT"
+    ],
+    "aiit2": [
+      "Informatik",
+      "AIIT"
+    ],
+    "amhet": [
+      "Mathematics (ONLY HET!!!)",
+      "AM (HET)"
+    ],
+    "amhit": [
+      "Mathematics (ONLY HIT!!!)",
+      "AM (HIT)"
+    ]
+  },
+  "NOT_AUTHORIZED": "You do not have enought rights to do that.",
+  "PERIOD_FULL": "It is full. 😞",
+  "WRONG_SUBJECT_FOR_LESSON": "You can't pick that subject right now",
+  "TOO_LATE_MENS": "Too late ... ⏰",
+  "BTCH_YOU_AINT_GO_DO_THAT": "You ain't gon do no such thing like that",
+  "DATA_MISSING": "Some data is missing 😞",
+  "LANG_FIELD_INVALID": "The language field is empty",
+  "THEME_FIELD_INVALID": "Theme error",
+  "NO_ENTRY_FOUND": "No entry found ...",
+  "NO_DATA_FOR_DAY": "No data was found for this day",
+  "SESS_KEY_AUTH_FAILED": "Invalid session key",
+  "MISSING_DATA_FOR_DAY": "No data found for this day. Please contact an Administrator",
+  "UNKNOWN_ERROR": "An unknown error has occurred",
+
+  "about": "about",
+  "room": "room"
+}

@@ -26,7 +26,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // TODO: load data from disk/preferences
-  DefaultStrings.setDefaultString();
+  await DefaultStrings.setDefaultString();
 
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware

@@ -2,6 +2,9 @@ import 'package:lbp/data/strings/DayTimeStrings.dart';
 import 'package:lbp/data/strings/LessonStrings.dart';
 
 class Strings {
+  static const dayTimesKey = "dayTimes";
+  static const lessonsKey = "subject";
+
   static final Map<String, String> strings = {};
   static LessonStrings lessons = LessonStrings();
   static DayTimeStrings dayTimes = DayTimeStrings();
@@ -45,5 +48,18 @@ class Strings {
 
   static String getGreetingString(int hour) {
     return "${capitalize(dayTimes.getGood())} ${capitalize(Strings.dayTimes.getTimeForHour(hour))}";
+  }
+
+  static void setFromJson(Map<String, dynamic> json) {
+    if(json.containsKey(dayTimesKey)) {
+      Strings.dayTimes = DayTimeStrings.fromJson(json[dayTimesKey]);
+      json.remove(dayTimesKey);
+    }
+    if(json.containsKey(lessonsKey)) {
+      Strings.lessons = LessonStrings.fromJson(json[lessonsKey]);
+      json.remove(lessonsKey);
+    }
+    //Strings.overrideMany(json);
+     json.forEach((k, v) => v is String ? Strings.strings[k] = v : print(""));
   }
 }

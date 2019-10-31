@@ -4,8 +4,8 @@ class DayTimeStrings {
 
   DayTimeStrings({this.entries});
 
-  factory DayTimeStrings.fromJson(Map<String, String> json) =>
-      DayTimeStrings(entries: json);
+  factory DayTimeStrings.fromJson(Map<String, dynamic> json) =>
+      DayTimeStrings(entries: Map<String, String>.from(json));
 
   getGood() {
     return entries['good'];

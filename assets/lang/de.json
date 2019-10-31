@@ -1,0 +1,190 @@
+{
+  "username": "benutzername",
+  "password": "passwort",
+  "settings": "einstellungen",
+  "queue": "schlange",
+  "chat": "chat",
+  "friends": "freunde",
+  "overview": "übersicht",
+  "monday": "montag",
+  "tuesday": "dienstag",
+  "wednesday": "mittwoch",
+  "thursday": "donnerstag",
+  "friday": "freitag",
+  "morning": "vormittag",
+  "afternoon": "nachmittag",
+  "hello": "hallo",
+  "information": "information",
+  "error": "fehler",
+  "success": "erfolgreich",
+  "submit": "senden",
+  "select_subject": "fach auswählen",
+  "sign_out": "abmelden",
+  "language": "sprache",
+  "theme": "theme",
+  "feedback": "feedback",
+  "your_feedback": "Dein Feedback",
+  "feedback_suc": "Dein Feedback wurde erfolgreich gesendet",
+  "feedback_err": "Beim Senden deines Feedbacks ist ein Fehler aufgetreten",
+  "network_err": "Netzwerkfehler",
+  "currently_offline": "Es konnte keine Verbindung zum Server aufgebaut werden",
+  "not_loaded": "Die Hauptapplikation ist noch nicht ganz fertig geladen. Einen Moment bitte.",
+  "login": "login",
+  "LOGIN_FAILED": "Anmeldung Fehlgeschlagen, überprüfe nocheinmal dein Username und Passwort 🤔",
+  "LOGIN_FAILED_SERVER_SIDE": "Der Server kann gerade keine Verbindung zu dem Authentifizierungsserver aufbauen. 🤬",
+  "LOGIN_FAILED_NOT_AUTHORIZED": "Du bist nicht berechtigt dich anzumelden. 😓",
+  "lesson_set_err": "Du kannst dich hier leider nicht eintragen",
+  "note": "notiz",
+  "noLBS_currently": "Momentan ist in keinem Lernbüro Unterricht.",
+  "beta_text": "Die Applikation ist momentan in der Beta.",
+  "search_students": "Hier nach Schülern suchen...",
+  "comming_soon": "In Kürze verfügbar...",
+  "dayTimes": {
+    "good": "guten",
+    "morning": "morgen",
+    "afternoon": "nachmittag",
+    "evening": "abend"
+  },
+  "subject": {
+    "subject": [
+      "Gegenstand",
+      "ggst"
+    ],
+    "ger": [
+      "Deutsch",
+      "D"
+    ],
+    "am": [
+      "Mathematik",
+      "AM"
+    ],
+    "am2": [
+      "Mathematik",
+      "AM"
+    ],
+    "eng": [
+      "Englisch",
+      "E"
+    ],
+    "sew": [
+      "Softwareentwicklung",
+      "SEW"
+    ],
+    "sew2": [
+      "Softwareentwicklung",
+      "SEW"
+    ],
+    "nwtk": [
+      "Netzwerktechnik",
+      "NWTK"
+    ],
+    "syte": [
+      "Systemtechnik Elektronik",
+      "SYTE"
+    ],
+    "syteahit": [
+      "Systemtechnik Elektronik (nur AHIT)",
+      "SYTE"
+    ],
+    "sytebhit": [
+      "Systemtechnik Elektronik (nur BHIT)",
+      "SYTE"
+    ],
+    "syti": [
+      "Systemtechnik Informatik",
+      "SYTI"
+    ],
+    "sytit": [
+      "Systemtechnik Informatik (Theorie)",
+      "SYTI"
+    ],
+    "sytit2": [
+      "Systemtechnik Informatik (Theorie)",
+      "SYTI"
+    ],
+    "syt": [
+      "Systemtechnik",
+      "SYT"
+    ],
+    "syt2": [
+      "Systemtechnik",
+      "SYT"
+    ],
+    "syt3": [
+      "Systemtechnik",
+      "SYT"
+    ],
+    "itsi": [
+      "IT-Security",
+      "ITSI"
+    ],
+    "ai": [
+      "AI / Data Science",
+      "AI"
+    ],
+    "insy": [
+      "Informationssysteme",
+      "INSY"
+    ],
+    "itp": [
+      "Informationstechnische Projekte",
+      "ITP"
+    ],
+    "nw": [
+      "Naturwissenschaften",
+      "NW"
+    ],
+    "medt": [
+      "Medientechnik",
+      "MEDT"
+    ],
+    "medt3d": [
+      "3D & Gameentwicklung",
+      "3DG"
+    ],
+    "medtmm": [
+      "Fotografie & Film",
+      "MM"
+    ],
+    "medtweb": [
+      "Web Entwicklung",
+      "WE"
+    ],
+    "es1": [
+      "Energiesysteme",
+      "ES"
+    ],
+    "aiit": [
+      "Informatik",
+      "AIIT"
+    ],
+    "aiit2": [
+      "Informatik",
+      "AIIT"
+    ],
+    "amhet": [
+      "Mathematik (NUR HET)",
+      "AM (HET)"
+    ],
+    "amhit": [
+      "Mathematik (NUR HIT)",
+      "AM (HIT)"
+    ]
+  },
+  "NOT_AUTHORIZED": "Du hast dafür leider keine Rechte",
+  "PERIOD_FULL": "Das LB ist bereits voll 😞",
+  "WRONG_SUBJECT_FOR_LESSON": "Dieses Fach findet jetzt nicht statt",
+  "TOO_LATE_MENS": "Du bist leider zu spät. ⏰",
+  "BTCH_YOU_AINT_GO_DO_THAT": "Dies wirst du nicht machen",
+  "DATA_MISSING": "Hierfür fehlen dir die benötigten Daten 😞",
+  "LANG_FIELD_INVALID": "Das Sprachfeld ist leider falsch",
+  "THEME_FIELD_INVALID": "Es gab einen Fehler mit dem Theme",
+  "NO_ENTRY_FOUND": "Es wurde für diesen Tag kein Eintrag gefunden",
+  "NO_DATA_FOR_DAY": "Es wurden für diesen Tag keine Daten gefunden",
+  "SESS_KEY_AUTH_FAILED": "Der Session Key ist nicht gültig.",
+  "MISSING_DATA_FOR_DAY": "Keine Daten für diesen Tag gefunden. Bitte kontaktiere einen Administrator",
+  "UNKNOWN_ERROR": "Ein unbekannter Fehler ist aufgetreten",
+
+  "about": "über",
+  "room": "raum"
+}
