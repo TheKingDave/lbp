@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
 
@@ -17,9 +18,10 @@ class DayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _DayScreenData>(
       converter: (store) => _DayScreenData(
-          lessons: lessonsOfDayAndClass(store.state, weekDay, $class)),
+          lessons: lessonsOfDayAndClassSelector(store.state, weekDay, $class)),
       builder: (context, model) {
         return ListView(
+          physics: ClampingScrollPhysics(),
           children: List.from(model.lessons.map((l) => _LessonOverview(
                 lesson: l,
               ))),
@@ -48,51 +50,54 @@ class _LessonOverview extends StatelessWidget {
     return Card(
         clipBehavior: Clip.hardEdge,
         color: lesson.selected ? Color(0xFFDDDDDD) : null,
-        child: Container(
-          padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              border: Border(
-            left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
-          )),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Text(
-                        Strings.lessons.getLessonLong(lesson.subject),
-                        style: mediumText,
+        child: InkWell(
+          onTap: () => cPrint(lesson.subject),
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+                border: Border(
+              left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
+            )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          Strings.lessons.getLessonLong(lesson.subject),
+                          style: mediumText,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Text("${lesson.currentStudents}/${lesson.maxStudents}",
-                        style: bigText),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Text(lesson.room, style: mediumText),
-                  Expanded(
-                    child: Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            physics: ClampingScrollPhysics(),
-                            child: Text(lesson.teacher,
-                                style: mediumText.copyWith(
-                                    color: Colors.black45)))),
-                  )
-                ],
-              ),
-            ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text("${lesson.currentStudents}/${lesson.maxStudents}",
+                          style: bigText),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(lesson.room, style: mediumText),
+                    Expanded(
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
+                          child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              physics: ClampingScrollPhysics(),
+                              child: Text(lesson.teacher,
+                                  style: mediumText.copyWith(
+                                      color: Colors.black45)))),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ));
   }
