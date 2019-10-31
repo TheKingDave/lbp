@@ -64,13 +64,13 @@ class LBPApp extends StatelessWidget {
       case RouteNames.login:
         return MaterialPageRoute(
             maintainState: false, builder: (_) => LoginScreen());
-      case RouteNames.overview:
+      case RouteNames.studentOverview:
         return MaterialPageRoute(
             maintainState: false,
             builder: (_) => DefaultScaffold(
                 name: Strings.getCapitalize("overview"),
                 child: OverviewScreen()));
-      case RouteNames.day:
+      case RouteNames.studentDay:
         return MaterialPageRoute(
           maintainState: false,
           builder: (_) => DayContainer(settings.arguments),

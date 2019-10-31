@@ -192,7 +192,7 @@ class _ClassOverview extends StatelessWidget {
         child: InkWell(
             onTap: () {
               Navigator.of(context)
-                  .pushNamed(RouteNames.day, arguments: data.dayRouteData);
+                  .pushNamed(RouteNames.studentDay, arguments: data.dayRouteData);
             },
             child: Container(
               padding: EdgeInsets.all(8.0),

@@ -43,8 +43,8 @@ class NavDrawer extends StatelessWidget {
                 currentAccountPicture: UserAvatar(state.photoUrl)),
             ListTile(
               title: Text(Strings.getCapitalize("overview")),
-              onTap: () => state.push(RouteNames.overview),
-              selected: isCurrentPath(RouteNames.overview),
+              onTap: () => state.push(RouteNames.studentOverview),
+              selected: isCurrentPath(RouteNames.studentOverview),
             ),
             Divider(),
           ];
@@ -52,9 +52,9 @@ class NavDrawer extends StatelessWidget {
           for (int wd in state.weekdays) {
             children.add(ListTile(
               title: Text(Strings.getWeekdayString(wd)),
-              onTap: () => Navigator.pushNamed(context, RouteNames.day,
+              onTap: () => Navigator.pushNamed(context, RouteNames.studentDay,
                   arguments: DayRouteData(wd)),
-              selected: isCurrentPath(RouteNames.day) && routeArgs.day == wd,
+              selected: isCurrentPath(RouteNames.studentDay) && routeArgs.studentDay == wd,
             ));
           }
 

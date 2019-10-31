@@ -19,8 +19,14 @@ final List<Logic> logics = [
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
-  store.dispatch(ApiGetDataAction());
-  next(NavigateReplaceAction(RouteNames.overview));
+
+  if(action.data.isTeacher) {
+    // get teacher data
+    next(NavigateReplaceAction(RouteNames.teacherOverview));
+  } else {
+    store.dispatch(ApiGetDataAction());
+    next(NavigateReplaceAction(RouteNames.studentOverview));
+  }
 }
 
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
