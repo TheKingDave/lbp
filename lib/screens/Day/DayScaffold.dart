@@ -4,6 +4,7 @@ import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/screens/Day/DayScreen.dart';
+import 'package:lbp/ui/ErrorNotifier.dart';
 import 'package:lbp/ui/NavDrawer.dart';
 
 class DayScaffold extends StatefulWidget {
@@ -49,12 +50,14 @@ class _DayScaffoldState extends State<DayScaffold>
             isScrollable: classes.length > 2,
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: List.from(classes.map((c) => DayScreen(
-            weekDay: data.day,
-            $class: index++,
-          ))),
+        body: ErrorNotifier(
+          child: TabBarView(
+            controller: _tabController,
+            children: List.from(classes.map((c) => DayScreen(
+              weekDay: data.day,
+              $class: index++,
+            ))),
+          ),
         ));
   }
 }
