@@ -18,24 +18,26 @@ class DayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _DayScreenData>(
       distinct: true,
-      converter: (store) =>
-          _DayScreenData(
-              lessons: lessonsOfDayAndClassSelector(
-                  store.state, weekDay, $class),
-              setSubject: (subject) =>
-                  store.dispatch(ApiSetDataAction(
-                      subject: subject,
-                      period:
-                      periodOfDayAndClassSelector(
-                          store.state, weekDay, $class)))),
+      converter: (store) => _DayScreenData(
+          visible:
+              classOfDayAndClassSelector(store.state, weekDay, $class).visible,
+          lessons: lessonsOfDayAndClassSelector(store.state, weekDay, $class),
+          setSubject: (subject) => store.dispatch(ApiSetDataAction(
+              subject: subject,
+              period:
+                  periodOfDayAndClassSelector(store.state, weekDay, $class)))),
       builder: (context, model) {
-        return ListView(
-          physics: ClampingScrollPhysics(),
-          children: List.from(model.lessons.map((l) =>
-              _LessonOverview(
-                lesson: l,
-                setSubject: model.setSubject,
-              ))),
+        return Stack(
+          children: <Widget>[
+            ListView(
+              physics: ClampingScrollPhysics(),
+              children: List.from(model.lessons.map((l) => _LessonOverview(
+                    lesson: l,
+                    visible: model.visible,
+                    setSubject: model.setSubject,
+                  ))),
+            ),
+          ],
         );
       },
     );
@@ -43,24 +45,23 @@ class DayScreen extends StatelessWidget {
 }
 
 class _DayScreenData {
+  final bool visible;
   final List<Lesson> lessons;
   final Function(String subject) setSubject;
 
-  _DayScreenData({this.lessons, this.setSubject});
+  _DayScreenData({@required this.visible, this.lessons, this.setSubject});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _DayScreenData &&
-              runtimeType == other.runtimeType &&
-              lessons == other.lessons &&
-              setSubject == other.setSubject;
+      other is _DayScreenData &&
+          runtimeType == other.runtimeType &&
+          lessons == other.lessons &&
+          setSubject == other.setSubject &&
+          visible == other.visible;
 
   @override
-  int get hashCode =>
-      lessons.hashCode ^
-      setSubject.hashCode;
-
+  int get hashCode => lessons.hashCode ^ setSubject.hashCode ^ visible.hashCode;
 }
 
 class _LessonOverview extends StatelessWidget {
@@ -68,23 +69,29 @@ class _LessonOverview extends StatelessWidget {
   static const mediumText = TextStyle(fontSize: 16.0);
 
   final Lesson lesson;
+  final bool visible;
   final Function(String subject) setSubject;
 
-  _LessonOverview({this.lesson, this.setSubject});
+  _LessonOverview({this.lesson, this.visible, this.setSubject});
 
   @override
   Widget build(BuildContext context) {
+    final t = Theme.of(context);
+
+    final _bigText = visible ? bigText : bigText.copyWith(color: t.disabledColor);
+    final _mediumText = visible ? mediumText : mediumText.copyWith(color: t.disabledColor);
+
     return Card(
         clipBehavior: Clip.hardEdge,
         color: lesson.selected ? Color(0xFFDDDDDD) : null,
         child: InkWell(
-          onTap: () => setSubject(lesson.subject),
+          onTap: visible ? () => setSubject(lesson.subject) : null,
           child: Container(
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
                 border: Border(
-                  left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
-                )),
+              left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
+            )),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -97,7 +104,7 @@ class _LessonOverview extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         child: Text(
                           Strings.lessons.getLessonLong(lesson.subject),
-                          style: mediumText,
+                          style: _mediumText,
                         ),
                       ),
                     ),
@@ -105,13 +112,13 @@ class _LessonOverview extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(
                           "${lesson.currentStudents}/${lesson.maxStudents}",
-                          style: bigText),
+                          style: _bigText),
                     ),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    Text(lesson.room, style: mediumText),
+                    Text(lesson.room, style: _mediumText),
                     Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(left: 4.0),
@@ -119,7 +126,7 @@ class _LessonOverview extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               physics: ClampingScrollPhysics(),
                               child: Text(lesson.teacher,
-                                  style: mediumText.copyWith(
+                                  style: _mediumText.copyWith(
                                       color: Colors.black45)))),
                     )
                   ],

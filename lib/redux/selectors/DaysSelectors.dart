@@ -9,18 +9,26 @@ List<Day> daysListSelector(AppState state) {
   return state.days.data?.days ?? List();
 }
 
-List<Class> classesOfDaySelector(AppState state, int weekDay) {
+Day dayOfWeekDaySelector(AppState state, int weekDay) {
   for(Day d in daysListSelector(state)) {
     if(d.getWeekDay() == weekDay) {
-      return d.classes;
+      return d;
     }
   }
+  return null;
+}
 
-  return List();
+List<Class> classesOfDaySelector(AppState state, int weekDay) {
+  Day d = dayOfWeekDaySelector(state, weekDay);
+  return d == null ? List() : d.classes;
+}
+
+Class classOfDayAndClassSelector(AppState state, int weekDay, int $class) {
+  return classesOfDaySelector(state, weekDay)[$class];
 }
 
 List<Lesson> lessonsOfDayAndClassSelector(AppState state, int weekDay, int $class) {
-  return classesOfDaySelector(state, weekDay)[$class].lessons;
+  return classOfDayAndClassSelector(state, weekDay, $class).lessons;
 }
 
 TimeFrame periodOfDayAndClassSelector(AppState state, int weekDay, int $class) {
