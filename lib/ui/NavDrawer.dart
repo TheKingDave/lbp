@@ -42,7 +42,7 @@ class NavDrawer extends StatelessWidget {
                     loginData.email == null ? null : Text(loginData.email),
                 currentAccountPicture: UserAvatar(state.photoUrl)),
             ListTile(
-              title: Text("Overview"),
+              title: Text(Strings.getCapitalize("overview")),
               onTap: () => state.push(RouteNames.overview),
               selected: isCurrentPath(RouteNames.overview),
             ),
@@ -62,23 +62,23 @@ class NavDrawer extends StatelessWidget {
             Divider(),
             ListTile(
               leading: Icon(Icons.feedback),
-              title: Text("Send feedback"),
+              title: Text(Strings.getCapitalize("feedback")),
               onTap: () => cPrint("NAV: Issue"),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text("Settings"),
+              title: Text(Strings.getCapitalize("settings")),
               selected: isCurrentPath(RouteNames.settings),
               onTap: () => state.push(RouteNames.settings),
             ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text('About'),
+              title: Text(Strings.getCapitalize("about")),
               onTap: () => state.push(RouteNames.about),
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
+              title: Text(Strings.getCapitalize("sign_out")),
               onTap: state.logout,
             )
           ]);

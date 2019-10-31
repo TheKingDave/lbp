@@ -20,6 +20,7 @@ import 'package:package_info/package_info.dart';
 import 'package:redux/redux.dart';
 
 import 'data/strings/DefaultStrings.dart';
+import 'data/strings/Strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,12 +67,12 @@ class LBPApp extends StatelessWidget {
         routes: {
           RouteNames.login: (context) => LoginScreen(),
           RouteNames.overview: (context) =>
-              DefaultScaffold(name: "Overview", child: OverviewScreen()),
+              DefaultScaffold(name: Strings.getCapitalize("overview"), child: OverviewScreen()),
           RouteNames.settings: (context) =>
-              DefaultScaffold(name: "Settings", child: SettingsScreen()),
+              DefaultScaffold(name: Strings.getCapitalize("settings"), child: SettingsScreen()),
           RouteNames.day: (context) => DayContainer(),
           RouteNames.about: (context) =>
-              DefaultScaffold(name: "About", child: AboutScreen(packageInfo)),
+              DefaultScaffold(name: Strings.getCapitalize("about"), child: AboutScreen(packageInfo)),
           RouteNames.openSourceLicenses: (context) => LicensePage(),
         },
         theme: Themes.lightTheme,

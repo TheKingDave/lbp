@@ -126,9 +126,9 @@ class _ClassOverviewData {
       String room,
       String note})
       : this.color = color ?? "#000000",
-        this.subject = subject ?? "Subject",
-        this.room = room ?? "Room",
-        this.note = note.isEmpty ? "Note" : note;
+        this.subject = subject ?? Strings.lessons.getLessonLong("subject"),
+        this.room = room ?? Strings.getCapitalize("room"),
+        this.note = note.isEmpty ? "Note" : Strings.getCapitalize("note");
 }
 
 class _ClassOverview extends StatelessWidget {

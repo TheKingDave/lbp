@@ -15,11 +15,24 @@ class DefaultStrings {
       "LOGIN_FAILED_NOT_AUTHORIZED": "You are not authorized to login 😓",
       "UNKNOWN_ERROR": "An unknown error has occurred",
       "network_err": "Network error",
+
       "monday": "monday",
       "tuesday": "tuesday",
       "wednesday": "wednesday",
       "thursday": "thursday",
       "friday": "friday",
+
+      "settings": "settings",
+      "about": "about",
+      "sign_out": "sign out",
+      "language": "language",
+      "note": "note",
+      "overview": "overview",
+      "submit": "submit",
+      "success": "success",
+      "theme": "theme",
+      "feedback": "feedback",
+      "room": "room",
     };
 
     Strings.overrideMany(strings);
