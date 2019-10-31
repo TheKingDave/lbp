@@ -13,6 +13,7 @@ class ErrorNotifier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ErrorNotifierModel>(
+      distinct: true,
       converter: (store) => _ErrorNotifierModel.fromStore(store),
       builder: (context, model) => child,
       onWillChange: (model) {

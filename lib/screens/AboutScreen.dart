@@ -15,12 +15,13 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, Map<String, dynamic>>(
-      converter: (store) => {
-        "error": (ex) => store.dispatch(ErrorOccurredAction(ex)),
-        "osl": () =>
+    return StoreConnector<AppState, _AboutScreenState>(
+      distinct: true,
+      converter: (store) => _AboutScreenState(
+        error: (ex) => store.dispatch(ErrorOccurredAction(ex)),
+        osl: () =>
             store.dispatch(NavigatePushAction(RouteNames.openSourceLicenses)),
-      },
+      ),
       builder: (context, state) => ListView(
         physics: ClampingScrollPhysics(),
         children: <Widget>[
@@ -34,7 +35,7 @@ class AboutScreen extends StatelessWidget {
             // Would have said beer but there is no icon for that :(
             title: Text("Buy me a cake"),
             subtitle: Text("paypal.me/DavidLangheiter"),
-            onTap: _buildBuyCake(state['error']),
+            onTap: _buildBuyCake(state.error),
           ),
           ListTile(
             leading: Icon(Icons.info),
@@ -44,7 +45,7 @@ class AboutScreen extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.public),
             title: Text("Open source licenses"),
-            onTap: state['osl'],
+            onTap: state.osl,
           ),
         ],
       ),
@@ -59,4 +60,22 @@ class AboutScreen extends StatelessWidget {
           error(Exception("Could not open link."));
         }
       };
+}
+
+class _AboutScreenState {
+  final Function(Exception ex) error;
+  final Function() osl;
+
+  _AboutScreenState({this.error, this.osl});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _AboutScreenState &&
+          runtimeType == other.runtimeType &&
+          error == other.error &&
+          osl == other.osl;
+
+  @override
+  int get hashCode => error.hashCode ^ osl.hashCode;
 }

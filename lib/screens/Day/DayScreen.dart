@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lbp/data/SetDataRequest.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
-import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
@@ -19,6 +17,7 @@ class DayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _DayScreenData>(
+      distinct: true,
       converter: (store) =>
           _DayScreenData(
               lessons: lessonsOfDayAndClassSelector(
@@ -48,6 +47,20 @@ class _DayScreenData {
   final Function(String subject) setSubject;
 
   _DayScreenData({this.lessons, this.setSubject});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is _DayScreenData &&
+              runtimeType == other.runtimeType &&
+              lessons == other.lessons &&
+              setSubject == other.setSubject;
+
+  @override
+  int get hashCode =>
+      lessons.hashCode ^
+      setSubject.hashCode;
+
 }
 
 class _LessonOverview extends StatelessWidget {

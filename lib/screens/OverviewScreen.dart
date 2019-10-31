@@ -9,7 +9,6 @@ import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
-import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/ui/Loader.dart';
@@ -18,6 +17,7 @@ class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _OverviewData>(
+      distinct: true,
       converter: (store) {
         var _days = List<_DayOverviewData>();
         if (store.state.days.data != null) {
@@ -75,6 +75,22 @@ class _DayOverviewData {
   final List<_ClassOverviewData> classes;
 
   _DayOverviewData({this.weekDay, this.date, this.classes});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is _DayOverviewData &&
+              runtimeType == other.runtimeType &&
+              weekDay == other.weekDay &&
+              date == other.date &&
+              classes == other.classes;
+
+  @override
+  int get hashCode =>
+      weekDay.hashCode ^
+      date.hashCode ^
+      classes.hashCode;
+
 }
 
 class _DayOverview extends StatelessWidget {
@@ -129,6 +145,28 @@ class _ClassOverviewData {
         this.subject = subject ?? Strings.lessons.getLessonLong("subject"),
         this.room = room ?? Strings.getCapitalize("room"),
         this.note = note.isEmpty ? "Note" : Strings.getCapitalize("note");
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is _ClassOverviewData &&
+              runtimeType == other.runtimeType &&
+              dayRouteData == other.dayRouteData &&
+              period == other.period &&
+              color == other.color &&
+              subject == other.subject &&
+              room == other.room &&
+              note == other.note;
+
+  @override
+  int get hashCode =>
+      dayRouteData.hashCode ^
+      period.hashCode ^
+      color.hashCode ^
+      subject.hashCode ^
+      room.hashCode ^
+      note.hashCode;
+
 }
 
 class _ClassOverview extends StatelessWidget {

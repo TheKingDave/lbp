@@ -18,9 +18,9 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, _State>(
+    return StoreConnector<AppState, _NavDrawerState>(
         distinct: true,
-        converter: (store) => _State(
+        converter: (store) => _NavDrawerState(
               loginData: store.state.login.data,
               photoUrl: userPhotoSelector(store.state),
               logout: () => store.dispatch(LogoutAction()),
@@ -91,19 +91,19 @@ class NavDrawer extends StatelessWidget {
   }
 }
 
-class _State {
+class _NavDrawerState {
   final LoginData loginData;
   final String photoUrl;
   final Function() logout;
   final Function(String route) push;
   final List<int> weekdays;
 
-  _State({this.loginData, this.photoUrl, this.logout, this.push, this.weekdays});
+  _NavDrawerState({this.loginData, this.photoUrl, this.logout, this.push, this.weekdays});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is _State &&
+      other is _NavDrawerState &&
           runtimeType == other.runtimeType &&
           loginData == other.loginData &&
           photoUrl == other.photoUrl &&

@@ -58,6 +58,7 @@ class _LoginScreenState extends State<_LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _LoginScreenModel>(
+      distinct: true,
       converter: (store) => _LoginScreenModel(
           state: store.state.login,
           login: (un, pw) =>
