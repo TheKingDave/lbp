@@ -1,4 +1,5 @@
 import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
@@ -12,6 +13,7 @@ import '../RouteNames.dart';
 
 final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
+  TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(_setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
 ];
 
@@ -19,6 +21,11 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
   store.dispatch(ApiGetDataAction());
   next(NavigateReplaceAction(RouteNames.overview));
+}
+
+void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
+    FetchActionSuccess<SetDataResponse> action) {
+  store.dispatch(ApiGetDataAction());
 }
 
 void _logout(Store<AppState> store, NextDispatcher next, action) {
