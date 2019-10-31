@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
@@ -11,6 +12,7 @@ import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/screens/AboutScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
+import 'package:lbp/screens/NotFoundScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/settings/Themes.dart';
@@ -57,6 +59,7 @@ class LBPApp extends StatelessWidget {
   LBPApp({@required this.store, this.packageInfo});
 
   Route<dynamic> _generateRoute(RouteSettings settings) {
+    cPrint(settings.name);
     switch (settings.name) {
       case RouteNames.login:
         return MaterialPageRoute(
@@ -89,6 +92,11 @@ class LBPApp extends StatelessWidget {
         return MaterialPageRoute(
           maintainState: false,
           builder: (_) => LicensePage(),
+        );
+      default:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) =>  NotFoundScreen(settings.name),
         );
     }
   }

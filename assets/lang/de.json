@@ -194,6 +194,9 @@
   "a_buy_cake_redirect_link": "https://paypal.me/DavidLangheiter",
   "a_app_version": "App Version",
   "a_osl": "Open-Source-Lizenzen",
+  "a_not_found_page": "nicht gefunden",
+  "a_not_found_page_text": "konnte diese Seite nicht finden.",
+  "a_go_back": "zurück",
 
   "a_COULD_NOT_OPEN_LINK": "Konnte den link nicht öffnen."
 }
