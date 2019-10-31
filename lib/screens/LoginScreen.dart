@@ -16,14 +16,14 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(Strings.getCapitalize("login")),
           actions: <Widget>[Image(image: AssetImage("assets/img/icon.jpg"))],
         ),
         body: ErrorNotifier(
             child: Container(
-
-      child: _LoginScreen(),
-    )));
+          child: _LoginScreen(),
+        )));
   }
 }
 
@@ -88,8 +88,7 @@ class _LoginScreenState extends State<_LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                        Strings.getGreetingString(TimeOfDay.now().hour),
+                    Text(Strings.getGreetingString(TimeOfDay.now().hour),
                         style: TextStyle(
                             fontSize: 32.0, fontWeight: FontWeight.bold)),
                     Padding(padding: EdgeInsets.only(top: 16.0)),
