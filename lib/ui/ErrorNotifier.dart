@@ -24,7 +24,6 @@ class ErrorNotifier extends StatelessWidget {
               .showSnackBar(SnackBar(
             content: Text(model.error.toString()),
             backgroundColor: Theme.of(context).errorColor,
-            //backgroundColor: Color(0xffc83b2e),
           ));
         }
       },
