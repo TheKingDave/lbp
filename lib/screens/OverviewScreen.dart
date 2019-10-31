@@ -55,7 +55,7 @@ class OverviewScreen extends StatelessWidget {
             return ListView(
               physics: ClampingScrollPhysics(),
               padding: const EdgeInsets.all(4.0),
-              children: model.days.map((d) => _DayOverview(data: d)).toList(),
+              children: List.from(model.days.map((d) => _DayOverview(data: d))),
             );
           },
         );
