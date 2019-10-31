@@ -38,6 +38,7 @@ class OverviewScreen extends StatelessWidget {
                   note: c.note,
                   room: l?.room,
                   subject: Strings.lessons.getLessonLong(l?.subject),
+                  visible: c.visible,
                 );
               })),
             );
@@ -52,6 +53,7 @@ class OverviewScreen extends StatelessWidget {
           build: (context) {
             // For refresh indicator: https://github.com/brianegan/flutter_redux/issues/6
             return ListView(
+              physics: ClampingScrollPhysics(),
               padding: const EdgeInsets.all(4.0),
               children: model.days.map((d) => _DayOverview(data: d)).toList(),
             );
@@ -79,18 +81,14 @@ class _DayOverviewData {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _DayOverviewData &&
-              runtimeType == other.runtimeType &&
-              weekDay == other.weekDay &&
-              date == other.date &&
-              classes == other.classes;
+      other is _DayOverviewData &&
+          runtimeType == other.runtimeType &&
+          weekDay == other.weekDay &&
+          date == other.date &&
+          classes == other.classes;
 
   @override
-  int get hashCode =>
-      weekDay.hashCode ^
-      date.hashCode ^
-      classes.hashCode;
-
+  int get hashCode => weekDay.hashCode ^ date.hashCode ^ classes.hashCode;
 }
 
 class _DayOverview extends StatelessWidget {
@@ -133,6 +131,7 @@ class _ClassOverviewData {
   final String subject;
   final String room;
   final String note;
+  final bool visible;
 
   _ClassOverviewData(
       {@required this.dayRouteData,
@@ -140,7 +139,8 @@ class _ClassOverviewData {
       String color,
       String subject,
       String room,
-      String note})
+      String note,
+      this.visible})
       : this.color = color ?? "#000000",
         this.subject = subject ?? Strings.lessons.getLessonLong("subject"),
         this.room = room ?? Strings.getCapitalize("room"),
@@ -149,14 +149,15 @@ class _ClassOverviewData {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _ClassOverviewData &&
-              runtimeType == other.runtimeType &&
-              dayRouteData == other.dayRouteData &&
-              period == other.period &&
-              color == other.color &&
-              subject == other.subject &&
-              room == other.room &&
-              note == other.note;
+      other is _ClassOverviewData &&
+          runtimeType == other.runtimeType &&
+          dayRouteData == other.dayRouteData &&
+          period == other.period &&
+          color == other.color &&
+          subject == other.subject &&
+          room == other.room &&
+          note == other.note &&
+          visible == other.visible;
 
   @override
   int get hashCode =>
@@ -165,8 +166,8 @@ class _ClassOverviewData {
       color.hashCode ^
       subject.hashCode ^
       room.hashCode ^
-      note.hashCode;
-
+      note.hashCode ^
+      visible.hashCode;
 }
 
 class _ClassOverview extends StatelessWidget {
@@ -179,6 +180,13 @@ class _ClassOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData t = Theme.of(context);
+
+    final _bigText =
+        data.visible ? bigText : bigText.copyWith(color: t.disabledColor);
+    final _mediumText =
+        data.visible ? mediumText : mediumText.copyWith(color: t.disabledColor);
+
     return Card(
         clipBehavior: Clip.hardEdge,
         child: InkWell(
@@ -202,18 +210,18 @@ class _ClassOverview extends StatelessWidget {
                           child: SingleChildScrollView(
                               physics: ClampingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
-                              child: Text(data.subject, style: mediumText))),
+                              child: Text(data.subject, style: _mediumText))),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
-                        child: Text(data.period, style: bigText),
+                        child: Text(data.room, style: _bigText),
                       ),
                     ],
                   ),
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Expanded(child: Text(data.note, style: mediumText)),
+                    Expanded(child: Text(data.note, style: _mediumText)),
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Text(data.room, style: mediumText),
+                      child: Text(data.period, style: _mediumText),
                     )
                   ]),
                 ],
