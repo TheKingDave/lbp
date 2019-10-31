@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/data/SetDataRequest.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
 
 class DayScreen extends StatelessWidget {
@@ -17,13 +19,23 @@ class DayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _DayScreenData>(
-      converter: (store) => _DayScreenData(
-          lessons: lessonsOfDayAndClassSelector(store.state, weekDay, $class)),
+      converter: (store) =>
+          _DayScreenData(
+              lessons: lessonsOfDayAndClassSelector(
+                  store.state, weekDay, $class),
+              setSubject: (subject) =>
+                  store.dispatch(ApiSetDataAction(
+                      subject: subject,
+                      period:
+                      periodOfDayAndClassSelector(
+                          store.state, weekDay, $class)))),
       builder: (context, model) {
         return ListView(
           physics: ClampingScrollPhysics(),
-          children: List.from(model.lessons.map((l) => _LessonOverview(
+          children: List.from(model.lessons.map((l) =>
+              _LessonOverview(
                 lesson: l,
+                setSubject: model.setSubject,
               ))),
         );
       },
@@ -33,8 +45,9 @@ class DayScreen extends StatelessWidget {
 
 class _DayScreenData {
   final List<Lesson> lessons;
+  final Function(String subject) setSubject;
 
-  _DayScreenData({this.lessons});
+  _DayScreenData({this.lessons, this.setSubject});
 }
 
 class _LessonOverview extends StatelessWidget {
@@ -42,8 +55,9 @@ class _LessonOverview extends StatelessWidget {
   static const mediumText = TextStyle(fontSize: 16.0);
 
   final Lesson lesson;
+  final Function(String subject) setSubject;
 
-  _LessonOverview({this.lesson});
+  _LessonOverview({this.lesson, this.setSubject});
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +65,13 @@ class _LessonOverview extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         color: lesson.selected ? Color(0xFFDDDDDD) : null,
         child: InkWell(
-          onTap: () => cPrint(lesson.subject),
+          onTap: () => setSubject(lesson.subject),
           child: Container(
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
                 border: Border(
-              left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
-            )),
+                  left: BorderSide(width: 10.0, color: HexColor(lesson.color)),
+                )),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -76,7 +90,8 @@ class _LessonOverview extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Text("${lesson.currentStudents}/${lesson.maxStudents}",
+                      child: Text(
+                          "${lesson.currentStudents}/${lesson.maxStudents}",
                           style: bigText),
                     ),
                   ],

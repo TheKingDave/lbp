@@ -7,6 +7,8 @@ class SetDataRequest extends ApiRequestWithKey {
   DateTime end;
   String subject;
 
+  SetDataRequest({this.begin, this.end, this.subject});
+
   Map<String, dynamic> toJson() {
     return {
       "begin": begin.toIso8601String(),

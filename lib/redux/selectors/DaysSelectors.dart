@@ -1,6 +1,7 @@
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/Lesson.dart';
+import 'package:lbp/data/lessons/TimeFrame.dart';
 
 import '../AppState.dart';
 
@@ -20,4 +21,8 @@ List<Class> classesOfDaySelector(AppState state, int weekDay) {
 
 List<Lesson> lessonsOfDayAndClassSelector(AppState state, int weekDay, int $class) {
   return classesOfDaySelector(state, weekDay)[$class].lessons;
+}
+
+TimeFrame periodOfDayAndClassSelector(AppState state, int weekDay, int $class) {
+  return classesOfDaySelector(state, weekDay).first.period;
 }
