@@ -94,7 +94,6 @@ class _LoginScreenState extends State<_LoginScreen> {
                     Padding(padding: EdgeInsets.only(top: 16.0)),
                     Autofill(
                         onAutofilled: (val) {
-                          cPrint("autofill username $val");
                           _usernameController.value = TextEditingValue(
                             text: val,
                           );
@@ -130,7 +129,6 @@ class _LoginScreenState extends State<_LoginScreen> {
                     Padding(padding: EdgeInsets.only(top: 16.0)),
                     Autofill(
                         onAutofilled: (val) {
-                          cPrint("autofill password $val");
                           _passwordController.value = TextEditingValue(
                             text: val,
                           );
