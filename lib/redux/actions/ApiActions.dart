@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lbp/data/SetDataRequest.dart';
+import 'package:lbp/data/setData/SetDataRequest.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/DaysRequest.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
