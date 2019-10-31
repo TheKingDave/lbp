@@ -126,8 +126,8 @@ class _ClassOverviewData {
       String room,
       String note})
       : this.color = color ?? "#000000",
-        this.subject = subject ?? "Gegenstand",
-        this.room = room ?? "Raum",
+        this.subject = subject ?? "Subject",
+        this.room = room ?? "Room",
         this.note = note.isEmpty ? "Note" : note;
 }
 
