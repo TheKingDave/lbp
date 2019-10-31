@@ -82,7 +82,7 @@ class LBPApp extends StatelessWidget {
         return MaterialPageRoute(
           maintainState: false,
           builder: (_) => DefaultScaffold(
-              name: Strings.getCapitalize("about"),
+              name: Strings.getCapitalize("a_about"),
               child: AboutScreen(packageInfo)),
         );
       case RouteNames.openSourceLicenses:

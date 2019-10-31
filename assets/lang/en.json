@@ -185,6 +185,15 @@
   "MISSING_DATA_FOR_DAY": "No data found for this day. Please contact an Administrator",
   "UNKNOWN_ERROR": "An unknown error has occurred",
 
-  "about": "about",
-  "room": "room"
+  "a_about": "about",
+  "a_room": "room",
+  "a_developer": "developer",
+  "a_developer_name": "David Langheiter",
+  "a_buy_cake": "Buy me a cake",
+  "a_buy_cake_link": "paypal.me/DavidLangheiter",
+  "a_buy_cake_redirect_link": "https://paypal.me/DavidLangheiter",
+  "a_app_version": "App version",
+  "a_osl": "Open source licenses",
+
+  "A_COULD_NOT_OPEN_LINK": "Could not open link."
 }

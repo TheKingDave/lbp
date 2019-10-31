@@ -143,7 +143,7 @@ class _ClassOverviewData {
       this.visible})
       : this.color = color ?? "#000000",
         this.subject = subject ?? Strings.lessons.getLessonLong("subject"),
-        this.room = room ?? Strings.getCapitalize("room"),
+        this.room = room ?? Strings.getCapitalize("a_room"),
         this.note = note.isEmpty ? "Note" : Strings.getCapitalize("note");
 
   @override

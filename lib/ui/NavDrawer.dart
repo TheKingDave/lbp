@@ -73,7 +73,7 @@ class NavDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text(Strings.getCapitalize("about")),
+              title: Text(Strings.getCapitalize("a_about")),
               onTap: () => state.push(RouteNames.about),
             ),
             ListTile(

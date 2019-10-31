@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ErrorActions.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
@@ -27,24 +28,24 @@ class AboutScreen extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.person_outline),
-            title: Text("Developer"),
-            subtitle: Text("David Langheiter"),
+            title: Text(Strings.getCapitalize("a_developer")),
+            subtitle: Text(Strings.getCapitalize("a_developer_name")),
           ),
           ListTile(
             leading: Icon(Icons.cake),
             // Would have said beer but there is no icon for that :(
-            title: Text("Buy me a cake"),
-            subtitle: Text("paypal.me/DavidLangheiter"),
+            title: Text(Strings.getCapitalize("a_buy_cake")),
+            subtitle: Text(Strings.getString("a_buy_cake_link")),
             onTap: _buildBuyCake(state.error),
           ),
           ListTile(
             leading: Icon(Icons.info),
-            title: Text("App version"),
+            title: Text(Strings.getCapitalize("a_app_version")),
             subtitle: Text("${packageInfo.version}+${packageInfo.buildNumber}"),
           ),
           ListTile(
             leading: Icon(Icons.public),
-            title: Text("Open source licenses"),
+            title: Text(Strings.getCapitalize("a_osl")),
             onTap: state.osl,
           ),
         ],
@@ -53,11 +54,11 @@ class AboutScreen extends StatelessWidget {
   }
 
   _buildBuyCake(error) => () async {
-        const url = "https://paypal.me/DavidLangheiter";
+        final url = Strings.getString("a_buy_cake_redirect_link");
         if (await canLaunch(url)) {
           await launch(url);
         } else {
-          error(Exception("Could not open link."));
+          error(Exception(Strings.getCapitalize("A_COULD_NOT_OPEN_LINK")));
         }
       };
 }
