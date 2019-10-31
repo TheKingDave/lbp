@@ -5,6 +5,7 @@ import 'package:lbp/data/lessons/DaysRequest.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/login/LoginRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:redux/redux.dart';
@@ -39,12 +40,11 @@ class ApiSetDataAction extends ApiActionWithApiCall<AppState> {
 
   @override
   void call(Store<AppState> store, next) {
-    next(SetDataRequest(
+    next(FetchDataAction<SetDataResponse>(SetDataRequest(
       subject: subject,
       begin: period.begin,
       end: period.end,
-    ));
+    )));
   }
-
 
 }

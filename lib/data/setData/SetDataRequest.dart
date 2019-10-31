@@ -25,7 +25,7 @@ class SetDataRequest extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "getData";
+    return "setData";
   }
 
 }
