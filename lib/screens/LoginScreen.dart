@@ -3,7 +3,6 @@ import 'package:flutter_autofill/flutter_autofill.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
-import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/states/FetchState.dart';
@@ -16,12 +15,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(Strings.getCapitalize("login")),
+          actions: <Widget>[Image(image: AssetImage("assets/img/icon.jpg"))],
+        ),
         body: ErrorNotifier(
             child: Container(
-      decoration: BoxDecoration(
-          border: Border(
-              top: BorderSide(
-                  width: 20.0, color: Theme.of(context).primaryColor))),
+
       child: _LoginScreen(),
     )));
   }
