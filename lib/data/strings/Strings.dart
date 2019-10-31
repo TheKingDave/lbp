@@ -21,7 +21,13 @@ class Strings {
     return capitalize(Strings.getString(short));
   }
 
-  static void setString(String short, String string) {
+  static void addString(String short, String string, [allowApp = false]) {
+    if((!allowApp) && short.startsWith("a_")) return;
+    if(!Strings.strings.containsKey(short)) Strings.setString(short, string, allowApp);
+  }
+
+  static void setString(String short, String string, [allowApp = false]) {
+    if((!allowApp) && short.startsWith("a_")) return;
     strings[short] = string;
   }
 
@@ -50,7 +56,7 @@ class Strings {
     return "${capitalize(dayTimes.getGood())} ${capitalize(Strings.dayTimes.getTimeForHour(hour))}";
   }
 
-  static void setFromJson(Map<String, dynamic> json) {
+  static void setFromJson(Map<String, dynamic> json, [allowApp = false]) {
     if(json.containsKey(dayTimesKey)) {
       Strings.dayTimes = DayTimeStrings.fromJson(json[dayTimesKey]);
       json.remove(dayTimesKey);
@@ -59,7 +65,10 @@ class Strings {
       Strings.lessons = LessonStrings.fromJson(json[lessonsKey]);
       json.remove(lessonsKey);
     }
-    //Strings.overrideMany(json);
-     json.forEach((k, v) => v is String ? Strings.strings[k] = v : print(""));
+    json.forEach((short, string) {
+      if(string is String) {
+        Strings.setString(short, string, allowApp);
+      }
+    });
   }
 }
