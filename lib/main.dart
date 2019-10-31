@@ -15,6 +15,7 @@ import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/NotFoundScreen.dart';
 import 'package:lbp/screens/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
+import 'package:lbp/screens/TeacherOverview.dart';
 import 'package:lbp/settings/Themes.dart';
 import 'package:lbp/screens/Day/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
@@ -92,6 +93,11 @@ class LBPApp extends StatelessWidget {
         return MaterialPageRoute(
           maintainState: false,
           builder: (_) => LicensePage(),
+        );
+      case RouteNames.teacherOverview:
+        return MaterialPageRoute(
+          maintainState: false,
+          builder: (_) => TeacherOverview(),
         );
       default:
         return MaterialPageRoute(

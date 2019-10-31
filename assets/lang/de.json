@@ -197,6 +197,8 @@
   "a_not_found_page": "nicht gefunden",
   "a_not_found_page_text": "konnte diese Seite nicht finden.",
   "a_go_back": "zurück",
+  "a_not_implemented": "nicht implementiert",
+  "a_no_teacher_page": "Lehrer Funktionen sind noch nicht implementiert.",
 
   "a_COULD_NOT_OPEN_LINK": "Konnte den link nicht öffnen."
 }
