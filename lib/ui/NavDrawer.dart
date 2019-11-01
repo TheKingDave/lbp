@@ -32,6 +32,7 @@ class NavDrawer extends StatelessWidget {
           LoginData loginData = state.loginData;
 
           String routeName = ModalRoute.of(context).settings.name;
+          cPrint("$routeName is: ${routeName == RouteNames.studentOverview}");
           dynamic routeArgs = ModalRoute.of(context).settings.arguments;
           Function(String path) isCurrentPath = (path) => path == routeName;
 
@@ -54,7 +55,7 @@ class NavDrawer extends StatelessWidget {
               title: Text(Strings.getWeekdayString(wd)),
               onTap: () => Navigator.pushNamed(context, RouteNames.studentDay,
                   arguments: DayRouteData(wd)),
-              selected: isCurrentPath(RouteNames.studentDay) && routeArgs.studentDay == wd,
+              selected: isCurrentPath(RouteNames.studentDay) && routeArgs.day == wd,
             ));
           }
 
@@ -74,6 +75,7 @@ class NavDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.info),
               title: Text(Strings.getCapitalize("a_about")),
+              selected: isCurrentPath(RouteNames.about),
               onTap: () => state.push(RouteNames.about),
             ),
             ListTile(

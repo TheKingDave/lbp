@@ -55,8 +55,7 @@ void main() async {
   }());
 
   final store = new Store<AppState>(rootReducer,
-      initialState: AppState.initial(),
-      middleware: middleware);
+      initialState: AppState.initial(), middleware: middleware);
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -76,26 +75,32 @@ class LBPApp extends StatelessWidget {
     switch (settings.name) {
       case RouteNames.login:
         return MaterialPageRoute(
-            maintainState: false, builder: (_) => LoginScreen());
+            settings: settings,
+            maintainState: false,
+            builder: (_) => LoginScreen());
       case RouteNames.studentOverview:
         return MaterialPageRoute(
+            settings: settings,
             maintainState: false,
             builder: (_) => DefaultScaffold(
                 name: Strings.getCapitalize("overview"),
                 child: OverviewScreen()));
       case RouteNames.studentDay:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
           builder: (_) => DayContainer(settings.arguments),
         );
       case RouteNames.settings:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
           builder: (_) => DefaultScaffold(
               name: Strings.getCapitalize("settings"), child: SettingsScreen()),
         );
       case RouteNames.about:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
           builder: (_) => DefaultScaffold(
               name: Strings.getCapitalize("a_about"),
@@ -103,18 +108,21 @@ class LBPApp extends StatelessWidget {
         );
       case RouteNames.openSourceLicenses:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
           builder: (_) => LicensePage(),
         );
       case RouteNames.teacherOverview:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
           builder: (_) => TeacherOverview(),
         );
       default:
         return MaterialPageRoute(
+          settings: settings,
           maintainState: false,
-          builder: (_) =>  NotFoundScreen(settings.name),
+          builder: (_) => NotFoundScreen(),
         );
     }
   }

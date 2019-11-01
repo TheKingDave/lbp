@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lbp/data/strings/Strings.dart';
 
 class NotFoundScreen extends StatelessWidget {
-  final String name;
-
-  NotFoundScreen(this.name);
-
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
+    final name = ModalRoute.of(context).settings.name;
 
     return Scaffold(
         appBar: AppBar(
