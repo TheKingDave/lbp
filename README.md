@@ -2,6 +2,13 @@
 
 Lernbüro Plan
 
+## Roadmap
+* [ ] Save session key between app restart
+* [ ] Localization
+* [ ] Theme change (dark mode)
+* [ ] Feedback
+* [ ] Teacher view 
+
 ## Make the API great again
 
 ### /login
