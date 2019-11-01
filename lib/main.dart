@@ -33,7 +33,7 @@ void main() async {
 
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware
-  var middleware = [
+  List<Middleware<AppState>> middleware = [
     ApiMiddleware<AppState>(),
     fetchMiddleware,
     LogicMiddleware(logic: logics),
