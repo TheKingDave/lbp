@@ -19,6 +19,7 @@ class DayScreen extends StatelessWidget {
     return StoreConnector<AppState, _DayScreenData>(
       distinct: true,
       converter: (store) => _DayScreenData(
+          loading: store.state.setData.loading || store.state.days.loading,
           visible:
               classOfDayAndClassSelector(store.state, weekDay, $class).visible,
           lessons: lessonsOfDayAndClassSelector(store.state, weekDay, $class),
@@ -27,17 +28,28 @@ class DayScreen extends StatelessWidget {
               period:
                   periodOfDayAndClassSelector(store.state, weekDay, $class)))),
       builder: (context, model) {
-        return Stack(
-          children: <Widget>[
-            ListView(
-              physics: ClampingScrollPhysics(),
-              children: List.from(model.lessons.map((l) => _LessonOverview(
-                    lesson: l,
-                    visible: model.visible,
-                    setSubject: model.setSubject,
-                  ))),
+        final children = <Widget>[
+          ListView(
+            physics: ClampingScrollPhysics(),
+            children: List.from(model.lessons.map((l) => _LessonOverview(
+                  lesson: l,
+                  visible: model.visible,
+                  setSubject: model.setSubject,
+                ))),
+          ),
+        ];
+
+        if (model.loading) {
+          children.add(Container(
+            color: Colors.black.withOpacity(0.3),
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
-          ],
+          ));
+        }
+
+        return Stack(
+          children: children,
         );
       },
     );
@@ -45,11 +57,16 @@ class DayScreen extends StatelessWidget {
 }
 
 class _DayScreenData {
+  final bool loading;
   final bool visible;
   final List<Lesson> lessons;
   final Function(String subject) setSubject;
 
-  _DayScreenData({@required this.visible, this.lessons, this.setSubject});
+  _DayScreenData(
+      {@required this.loading,
+      @required this.visible,
+      this.lessons,
+      this.setSubject});
 
   @override
   bool operator ==(Object other) =>
@@ -58,10 +75,15 @@ class _DayScreenData {
           runtimeType == other.runtimeType &&
           lessons == other.lessons &&
           setSubject == other.setSubject &&
-          visible == other.visible;
+          visible == other.visible &&
+          loading == other.loading;
 
   @override
-  int get hashCode => lessons.hashCode ^ setSubject.hashCode ^ visible.hashCode;
+  int get hashCode =>
+      lessons.hashCode ^
+      setSubject.hashCode ^
+      visible.hashCode ^
+      loading.hashCode;
 }
 
 class _LessonOverview extends StatelessWidget {
@@ -78,8 +100,10 @@ class _LessonOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = Theme.of(context);
 
-    final _bigText = visible ? bigText : bigText.copyWith(color: t.disabledColor);
-    final _mediumText = visible ? mediumText : mediumText.copyWith(color: t.disabledColor);
+    final _bigText =
+        visible ? bigText : bigText.copyWith(color: t.disabledColor);
+    final _mediumText =
+        visible ? mediumText : mediumText.copyWith(color: t.disabledColor);
 
     return Card(
         clipBehavior: Clip.hardEdge,
