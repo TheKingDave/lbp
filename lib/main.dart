@@ -33,18 +33,30 @@ void main() async {
 
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware
+  var middleware = [
+    ApiMiddleware<AppState>(),
+    fetchMiddleware,
+    LogicMiddleware(logic: logics),
+    RouteMiddleware(),
+  ];
+
+  assert(() {
+    middleware = [
+      LoggingMiddleware("1"),
+      ApiMiddleware<AppState>(),
+      LoggingMiddleware("2"),
+      fetchMiddleware,
+      LoggingMiddleware("3"),
+      LogicMiddleware(logic: logics),
+      LoggingMiddleware("4"),
+      RouteMiddleware(),
+    ];
+    return true;
+  }());
+
   final store = new Store<AppState>(rootReducer,
       initialState: AppState.initial(),
-      middleware: [
-        LoggingMiddleware("1"),
-        ApiMiddleware<AppState>(),
-        LoggingMiddleware("2"),
-        fetchMiddleware,
-        LoggingMiddleware("3"),
-        LogicMiddleware(logic: logics),
-        LoggingMiddleware("4"),
-        RouteMiddleware(),
-      ]);
+      middleware: middleware);
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
