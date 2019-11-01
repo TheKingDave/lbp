@@ -161,7 +161,6 @@ class _LoginScreenState extends State<_LoginScreen> {
                             const BoxConstraints(minWidth: double.infinity),
                         child: LoadingButton(
                           loading: loading,
-                          padding: EdgeInsets.all(loading ? 8 : 16),
                           onPressed: _login,
                           child: Text(Strings.getCapitalize("login")),
                         )),

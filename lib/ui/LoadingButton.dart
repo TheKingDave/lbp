@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/ui/OwnCircularProgressIndicator.dart';
 
 class LoadingButton extends RaisedButton {
@@ -50,7 +51,7 @@ class LoadingButton extends RaisedButton {
           hoverElevation: hoverElevation,
           highlightElevation: highlightElevation,
           disabledElevation: disabledElevation,
-          padding: padding,
+          padding: loading ? EdgeInsets.all(8) : EdgeInsets.all(16),
           shape: shape,
           clipBehavior: clipBehavior ?? Clip.none,
           focusNode: focusNode,
@@ -58,8 +59,8 @@ class LoadingButton extends RaisedButton {
           materialTapTargetSize: materialTapTargetSize,
           animationDuration: animationDuration,
           child: loading ? SizedBox(
-              width: 24,
-              height: 24,
+              width: 32,
+              height: 32,
               child: OwnCircularProgressIndicator()) : child,
         );
 
