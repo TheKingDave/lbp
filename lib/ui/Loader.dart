@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lbp/ui/OwnCircularProgressIndicator.dart';
 
 class Loader extends StatelessWidget {
   final bool loading;
@@ -12,7 +13,7 @@ class Loader extends StatelessWidget {
     if (loading) {
       return Container(
         alignment: Alignment(0, 0),
-        child: CircularProgressIndicator(),
+        child: OwnCircularProgressIndicator(),
       );
     } else {
       return _build(context);
