@@ -1,5 +1,6 @@
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
+import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
@@ -20,7 +21,7 @@ final List<Logic> logics = [
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
 
-  if(action.data.isTeacher) {
+  if(action.data.$class == Constants.teacherClass) {
     // get teacher data
     next(NavigateReplaceAction(RouteNames.teacherOverview));
   } else {
