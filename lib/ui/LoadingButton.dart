@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lbp/ui/OwnCircularProgressIndicator.dart';
 
 class LoadingButton extends RaisedButton {
   LoadingButton({
@@ -59,11 +60,7 @@ class LoadingButton extends RaisedButton {
           child: loading ? SizedBox(
               width: 24,
               height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    Colors.white),
-              )) : child,
+              child: OwnCircularProgressIndicator()) : child,
         );
 
   @override

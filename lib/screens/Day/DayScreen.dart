@@ -7,6 +7,7 @@ import 'package:lbp/etc/HexColor.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/selectors/DaysSelectors.dart';
+import 'package:lbp/ui/OwnCircularProgressIndicator.dart';
 
 class DayScreen extends StatelessWidget {
   final int weekDay;
@@ -43,7 +44,7 @@ class DayScreen extends StatelessWidget {
           children.add(Container(
             color: Colors.black.withOpacity(0.3),
             child: Center(
-              child: CircularProgressIndicator(),
+              child: OwnCircularProgressIndicator(),
             ),
           ));
         }
