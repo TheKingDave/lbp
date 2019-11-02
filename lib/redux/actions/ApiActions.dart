@@ -28,15 +28,9 @@ class ApiLoginAction extends ApiActionWithApiCall<AppState> {
 }
 
 class ApiLoginActionSessKey extends ApiActionWithApiCall<AppState> {
-  final String sessKey;
-
-  ApiLoginActionSessKey(this.sessKey);
-
   @override
   void call(Store<AppState> store, NextDispatcher next) {
-    next(SetSessKeyAction(sessKey));
-    next(FetchDataAction<LoginData>(
-        LoginRequestWithSessKey()));
+    next(FetchDataAction<LoginData>(LoginRequestWithSessKey()));
   }
 }
 
@@ -61,5 +55,4 @@ class ApiSetDataAction extends ApiActionWithApiCall<AppState> {
       end: period.end,
     )));
   }
-
 }

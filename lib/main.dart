@@ -33,9 +33,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // TODO: load data from disk/preferences
-  SharedPreferences sp = await SharedPreferences.getInstance();
-  final String initialUserName = sp.getString(Constants.sp_username);
-  final String initialSessKey = sp.getString(Constants.sp_sess_key);
 
   await DefaultStrings.setDefaultString();
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -64,11 +61,10 @@ void main() async {
   }());
 
   final store = new Store<AppState>(rootReducer,
-      initialState: AppState.initial(), middleware: middleware);
+      initialState: await AppState.initial(), middleware: middleware);
 
-  store.dispatch(SetInitUsernameAction(initialUserName));
-  if (initialSessKey != null) {
-    store.dispatch(ApiLoginActionSessKey(initialSessKey));
+  if(sessKeySelector(store.state) != null) {
+    store.dispatch(ApiLoginActionSessKey());
   }
 
   runApp(LBPApp(
