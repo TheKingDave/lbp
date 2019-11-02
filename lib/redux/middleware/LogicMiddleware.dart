@@ -1,9 +1,6 @@
-import 'package:lbp/etc/helpers.dart';
 import 'package:redux/redux.dart';
 
 abstract class Logic<State> {
-
-
   void call(Store<State> store, NextDispatcher next, dynamic action);
 }
 
