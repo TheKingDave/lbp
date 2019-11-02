@@ -1,5 +1,5 @@
 import 'package:lbp/data/login/LoginData.dart';
-import 'package:lbp/data/setData/SetDataResponse.dart';
+import 'package:lbp/data/ValidationResponse.dart';
 import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
@@ -16,9 +16,10 @@ import '../RouteNames.dart';
 
 final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
-  TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(_setDataSuccessLogic),
+  TypedLogic<AppState, FetchActionSuccess<ValidationResponse>>(_setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
+  TypedLogic<AppState, GeneralAction>(_syncGeneralSetting),
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
@@ -40,7 +41,7 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 }
 
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
-    FetchActionSuccess<SetDataResponse> action) {
+    FetchActionSuccess<ValidationResponse> action) {
   store.dispatch(ApiGetDataAction());
 }
 
@@ -66,5 +67,11 @@ void _saveGeneralSetting(Store<AppState> store, NextDispatcher next, GeneralActi
     SharedPreferences.getInstance().then((sp) {
       sp.setBool(Constants.sp_dark_mode, action.darkMode);
     });
+  }
+}
+
+void _syncGeneralSetting(Store<AppState> store, NextDispatcher next, GeneralAction action) {
+  if(action is SetDarkModeAction) {
+
   }
 }
