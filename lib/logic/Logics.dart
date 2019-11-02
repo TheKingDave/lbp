@@ -20,18 +20,15 @@ final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(_setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, SetUsernameAction>(_login),
+  TypedLogic<AppState, SetSessKeyAction>(_setSessKey),
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
 
   if(action.data.sessionKey != null) {
-    next(SetSessKeyAction(action.data.sessionKey));
+    store.dispatch(SetSessKeyAction(action.data.sessionKey));
   }
-
-  SharedPreferences.getInstance().then((sp) {
-    sp.setString(Constants.sp_sess_key, action.data.sessionKey);
-  });
 
   if(action.data.ldClass == Constants.teacherClass) {
     // get teacher data
@@ -48,6 +45,10 @@ void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
 }
 
 void _logout(Store<AppState> store, NextDispatcher next, action) {
+  SharedPreferences.getInstance().then((sp) {
+    sp.remove(Constants.sp_username);
+    sp.remove(Constants.sp_sess_key);
+  });
   next(NavigatePushNamedAndRemoveUntilAction(RouteNames.login));
   next(InitAction());
 }
@@ -55,5 +56,11 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
 void _login(Store<AppState> store, NextDispatcher next, SetUsernameAction action) {
   SharedPreferences.getInstance().then((sp) {
     sp.setString(Constants.sp_username, action.username);
+  });
+}
+
+void _setSessKey(Store<AppState> store, NextDispatcher next, SetSessKeyAction action) {
+  SharedPreferences.getInstance().then((sp) {
+    sp.setString(Constants.sp_sess_key, action.sessKey);
   });
 }
