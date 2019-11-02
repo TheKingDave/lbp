@@ -11,10 +11,6 @@ import 'package:lbp/ui/ErrorNotifier.dart';
 import 'package:lbp/ui/LoadingButton.dart';
 
 class LoginScreen extends StatelessWidget {
-  final String initialUserName;
-
-  LoginScreen({this.initialUserName});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,19 +21,14 @@ class LoginScreen extends StatelessWidget {
         ),
         body: ErrorNotifier(
             child: Container(
-          child: _LoginScreen(initialUserName: initialUserName),
+          child: _LoginScreen(),
         )));
   }
 }
 
 class _LoginScreen extends StatefulWidget {
-  final String initialUserName;
-
-  _LoginScreen({this.initialUserName});
-
   @override
-  _LoginScreenState createState() =>
-      _LoginScreenState(initialUserName: initialUserName);
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<_LoginScreen> {
@@ -51,12 +42,6 @@ class _LoginScreenState extends State<_LoginScreen> {
 
   bool _formCommitted = false;
   bool _autoFillCommitted = false;
-
-  _LoginScreenState({initialUserName}) {
-    if (initialUserName != null) {
-      _usernameController.value = TextEditingValue(text: initialUserName);
-    }
-  }
 
   @override
   void dispose() {
@@ -75,6 +60,7 @@ class _LoginScreenState extends State<_LoginScreen> {
       distinct: true,
       converter: (store) => _LoginScreenModel(
           state: store.state.login,
+          initUsername: store.state.general.initUsername,
           login: (un, pw) =>
               store.dispatch(ApiLoginAction(username: un, password: pw))),
       builder: (context, model) {
@@ -93,6 +79,10 @@ class _LoginScreenState extends State<_LoginScreen> {
             model.login(un, pw);
           }
         };
+
+        if(model.initUsername != null) {
+          _usernameController.value = TextEditingValue(text: model.initUsername);
+        }
 
         return Padding(
             padding: const EdgeInsets.all(32.0),
@@ -188,8 +178,9 @@ class _LoginScreenState extends State<_LoginScreen> {
 class _LoginScreenModel {
   final FetchState<LoginData> state;
   final void Function(String username, String password) login;
+  final String initUsername;
 
-  _LoginScreenModel({this.state, this.login});
+  _LoginScreenModel({this.state, this.login, this.initUsername});
 
   @override
   bool operator ==(Object other) =>
@@ -197,8 +188,9 @@ class _LoginScreenModel {
       other is _LoginScreenModel &&
           runtimeType == other.runtimeType &&
           state == other.state &&
-          login == other.login;
+          login == other.login &&
+          initUsername == other.initUsername;
 
   @override
-  int get hashCode => state.hashCode ^ login.hashCode;
+  int get hashCode => state.hashCode ^ login.hashCode ^ initUsername.hashCode;
 }

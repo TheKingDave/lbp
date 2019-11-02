@@ -12,5 +12,5 @@ GeneralData _setSessKey(GeneralData state, SetSessKeyAction action) {
 }
 
 GeneralData _setInitUsername(GeneralData state, SetInitUsernameAction action) {
-  return state.copyWith(sessKey: action.initUsername);
+  return state.copyWith(initUsername: action.initUsername);
 }

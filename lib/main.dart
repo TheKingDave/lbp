@@ -66,15 +66,14 @@ void main() async {
   final store = new Store<AppState>(rootReducer,
       initialState: AppState.initial(), middleware: middleware);
 
+  store.dispatch(SetInitUsernameAction(initialUserName));
   if(initialSessKey != null) {
-    cPrint("Try login with initsesskey");
     store.dispatch(ApiLoginActionSessKey(initialSessKey));
   }
 
   runApp(LBPApp(
     store: store,
     packageInfo: packageInfo,
-    initialUserName: initialUserName,
   ));
 }
 
@@ -83,9 +82,8 @@ GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 class LBPApp extends StatelessWidget {
   final Store store;
   final PackageInfo packageInfo;
-  final String initialUserName;
 
-  LBPApp({@required this.store, this.packageInfo, this.initialUserName});
+  LBPApp({@required this.store, this.packageInfo});
 
   Route<dynamic> _generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -93,7 +91,7 @@ class LBPApp extends StatelessWidget {
         return MaterialPageRoute(
             settings: settings,
             maintainState: false,
-            builder: (_) => LoginScreen(initialUserName: initialUserName));
+            builder: (_) => LoginScreen());
       case RouteNames.studentOverview:
         return MaterialPageRoute(
             settings: settings,
