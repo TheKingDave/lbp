@@ -13,6 +13,7 @@ import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
+import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:lbp/screens/AboutScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/NotFoundScreen.dart';
@@ -67,7 +68,7 @@ void main() async {
       initialState: AppState.initial(), middleware: middleware);
 
   store.dispatch(SetInitUsernameAction(initialUserName));
-  if(initialSessKey != null) {
+  if (initialSessKey != null) {
     store.dispatch(ApiLoginActionSessKey(initialSessKey));
   }
 
@@ -145,13 +146,34 @@ class LBPApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
-      child: MaterialApp(
-        title: 'Lernbüro Planer',
-        initialRoute: '/login',
-        navigatorKey: navigatorKey,
-        onGenerateRoute: _generateRoute,
-        theme: Themes.lightTheme,
+      child: StoreConnector<AppState, _MainModel>(
+        distinct: true,
+        converter: (store) =>
+            _MainModel(darkMode: darkModeSelector((store.state))),
+        builder: (_, model) => MaterialApp(
+          title: 'Lernbüro Planer',
+          initialRoute: '/login',
+          navigatorKey: navigatorKey,
+          onGenerateRoute: _generateRoute,
+          theme: model.darkMode ? Themes.darkTheme : Themes.lightTheme,
+        ),
       ),
     );
   }
+}
+
+class _MainModel {
+  final bool darkMode;
+
+  _MainModel({this.darkMode});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _MainModel &&
+          runtimeType == other.runtimeType &&
+          darkMode == other.darkMode;
+
+  @override
+  int get hashCode => darkMode.hashCode;
 }
