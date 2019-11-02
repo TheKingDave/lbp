@@ -6,7 +6,7 @@ import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
-import 'package:lbp/redux/actions/SetSessKeyAction.dart';
+import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';

@@ -18,7 +18,7 @@ class FetchDataAction<T extends ApiResponses>
   }
 
   fetchData(Store<AppState> store, NextDispatcher next) async {
-    final sessKey =  store.state.sessKey;
+    final sessKey =  store.state.general.sessKey;
 
     next(getStartAction());
     final res = await PostRequest<T>().send(request, sessKey);

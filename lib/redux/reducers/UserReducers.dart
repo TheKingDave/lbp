@@ -1,5 +1,5 @@
 import 'package:lbp/data/login/LoginData.dart';
-import 'package:lbp/redux/actions/SetSessKeyAction.dart';
+import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:redux/redux.dart';
 

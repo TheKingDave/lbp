@@ -7,7 +7,7 @@ import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
-import 'package:lbp/redux/actions/SetSessKeyAction.dart';
+import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';

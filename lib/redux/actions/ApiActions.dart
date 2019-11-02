@@ -7,7 +7,7 @@ import 'package:lbp/data/login/LoginRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
-import 'package:lbp/redux/actions/SetSessKeyAction.dart';
+import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:redux/redux.dart';
