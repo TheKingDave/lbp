@@ -37,7 +37,7 @@ class LoginRequest extends ApiRequest {
 class LoginRequestWithSessKey extends ApiRequestWithKey {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sessKey'] = this.sessKey;
+    data['sess_key'] = this.sessKey;
     return data;
   }
 

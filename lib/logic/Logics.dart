@@ -1,12 +1,12 @@
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/etc/Constants.dart';
-import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
+import 'package:lbp/redux/actions/SetSessKeyAction.dart';
 import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';
@@ -24,6 +24,14 @@ final List<Logic> logics = [
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
+
+  if(action.data.sessionKey != null) {
+    next(SetSessKeyAction(action.data.sessionKey));
+  }
+
+  SharedPreferences.getInstance().then((sp) {
+    sp.setString(Constants.sp_sess_key, action.data.sessionKey);
+  });
 
   if(action.data.ldClass == Constants.teacherClass) {
     // get teacher data

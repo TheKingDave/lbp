@@ -6,7 +6,6 @@ import 'package:redux/redux.dart';
 final Reducer<LoginData> userReducer = combineReducers<LoginData>([
   TypedReducer<LoginData, SetLanguageAction>(_setLanguageReducer),
   TypedReducer<LoginData, SetDarkModeAction>(_setDarkModeReducer),
-  TypedReducer<LoginData, SetSessKeyAction>(_setSessKey),
 ]);
 
 final _setLanguageReducer = (LoginData state, SetLanguageAction action) =>
@@ -14,6 +13,3 @@ final _setLanguageReducer = (LoginData state, SetLanguageAction action) =>
 
 final _setDarkModeReducer = (LoginData state, SetDarkModeAction action) =>
     LoginData.copy(state, darkMode: action.value);
-
-final _setSessKey = (LoginData state, SetSessKeyAction action) =>
-    LoginData(sessionKey: action.sessKey);

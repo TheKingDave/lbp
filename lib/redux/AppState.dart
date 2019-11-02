@@ -8,6 +8,7 @@ class AppState {
   final FetchState<LoginData> login;
   final FetchState<Days> days;
   final FetchState<SetDataResponse> setData;
+  final String sessKey;
   final Exception error;
   final ConfigState config;
 
@@ -15,6 +16,7 @@ class AppState {
     this.login,
     this.days,
     this.setData,
+    this.sessKey,
     this.error,
     this.config,
   });
@@ -23,6 +25,7 @@ class AppState {
       login: FetchState<LoginData>.initial(),
       days: FetchState<Days>.initial(),
       setData: FetchState<SetDataResponse>.initial(),
+      sessKey: null,
       error: null,
       config: ConfigState.initial());
 }

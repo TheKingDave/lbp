@@ -65,7 +65,7 @@ class LoginData extends ApiResponses {
 
   @override
   String toString() {
-    return 'LoginResponse{'
+    return 'LoginData{'
         'ldClass: $ldClass,'
         'fullName: $fullName,'
         'email: $email,'
