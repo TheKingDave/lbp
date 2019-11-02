@@ -32,6 +32,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _State>(
+      distinct: true,
       converter: (store) => _State(
         language: languageSelector(store.state),
         darkMode: darkModeSelector(store.state),
@@ -73,4 +74,22 @@ class _State {
   Function(Language language) setLanguage;
 
   _State({this.language, this.darkMode, this.setDarkMode, this.setLanguage});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is _State &&
+              runtimeType == other.runtimeType &&
+              language == other.language &&
+              darkMode == other.darkMode &&
+              setDarkMode == other.setDarkMode &&
+              setLanguage == other.setLanguage;
+
+  @override
+  int get hashCode =>
+      language.hashCode ^
+      darkMode.hashCode ^
+      setDarkMode.hashCode ^
+      setLanguage.hashCode;
+
 }

@@ -12,6 +12,7 @@ class AppState {
   final GeneralData general;
   final Exception error;
   final ConfigState config;
+  final int forceReloadCounter;
 
   AppState({
     this.login,
@@ -20,15 +21,18 @@ class AppState {
     this.general,
     this.error,
     this.config,
+    this.forceReloadCounter,
   });
 
   factory AppState.initial([GeneralData generalData]) {
     return AppState(
-        login: FetchState<LoginData>.initial(),
-        days: FetchState<Days>.initial(),
-        setData: FetchState<SetDataResponse>.initial(),
-        general: generalData ?? GeneralData.initial(),
-        error: null,
-        config: ConfigState.initial());
+      login: FetchState<LoginData>.initial(),
+      days: FetchState<Days>.initial(),
+      setData: FetchState<SetDataResponse>.initial(),
+      general: generalData ?? GeneralData.initial(),
+      error: null,
+      config: ConfigState.initial(),
+      forceReloadCounter: 0,
+    );
   }
 }

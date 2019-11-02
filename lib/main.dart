@@ -62,7 +62,7 @@ void main() async {
   final store = new Store<AppState>(rootReducer,
       initialState: AppState.initial(initGD), middleware: middleware);
 
-  if(sessKeySelector(store.state) != null) {
+  if (sessKeySelector(store.state) != null) {
     store.dispatch(ApiLoginActionSessKey());
   }
 
@@ -144,8 +144,9 @@ class LBPApp extends StatelessWidget {
       store: store,
       child: StoreConnector<AppState, _MainModel>(
         distinct: true,
-        converter: (store) =>
-            _MainModel(darkMode: darkModeSelector((store.state))),
+        converter: (store) => _MainModel(
+            darkMode: darkModeSelector(store.state),
+            reload: store.state.forceReloadCounter),
         builder: (_, model) => MaterialApp(
           title: 'Lernbüro Planer',
           initialRoute: '/login',
@@ -160,16 +161,18 @@ class LBPApp extends StatelessWidget {
 
 class _MainModel {
   final bool darkMode;
+  final int reload;
 
-  _MainModel({this.darkMode});
+  _MainModel({this.darkMode, this.reload});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is _MainModel &&
           runtimeType == other.runtimeType &&
-          darkMode == other.darkMode;
+          darkMode == other.darkMode &&
+          reload == other.reload;
 
   @override
-  int get hashCode => darkMode.hashCode;
+  int get hashCode => darkMode.hashCode ^ reload.hashCode;
 }

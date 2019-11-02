@@ -2,10 +2,12 @@ import 'package:lbp/data/general/SetDarkModeRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
+import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
+import 'package:lbp/redux/actions/ForceReloadAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
@@ -23,6 +25,7 @@ final List<Logic> logics = [
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
   TypedLogic<AppState, GeneralAction>(_syncGeneralSetting),
+  TypedLogic<AppState, SetLanguageAction>(_updateLanguage),
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
@@ -70,7 +73,7 @@ void _saveGeneralSetting(
     SharedPreferences.getInstance().then((sp) {
       sp.setBool(Constants.sp_dark_mode, action.darkMode);
     });
-  } else if(action is SetLanguageAction) {
+  } else if (action is SetLanguageAction) {
     SharedPreferences.getInstance().then((sp) {
       sp.setString(Constants.sp_language, action.language.short);
     });
@@ -83,4 +86,10 @@ void _syncGeneralSetting(
     store.dispatch(FetchDataAction<ValidationResponse>(
         SetDarkModeRequest(darkMode: action.darkMode)));
   }
+}
+
+void _updateLanguage(
+    Store<AppState> store, NextDispatcher next, SetLanguageAction action) {
+  Strings.loadFromAssets(action.language);
+  next(ForceReloadAction());
 }
