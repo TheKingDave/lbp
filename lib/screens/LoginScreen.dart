@@ -3,6 +3,7 @@ import 'package:flutter_autofill/flutter_autofill.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/strings/Strings.dart';
+import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/states/FetchState.dart';
@@ -24,7 +25,7 @@ class LoginScreen extends StatelessWidget {
         ),
         body: ErrorNotifier(
             child: Container(
-          child: _LoginScreen(),
+          child: _LoginScreen(initialUserName: initialUserName),
         )));
   }
 }
@@ -35,7 +36,8 @@ class _LoginScreen extends StatefulWidget {
   _LoginScreen({this.initialUserName});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginScreenState createState() =>
+      _LoginScreenState(initialUserName: initialUserName);
 }
 
 class _LoginScreenState extends State<_LoginScreen> {
@@ -51,7 +53,7 @@ class _LoginScreenState extends State<_LoginScreen> {
   bool _autoFillCommitted = false;
 
   _LoginScreenState({initialUserName}) {
-    if(initialUserName != null) {
+    if (initialUserName != null) {
       _usernameController.value = TextEditingValue(text: initialUserName);
     }
   }
