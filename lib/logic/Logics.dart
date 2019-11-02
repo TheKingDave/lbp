@@ -7,7 +7,6 @@ import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
-import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:redux/redux.dart';
@@ -19,8 +18,7 @@ final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
   TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(_setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
-  TypedLogic<AppState, SetUsernameAction>(_login),
-  TypedLogic<AppState, SetSessKeyAction>(_setSessKey),
+  TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
@@ -55,14 +53,18 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
   next(InitAction());
 }
 
-void _login(Store<AppState> store, NextDispatcher next, SetUsernameAction action) {
-  SharedPreferences.getInstance().then((sp) {
-    sp.setString(Constants.sp_username, action.username);
-  });
-}
-
-void _setSessKey(Store<AppState> store, NextDispatcher next, SetSessKeyAction action) {
-  SharedPreferences.getInstance().then((sp) {
-    sp.setString(Constants.sp_sess_key, action.sessKey);
-  });
+void _saveGeneralSetting(Store<AppState> store, NextDispatcher next, GeneralAction action) {
+  if(action is SetInitUsernameAction) {
+    SharedPreferences.getInstance().then((sp) {
+      sp.setString(Constants.sp_username, action.initUsername);
+    });
+  } else if(action is SetSessKeyAction) {
+    SharedPreferences.getInstance().then((sp) {
+      sp.setString(Constants.sp_sess_key, action.sessKey);
+    });
+  } else if(action is SetDarkModeAction) {
+    SharedPreferences.getInstance().then((sp) {
+      sp.setBool(Constants.sp_dark_mode, action.darkMode);
+    });
+  }
 }
