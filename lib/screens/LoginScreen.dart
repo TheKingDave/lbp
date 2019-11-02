@@ -10,7 +10,9 @@ import 'package:lbp/ui/ErrorNotifier.dart';
 import 'package:lbp/ui/LoadingButton.dart';
 
 class LoginScreen extends StatelessWidget {
-  static const String routeName = "/";
+  final String initialUserName;
+
+  LoginScreen({this.initialUserName});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,10 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginScreen extends StatefulWidget {
+  final String initialUserName;
+
+  _LoginScreen({this.initialUserName});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -43,6 +49,12 @@ class _LoginScreenState extends State<_LoginScreen> {
 
   bool _formCommitted = false;
   bool _autoFillCommitted = false;
+
+  _LoginScreenState({initialUserName}) {
+    if(initialUserName != null) {
+      _usernameController.value = TextEditingValue(text: initialUserName);
+    }
+  }
 
   @override
   void dispose() {

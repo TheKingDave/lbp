@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
+import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -21,6 +22,7 @@ import 'package:lbp/screens/Day/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:package_info/package_info.dart';
 import 'package:redux/redux.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/strings/DefaultStrings.dart';
 import 'data/strings/Strings.dart';
@@ -29,6 +31,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // TODO: load data from disk/preferences
+  SharedPreferences sp = await SharedPreferences.getInstance();
+  final String initialUserName = sp.getString(Constants.sp_username);
+
   await DefaultStrings.setDefaultString();
 
   // TODO: init redux state with data from disk
@@ -59,7 +64,11 @@ void main() async {
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-  runApp(LBPApp(store: store, packageInfo: packageInfo));
+  runApp(LBPApp(
+    store: store,
+    packageInfo: packageInfo,
+    initialUserName: initialUserName,
+  ));
 }
 
 GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
@@ -67,8 +76,9 @@ GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 class LBPApp extends StatelessWidget {
   final Store store;
   final PackageInfo packageInfo;
+  final String initialUserName;
 
-  LBPApp({@required this.store, this.packageInfo});
+  LBPApp({@required this.store, this.packageInfo, this.initialUserName});
 
   Route<dynamic> _generateRoute(RouteSettings settings) {
     cPrint(settings.name);
@@ -77,7 +87,7 @@ class LBPApp extends StatelessWidget {
         return MaterialPageRoute(
             settings: settings,
             maintainState: false,
-            builder: (_) => LoginScreen());
+            builder: (_) => LoginScreen(initialUserName: initialUserName));
       case RouteNames.studentOverview:
         return MaterialPageRoute(
             settings: settings,
