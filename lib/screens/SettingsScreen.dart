@@ -7,7 +7,6 @@ import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/GeneralSelectors.dart';
-import 'package:lbp/redux/selectors/UserSelectors.dart';
 
 class SettingsScreen extends StatelessWidget {
   Future<Language> _selectLanguage(BuildContext context, Language current) {

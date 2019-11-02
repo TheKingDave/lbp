@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/strings/DayTimeStrings.dart';
 import 'package:lbp/data/strings/LessonStrings.dart';
 import 'package:lbp/etc/Constants.dart';
@@ -71,5 +75,12 @@ class Strings {
         Strings.setString(short, string, allowApp);
       }
     });
+  }
+
+  static loadFromAssets(Language lang) async {
+    Strings.setFromJson(
+        jsonDecode(
+            await rootBundle.loadString("assets/lang/${lang.short}.json")),
+        true);
   }
 }

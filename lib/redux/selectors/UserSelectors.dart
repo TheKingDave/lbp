@@ -11,6 +11,3 @@ String urlSelector(AppState state, [extension = ""]) =>
 
 String apiUrlSelector(AppState state, [extension = ""]) =>
     Api.getApiUrl(extension);
-
-Language languageSelector(AppState state) =>
-    Language(state.login.data?.language);

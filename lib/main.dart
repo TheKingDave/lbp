@@ -25,17 +25,13 @@ import 'package:lbp/screens/Day/DayContainer.dart';
 import 'package:lbp/ui/DefaultScaffold.dart';
 import 'package:package_info/package_info.dart';
 import 'package:redux/redux.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data/strings/DefaultStrings.dart';
 import 'data/strings/Strings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // TODO: load data from disk/preferences
-
-  await DefaultStrings.setDefaultString();
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
   // TODO: init redux state with data from disk
@@ -69,6 +65,8 @@ void main() async {
   if(sessKeySelector(store.state) != null) {
     store.dispatch(ApiLoginActionSessKey());
   }
+
+  await Strings.loadFromAssets(languageSelector((store.state)));
 
   runApp(LBPApp(
     store: store,
