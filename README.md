@@ -5,7 +5,13 @@ Lernbüro Plan
 ## Roadmap
 * [x] Save session key/username between app restart
 * [ ] Localization
-* [ ] Theme change (dark mode)
+    * [ ] Local localization
+    * [ ] Save language locally (between app restarts)
+    * [ ] Sync language change to API
+* [ ] Theme
+    * [x] Local theme change
+    * [ ] Save theme locally (between app restarts)
+    * [ ] Sync theme change to API
 * [ ] Feedback
 * [ ] Teacher view 
 
