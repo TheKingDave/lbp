@@ -10,7 +10,7 @@ Lernbüro Plan
     * [ ] Sync language change to API
 * [ ] Theme
     * [x] Local theme change
-    * [ ] Save theme locally (between app restarts)
+    * [x] Save theme locally (between app restarts)
     * [ ] Sync theme change to API
 * [ ] Feedback
 * [ ] Teacher view 
