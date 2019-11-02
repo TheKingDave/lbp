@@ -16,8 +16,8 @@ class Language {
 
   factory Language(String short) {
     if (!nameMap.containsKey(short)) {
-      throw ArgumentError.value(
-          short, "short", "Must be one of: ${nameMap.keys}");
+      // Return default language
+      return Language.en;
     }
     return Language._internal(short, nameMap[short]);
   }
