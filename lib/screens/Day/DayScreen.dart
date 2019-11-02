@@ -108,7 +108,7 @@ class _LessonOverview extends StatelessWidget {
 
     return Card(
         clipBehavior: Clip.hardEdge,
-        color: lesson.selected ? Color(0xFFDDDDDD) : null,
+        color: lesson.selected ? (t.brightness == Brightness.light ? Color(0xFFDDDDDD): t.disabledColor) : null,
         child: InkWell(
           onTap: visible ? () => setSubject(lesson.subject) : null,
           child: Container(
@@ -152,7 +152,7 @@ class _LessonOverview extends StatelessWidget {
                               physics: ClampingScrollPhysics(),
                               child: Text(lesson.teacher,
                                   style: _mediumText.copyWith(
-                                      color: Colors.black45)))),
+                                      color: t.disabledColor)))),
                     )
                   ],
                 ),
