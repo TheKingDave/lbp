@@ -3,7 +3,7 @@
 Lernbüro Plan
 
 ## Roadmap
-* [ ] Save session key between app restart
+* [x] Save session key/username between app restart
 * [ ] Localization
 * [ ] Theme change (dark mode)
 * [ ] Feedback
