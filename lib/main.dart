@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
+import 'package:lbp/data/GeneralData.dart';
 import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
@@ -60,8 +61,10 @@ void main() async {
     return true;
   }());
 
+  GeneralData initGD = await GeneralData.loadInitial();
+
   final store = new Store<AppState>(rootReducer,
-      initialState: await AppState.initial(), middleware: middleware);
+      initialState: AppState.initial(initGD), middleware: middleware);
 
   if(sessKeySelector(store.state) != null) {
     store.dispatch(ApiLoginActionSessKey());

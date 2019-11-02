@@ -8,7 +8,15 @@ class GeneralData {
 
   GeneralData({this.sessKey, this.initUsername, this.darkMode});
 
-  static initial() async {
+  factory GeneralData.initial() {
+    return GeneralData(
+      sessKey: null,
+      initUsername: null,
+      darkMode: false,
+    );
+  }
+
+  static Future<GeneralData> loadInitial() async {
     final sp = await SharedPreferences.getInstance();
     return GeneralData(
       sessKey: sp.getString(Constants.sp_sess_key),

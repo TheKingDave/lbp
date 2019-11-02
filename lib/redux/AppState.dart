@@ -22,12 +22,12 @@ class AppState {
     this.config,
   });
 
-  static initial() async {
+  factory AppState.initial([GeneralData generalData]) {
     return AppState(
         login: FetchState<LoginData>.initial(),
         days: FetchState<Days>.initial(),
         setData: FetchState<SetDataResponse>.initial(),
-        general: await GeneralData.initial(),
+        general: generalData ?? GeneralData.initial(),
         error: null,
         config: ConfigState.initial());
   }
