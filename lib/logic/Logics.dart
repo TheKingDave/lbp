@@ -30,6 +30,8 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     store.dispatch(SetSessKeyAction(action.data.sessionKey));
   }
 
+  store.dispatch(SetDarkModeAction(action.data.darkMode));
+
   if(action.data.ldClass == Constants.teacherClass) {
     // get teacher data
     next(NavigateReplaceAction(RouteNames.teacherOverview));
