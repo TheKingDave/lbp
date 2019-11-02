@@ -1,6 +1,7 @@
 import 'package:lbp/data/general/SetDarkModeRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
+import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
@@ -17,7 +18,7 @@ import '../RouteNames.dart';
 
 final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
-  TypedLogic<AppState, FetchActionSuccess<ValidationResponse>>(
+  TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(
       _setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),

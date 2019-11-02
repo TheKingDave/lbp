@@ -4,28 +4,40 @@ import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
+import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 
 class ApiResponses {
   static final Map<dynamic, Function(Map<String, dynamic>)> _constructorsMap = {
-    LoginData: (Map<String, dynamic> json) => LoginData.fromJson(json),
-    Class: (Map<String, dynamic> json) => Class.fromJson(json),
-    ValidationResponse: (Map<String, dynamic> json) =>
-        ValidationResponse.fromJson(json),
-  };
+  LoginData: (Map<String, dynamic> json) => LoginData.fromJson(json),
+  Class: (Map<String, dynamic> json) => Class.fromJson(json),
+  ValidationResponse: (Map<String, dynamic> json) =>
+  ValidationResponse.fromJson(json),
+  SetDataResponse: (Map<String, dynamic> json) => SetDataResponse.fromJson(json),
+};
 
-  static final Map<dynamic, Function(List<dynamic> json)> _constructorsList = {
-    Days: (List<dynamic> json) => Days.fromJson(json),
-  };
+static final Map<dynamic, Function(List<dynamic> json)> _constructorsList = {
+  Days: (List<dynamic> json) => Days.fromJson(json),
+};
 
-  static ApiResponses createMap(Type type, Map<String, dynamic> json) {
-    return _constructorsMap[type](json);
-  }
+static ApiResponses createMap
+(
 
-  static ApiResponses createList(Type type, List<dynamic> json) {
-    return _constructorsList[type](json);
-  }
+Type type, Map
+<
+String, dynamic> json) {
+return _constructorsMap[type](json);
+}
+
+static ApiResponses createList
+(
+
+Type type, List
+<
+dynamic> json) {
+return _constructorsList[type](json);
+}
 }
 
 class ApiResponse<T extends ApiResponses> {
