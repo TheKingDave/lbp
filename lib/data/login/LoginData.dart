@@ -7,7 +7,6 @@ class LoginData extends ApiResponses {
   bool darkMode;
   String language;
   String sessionKey;
-  // bool isTeacher;
   String photo;
 
   LoginData(
@@ -17,7 +16,6 @@ class LoginData extends ApiResponses {
       this.darkMode,
       this.language,
       this.sessionKey,
-      // this.isTeacher,
       this.photo}) {
     if (email == "NULL") email = null;
   }
@@ -38,7 +36,6 @@ class LoginData extends ApiResponses {
         darkMode: darkMode ?? other.darkMode,
         language: language ?? other.language,
         sessionKey: sessionKey ?? other.sessionKey,
-        // isTeacher: isTeacher ?? other.isTeacher,
         photo: photo ?? other.photo,
       );
 
@@ -50,7 +47,6 @@ class LoginData extends ApiResponses {
       darkMode: json['theme'] == "dark",
       language: json['language'],
       sessionKey: json['session_key'],
-      // isTeacher: json['isTeacher'],
       photo: json['photo'],
     );
   }
@@ -63,14 +59,12 @@ class LoginData extends ApiResponses {
     data['theme'] = this.darkMode ? 'dark' : 'light';
     data['language'] = this.language;
     data['session_key'] = this.sessionKey;
-    // data['isTeacher'] = this.isTeacher;
     data['photo'] = this.photo;
     return data;
   }
 
   @override
   String toString() {
-    // return 'LoginResponse{"class": ${ldClass}, fullName: $fullName, email: $email, darkMode: $darkMode, language: $language, sessionKey: $sessionKey, isTeacher: $isTeacher, photo: $photo}';
     return 'LoginResponse{'
         'ldClass: $ldClass,'
         'fullName: $fullName,'
@@ -78,7 +72,6 @@ class LoginData extends ApiResponses {
         'darkMode: $darkMode,'
         'language: $language,'
         'sessionKey: $sessionKey,'
-        // 'isTeacher: $isTeacher,'
         'photo: $photo'
         '}';
   }
@@ -94,7 +87,6 @@ class LoginData extends ApiResponses {
               darkMode == other.darkMode &&
               language == other.language &&
               sessionKey == other.sessionKey &&
-              // isTeacher == other.isTeacher &&
               photo == other.photo;
 
   @override
@@ -105,7 +97,6 @@ class LoginData extends ApiResponses {
       darkMode.hashCode ^
       language.hashCode ^
       sessionKey.hashCode ^
-      // isTeacher.hashCode ^
       photo.hashCode;
 
 }

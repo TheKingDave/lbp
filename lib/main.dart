@@ -6,6 +6,8 @@ import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/RootReducer.dart';
+import 'package:lbp/redux/actions/ApiActions.dart';
+import 'package:lbp/redux/actions/SetSessKeyAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:lbp/redux/middleware/FetchMiddleware.dart';
 import 'package:lbp/redux/middleware/LogginMiddleware.dart';
@@ -33,8 +35,10 @@ void main() async {
   // TODO: load data from disk/preferences
   SharedPreferences sp = await SharedPreferences.getInstance();
   final String initialUserName = sp.getString(Constants.sp_username);
+  final String initialSessKey = sp.getString(Constants.sp_sess_key);
 
   await DefaultStrings.setDefaultString();
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
   // TODO: init redux state with data from disk
   // TODO: remove loggin middleware
@@ -62,7 +66,10 @@ void main() async {
   final store = new Store<AppState>(rootReducer,
       initialState: AppState.initial(), middleware: middleware);
 
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  if(initialSessKey != null) {
+    cPrint("Try login with initsesskey");
+    store.dispatch(ApiLoginActionSessKey(initialSessKey));
+  }
 
   runApp(LBPApp(
     store: store,

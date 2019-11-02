@@ -7,6 +7,7 @@ import 'package:lbp/data/login/LoginRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/SetSessKeyAction.dart';
 import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:redux/redux.dart';
@@ -24,6 +25,19 @@ class ApiLoginAction extends ApiActionWithApiCall<AppState> {
     next(SetUsernameAction(username));
     next(FetchDataAction<LoginData>(
         LoginRequest(username: username, password: password)));
+  }
+}
+
+class ApiLoginActionSessKey extends ApiActionWithApiCall<AppState> {
+  final String sessKey;
+
+  ApiLoginActionSessKey(this.sessKey);
+
+  @override
+  void call(Store<AppState> store, NextDispatcher next) {
+    next(SetSessKeyAction(sessKey));
+    next(FetchDataAction<LoginData>(
+        LoginRequestWithSessKey()));
   }
 }
 
