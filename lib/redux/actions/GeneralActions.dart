@@ -1,3 +1,5 @@
+import 'package:lbp/data/Language.dart';
+
 abstract class GeneralAction {}
 
 class SetSessKeyAction extends GeneralAction {
@@ -16,4 +18,10 @@ class SetDarkModeAction extends GeneralAction {
   final bool darkMode;
 
   SetDarkModeAction(this.darkMode);
+}
+
+class SetLanguageAction extends GeneralAction {
+  final Language language;
+
+  SetLanguageAction(this.language);
 }

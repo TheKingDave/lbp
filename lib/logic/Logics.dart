@@ -70,6 +70,10 @@ void _saveGeneralSetting(
     SharedPreferences.getInstance().then((sp) {
       sp.setBool(Constants.sp_dark_mode, action.darkMode);
     });
+  } else if(action is SetLanguageAction) {
+    SharedPreferences.getInstance().then((sp) {
+      sp.setString(Constants.sp_language, action.language.short);
+    });
   }
 }
 
