@@ -12,7 +12,15 @@ class Language {
   final String short;
   final String name;
 
-  Language(this.short) : name = nameMap[short];
+  Language._internal(this.short, this.name);
+
+  factory Language(String short) {
+    if (!nameMap.containsKey(short)) {
+      throw ArgumentError.value(
+          short, "short", "Must be one of: ${nameMap.keys}");
+    }
+    return Language._internal(short, nameMap[short]);
+  }
 
   @override
   String toString() {
@@ -22,14 +30,11 @@ class Language {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Language &&
-              runtimeType == other.runtimeType &&
-              short == other.short &&
-              name == other.name;
+      other is Language &&
+          runtimeType == other.runtimeType &&
+          short == other.short &&
+          name == other.name;
 
   @override
-  int get hashCode =>
-      short.hashCode ^
-      name.hashCode;
-
+  int get hashCode => short.hashCode ^ name.hashCode;
 }
