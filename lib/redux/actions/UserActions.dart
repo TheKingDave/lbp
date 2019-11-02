@@ -2,17 +2,6 @@ import 'package:lbp/data/Language.dart';
 
 class LogoutAction {}
 
-class SetDarkModeAction {
-  bool value;
-
-  SetDarkModeAction(this.value);
-
-  @override
-  String toString() {
-    return 'SetDarkModeAction{value: $value}';
-  }
-}
-
 class SetLanguageAction {
   Language value;
 

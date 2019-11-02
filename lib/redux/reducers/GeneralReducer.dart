@@ -5,6 +5,7 @@ import 'package:redux/redux.dart';
 final Reducer<GeneralData> generalReducer = combineReducers<GeneralData>([
   TypedReducer<GeneralData, SetSessKeyAction>(_setSessKey),
   TypedReducer<GeneralData, SetInitUsernameAction>(_setInitUsername),
+  TypedReducer<GeneralData, SetDarkModeAction>(_setDarkMode),
 ]);
 
 GeneralData _setSessKey(GeneralData state, SetSessKeyAction action) {
@@ -13,4 +14,8 @@ GeneralData _setSessKey(GeneralData state, SetSessKeyAction action) {
 
 GeneralData _setInitUsername(GeneralData state, SetInitUsernameAction action) {
   return state.copyWith(initUsername: action.initUsername);
+}
+
+GeneralData _setDarkMode(GeneralData state, SetDarkModeAction action) {
+  return state.copyWith(darkMode: action.darkMode);
 }

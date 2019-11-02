@@ -4,7 +4,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
+import 'package:lbp/redux/selectors/GeneralSelectors.dart';
 import 'package:lbp/redux/selectors/UserSelectors.dart';
 
 class SettingsScreen extends StatelessWidget {

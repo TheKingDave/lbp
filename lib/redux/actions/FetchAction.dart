@@ -1,6 +1,7 @@
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/PostRequest.dart';
+import 'package:lbp/redux/selectors/GeneralSelectors.dart';
 import 'package:redux/redux.dart';
 
 import '../AppState.dart';
@@ -18,7 +19,7 @@ class FetchDataAction<T extends ApiResponses>
   }
 
   fetchData(Store<AppState> store, NextDispatcher next) async {
-    final sessKey =  store.state.general.sessKey;
+    final sessKey =  sessKeySelector(store.state);
 
     next(getStartAction());
     final res = await PostRequest<T>().send(request, sessKey);

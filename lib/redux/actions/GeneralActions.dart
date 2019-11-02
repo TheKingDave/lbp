@@ -9,3 +9,9 @@ class SetInitUsernameAction {
 
   SetInitUsernameAction(this.initUsername);
 }
+
+class SetDarkModeAction {
+  final bool darkMode;
+
+  SetDarkModeAction(this.darkMode);
+}
