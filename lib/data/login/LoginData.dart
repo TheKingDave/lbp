@@ -1,4 +1,5 @@
 import 'package:lbp/api/ApiResponse.dart';
+import 'package:lbp/etc/Constants.dart';
 
 class LoginData extends ApiResponses {
   String ldClass;
@@ -44,7 +45,7 @@ class LoginData extends ApiResponses {
       ldClass: json['class'],
       fullName: json['FullName'],
       email: json['email'],
-      darkMode: json['theme'] == "dark",
+      darkMode: json['theme'] == Constants.theme_dark,
       language: json['language'],
       sessionKey: json['session_key'],
       photo: json['photo'],
@@ -56,7 +57,7 @@ class LoginData extends ApiResponses {
     data['class'] = this.ldClass;
     data['FullName'] = this.fullName;
     data['email'] = this.email;
-    data['theme'] = this.darkMode ? 'dark' : 'light';
+    data['theme'] = this.darkMode ? Constants.theme_dark : Constants.theme_light;
     data['language'] = this.language;
     data['session_key'] = this.sessionKey;
     data['photo'] = this.photo;
