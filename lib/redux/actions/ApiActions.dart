@@ -7,6 +7,7 @@ import 'package:lbp/data/login/LoginRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/SetUsernameAction.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
 import 'package:redux/redux.dart';
 
@@ -20,6 +21,7 @@ class ApiLoginAction extends ApiActionWithApiCall<AppState> {
 
   @override
   void call(Store<AppState> store, NextDispatcher next) {
+    next(SetUsernameAction(username));
     next(FetchDataAction<LoginData>(
         LoginRequest(username: username, password: password)));
   }
