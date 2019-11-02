@@ -81,7 +81,6 @@ class LBPApp extends StatelessWidget {
   LBPApp({@required this.store, this.packageInfo, this.initialUserName});
 
   Route<dynamic> _generateRoute(RouteSettings settings) {
-    cPrint(settings.name);
     switch (settings.name) {
       case RouteNames.login:
         return MaterialPageRoute(

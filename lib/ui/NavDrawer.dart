@@ -32,7 +32,6 @@ class NavDrawer extends StatelessWidget {
           LoginData loginData = state.loginData;
 
           String routeName = ModalRoute.of(context).settings.name;
-          cPrint("$routeName is: ${routeName == RouteNames.studentOverview}");
           dynamic routeArgs = ModalRoute.of(context).settings.arguments;
           Function(String path) isCurrentPath = (path) => path == routeName;
 
