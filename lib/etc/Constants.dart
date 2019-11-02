@@ -7,4 +7,7 @@ class Constants {
 
   static const theme_light = "light";
   static const theme_dark = "dark";
+
+  static const strings_day_times_key = "dayTimes";
+  static const strings_lessons_key = "subject";
 }

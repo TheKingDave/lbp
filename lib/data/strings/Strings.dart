@@ -1,10 +1,8 @@
 import 'package:lbp/data/strings/DayTimeStrings.dart';
 import 'package:lbp/data/strings/LessonStrings.dart';
+import 'package:lbp/etc/Constants.dart';
 
 class Strings {
-  static const dayTimesKey = "dayTimes";
-  static const lessonsKey = "subject";
-
   static final Map<String, String> strings = {};
   static LessonStrings lessons = LessonStrings();
   static DayTimeStrings dayTimes = DayTimeStrings();
@@ -22,12 +20,13 @@ class Strings {
   }
 
   static void addString(String short, String string, [allowApp = false]) {
-    if((!allowApp) && short.startsWith("a_")) return;
-    if(!Strings.strings.containsKey(short)) Strings.setString(short, string, allowApp);
+    if ((!allowApp) && short.startsWith("a_")) return;
+    if (!Strings.strings.containsKey(short))
+      Strings.setString(short, string, allowApp);
   }
 
   static void setString(String short, String string, [allowApp = false]) {
-    if((!allowApp) && short.startsWith("a_")) return;
+    if ((!allowApp) && short.startsWith("a_")) return;
     strings[short] = string;
   }
 
@@ -57,16 +56,18 @@ class Strings {
   }
 
   static void setFromJson(Map<String, dynamic> json, [allowApp = false]) {
-    if(json.containsKey(dayTimesKey)) {
-      Strings.dayTimes = DayTimeStrings.fromJson(json[dayTimesKey]);
-      json.remove(dayTimesKey);
+    if (json.containsKey(Constants.strings_day_times_key)) {
+      Strings.dayTimes =
+          DayTimeStrings.fromJson(json[Constants.strings_day_times_key]);
+      json.remove(Constants.strings_day_times_key);
     }
-    if(json.containsKey(lessonsKey)) {
-      Strings.lessons = LessonStrings.fromJson(json[lessonsKey]);
-      json.remove(lessonsKey);
+    if (json.containsKey(Constants.strings_lessons_key)) {
+      Strings.lessons =
+          LessonStrings.fromJson(json[Constants.strings_lessons_key]);
+      json.remove(Constants.strings_lessons_key);
     }
     json.forEach((short, string) {
-      if(string is String) {
+      if (string is String) {
         Strings.setString(short, string, allowApp);
       }
     });
