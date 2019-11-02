@@ -21,7 +21,7 @@ final List<Logic> logics = [
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<LoginData> action) {
 
-  if(action.data.$class == Constants.teacherClass) {
+  if(action.data.ldClass == Constants.teacherClass) {
     // get teacher data
     next(NavigateReplaceAction(RouteNames.teacherOverview));
   } else {
