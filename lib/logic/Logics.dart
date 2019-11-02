@@ -1,3 +1,4 @@
+import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/general/SetDarkModeRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
@@ -35,6 +36,7 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
   }
 
   store.dispatch(SetDarkModeAction(action.data.darkMode));
+  store.dispatch(SetLanguageAction(Language(action.data.language)));
 
   if (action.data.ldClass == Constants.teacherClass) {
     // get teacher data
