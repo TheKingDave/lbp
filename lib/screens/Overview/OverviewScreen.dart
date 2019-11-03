@@ -35,7 +35,7 @@ class OverviewScreen extends StatelessWidget {
                   dayRouteData:
                       DayRouteData(d.getWeekDay(), initialLesson: index++),
                   color: l?.color,
-                  period: c.period.toString(),
+                  period: c.period,
                   note: c.note,
                   room: l?.room,
                   subject: Strings.lessons.getLessonLong(l?.subject),

@@ -4,6 +4,7 @@ import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
+import 'package:lbp/data/note/SetNoteResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/Constants.dart';
@@ -25,6 +26,8 @@ final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
   TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(
       _setDataSuccessLogic),
+  TypedLogic<AppState, FetchActionSuccess<SetNoteResponse>>(
+      _setNoteSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, SetLanguageAction>(_updateLanguage),
   TypedLogic<AppState, FetchActionSuccess<SetLanguageResponse>>(
@@ -53,6 +56,11 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<ValidationResponse> action) {
+  store.dispatch(ApiGetDataAction());
+}
+
+void _setNoteSuccessLogic(Store<AppState> store, NextDispatcher next,
+    FetchActionSuccess<SetNoteResponse> action) {
   store.dispatch(ApiGetDataAction());
 }
 

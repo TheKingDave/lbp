@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
+import 'package:lbp/data/note/SetNoteRequest.dart';
+import 'package:lbp/data/note/SetNoteResponse.dart';
 import 'package:lbp/data/setData/SetDataRequest.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/lessons/DaysRequest.dart';
@@ -70,6 +72,21 @@ class ApiSetLanguageAction extends ApiActionWithApiCall<AppState> {
   void call(Store<AppState> store, next) {
     next(FetchDataAction<SetLanguageResponse>(SetLanguageRequest(
       language: language,
+    )));
+  }
+}
+
+class ApiSetNoteAction extends ApiActionWithApiCall<AppState> {
+  final TimeFrame period;
+  final String note;
+
+  ApiSetNoteAction({@required this.period, this.note});
+
+  @override
+  void call(Store<AppState> store, next) {
+    next(FetchDataAction<SetNoteResponse>(SetNoteRequest(
+      period: period,
+      note: note,
     )));
   }
 }
