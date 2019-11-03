@@ -25,11 +25,19 @@ class ApiResponses {
   };
 
   static ApiResponses createMap(Type type, Map<String, dynamic> json) {
-    return _constructorsMap[type](json);
+    if(_constructorsMap.containsKey(type)) {
+      return _constructorsMap[type](json);
+    } else {
+      throw Exception("$type is not defined in the mapping list (Map)");
+    }
   }
 
   static ApiResponses createList(Type type, List<dynamic> json) {
-    return _constructorsList[type](json);
+    if(_constructorsList.containsKey(type)) {
+      return _constructorsList[type](json);
+    } else {
+      throw Exception("$type is not defined in the mapping list (List)");
+    }
   }
 }
 
