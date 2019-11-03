@@ -144,7 +144,7 @@ class _ClassOverviewData {
       : this.color = color ?? "#000000",
         this.subject = subject ?? Strings.lessons.getLessonLong("subject"),
         this.room = room ?? Strings.getCapitalize("a_room"),
-        this.note = note.isEmpty ? "Note" : Strings.getCapitalize("note");
+        this.note = note.isEmpty ? null : note;
 
   @override
   bool operator ==(Object other) =>
@@ -182,17 +182,18 @@ class _ClassOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData t = Theme.of(context);
 
+    final _mediumTextDisabled = mediumText.copyWith(color: t.disabledColor);
+
     final _bigText =
         data.visible ? bigText : bigText.copyWith(color: t.disabledColor);
-    final _mediumText =
-        data.visible ? mediumText : mediumText.copyWith(color: t.disabledColor);
+    final _mediumText = data.visible ? mediumText : _mediumTextDisabled;
 
     return Card(
         clipBehavior: Clip.hardEdge,
         child: InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .pushNamed(RouteNames.studentDay, arguments: data.dayRouteData);
+              Navigator.of(context).pushNamed(RouteNames.studentDay,
+                  arguments: data.dayRouteData);
             },
             child: Container(
               padding: EdgeInsets.all(8.0),
@@ -218,7 +219,13 @@ class _ClassOverview extends StatelessWidget {
                     ],
                   ),
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Expanded(child: Text(data.note, style: _mediumText)),
+                    Expanded(
+                        child: Text(
+                            data.note ??
+                                Strings.getCapitalize("note"),
+                            style: data.note == null
+                                ? _mediumTextDisabled
+                                : _mediumText)),
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(data.period, style: _mediumText),
