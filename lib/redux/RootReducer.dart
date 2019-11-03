@@ -1,5 +1,6 @@
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/login/LoginData.dart';
+import 'package:lbp/data/note/SetNoteResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ForceReloadAction.dart';
@@ -17,6 +18,7 @@ AppState rootReducer(AppState state, action) {
       login: fetchReducer<LoginData>(state.login, action),
       days: fetchReducer<Days>(state.days, action),
       setData: fetchReducer<SetDataResponse>(state.setData, action),
+      setNote: fetchReducer<SetNoteResponse>(state.setNote, action),
       general: generalReducer(state.general, action),
       error: errorReducer(state.error, action),
       config: state.config,

@@ -9,6 +9,7 @@ import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/logic/DayRouteData.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/selectors/OverviewSelectors.dart';
 import 'package:lbp/ui/Loader.dart';
 
 import 'ClassOverview.dart';
@@ -46,7 +47,7 @@ class OverviewScreen extends StatelessWidget {
           }));
         }
 
-        return _OverviewData(loading: store.state.days.loading, days: _days);
+        return _OverviewData(loading: overviewLoadingSelector(store.state), days: _days);
       },
       builder: (context, model) {
         return Loader(
