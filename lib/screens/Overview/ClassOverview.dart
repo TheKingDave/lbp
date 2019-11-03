@@ -49,7 +49,7 @@ class ClassOverview extends StatelessWidget {
                     context: context,
                     builder: (context) => NoteDialog(data.note));
 
-                if(value != data.note) {
+                if(value != data.note && value != null) {
                   model.setNote(data.period, value);
                 }
               },
