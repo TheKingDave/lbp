@@ -30,67 +30,56 @@ class ClassOverview extends StatelessWidget {
         data.visible ? bigText : bigText.copyWith(color: t.disabledColor);
     final _mediumText = data.visible ? mediumText : _mediumTextDisabled;
 
-    return StoreConnector<AppState, _ClassOverviewModel>(
-      converter: (store) => _ClassOverviewModel(
-        setNote: (period, note) => store.dispatch(ApiSetNoteAction(
-          period: period,
-          note: note,
-        ))
-      ),
-      builder: (_, model) => Card(
-          clipBehavior: Clip.hardEdge,
-          child: InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed(RouteNames.studentDay,
-                    arguments: data.dayRouteData);
-              },
-              onLongPress: () async {
-                final value = await showDialog(
-                    context: context,
-                    builder: (context) => NoteDialog(data.note));
-
-                if(value != data.note && value != null) {
-                  model.setNote(data.period, value);
-                }
-              },
-              child: Container(
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    border: Border(
-                      left: BorderSide(width: 10.0, color: HexColor(data.color)),
-                    )),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                            child: SingleChildScrollView(
-                                physics: ClampingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                child: Text(data.subject, style: _mediumText))),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Text(data.room, style: _bigText),
-                        ),
-                      ],
-                    ),
-                    Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return Card(
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed(RouteNames.studentDay,
+                  arguments: data.dayRouteData);
+            },
+            onLongPress: () async {
+              await showDialog(
+                  context: context,
+                  builder: (context) =>
+                      NoteDialog(note: data.note, period: data.period));
+            },
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border(
+                left: BorderSide(width: 10.0, color: HexColor(data.color)),
+              )),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
                       Expanded(
-                          child: Text(data.note ?? Strings.getCapitalize("note"),
-                              style: data.note == null
-                                  ? _mediumTextDisabled
-                                  : _mediumText)),
+                          child: SingleChildScrollView(
+                              physics: ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: Text(data.subject, style: _mediumText))),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
-                        child: Text(data.period.toString(), style: _mediumText),
-                      )
-                    ]),
-                  ],
-                ),
-              ))),
-    );
+                        child: Text(data.room, style: _bigText),
+                      ),
+                    ],
+                  ),
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Expanded(
+                        child: Text(data.note ?? Strings.getCapitalize("note"),
+                            style: data.note == null
+                                ? _mediumTextDisabled
+                                : _mediumText)),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(data.period.toString(), style: _mediumText),
+                    )
+                  ]),
+                ],
+              ),
+            )));
   }
 }
 
@@ -138,10 +127,4 @@ class ClassOverviewData {
       room.hashCode ^
       note.hashCode ^
       visible.hashCode;
-}
-
-class _ClassOverviewModel {
-  final Function(TimeFrame period, String note) setNote;
-
-  _ClassOverviewModel({this.setNote});
 }
