@@ -1,12 +1,12 @@
 import 'package:lbp/data/NotifyModel.dart';
-import 'package:lbp/redux/actions/ErrorActions.dart';
+import 'package:lbp/redux/actions/NotifyActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:redux/redux.dart';
 
 final Reducer<NotifyModel> notifyReducer = combineReducers<NotifyModel>([
   TypedReducer<NotifyModel, ErrorOccurredAction>(_errorOccurredReducer),
   TypedReducer<NotifyModel, FetchActionFailure>(_fetchActionFailureReducer),
-  TypedReducer<NotifyModel, ErrorHandledAction>(_errorHandledReducer),
+  TypedReducer<NotifyModel, NotificationHandledAction>(_errorHandledReducer),
 ]);
 
 NotifyModel _errorOccurredReducer(NotifyModel _, ErrorOccurredAction action) {
@@ -17,6 +17,6 @@ NotifyModel _fetchActionFailureReducer(NotifyModel _, FetchActionFailure action)
   return NotifyModel(NotifyModel.type_error, action.error.toString());
 }
 
-NotifyModel _errorHandledReducer(NotifyModel _, ErrorHandledAction action) {
+NotifyModel _errorHandledReducer(NotifyModel _, NotificationHandledAction action) {
   return null;
 }

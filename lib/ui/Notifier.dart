@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/NotifyModel.dart';
 import 'package:lbp/redux/AppState.dart';
-import 'package:lbp/redux/actions/ErrorActions.dart';
+import 'package:lbp/redux/actions/NotifyActions.dart';
 import 'package:redux/redux.dart';
 
 class Notifier extends StatelessWidget {
@@ -18,13 +18,18 @@ class Notifier extends StatelessWidget {
       converter: (store) => _NotifierModel.fromStore(store),
       builder: (context, model) => child,
       onWillChange: (model) {
+        final colorMap = {
+          NotifyModel.type_error: Theme.of(context).errorColor,
+          NotifyModel.type_ok: Colors.lightGreenAccent,
+        };
+
         if(model.notify != null) {
-          model.markErrorAsHandled();
+          model.markNotificationAsHandled();
 
           Scaffold.of(context)
               .showSnackBar(SnackBar(
             content: Text(model.notify.message),
-            backgroundColor: Theme.of(context).errorColor,
+            backgroundColor: colorMap[model.notify.type],
           ));
         }
       },
@@ -33,14 +38,14 @@ class Notifier extends StatelessWidget {
 }
 
 class _NotifierModel {
-  final Function markErrorAsHandled;
+  final Function markNotificationAsHandled;
   final NotifyModel notify;
 
-  _NotifierModel({this.markErrorAsHandled, this.notify});
+  _NotifierModel({this.markNotificationAsHandled, this.notify});
 
   static _NotifierModel fromStore(Store<AppState> store) {
     return _NotifierModel(
-      markErrorAsHandled: () => store.dispatch(ErrorHandledAction()),
+      markNotificationAsHandled: () => store.dispatch(NotificationHandledAction()),
       notify: store.state.notify,
     );
   }

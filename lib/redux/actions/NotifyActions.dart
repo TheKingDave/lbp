@@ -9,4 +9,4 @@ class ErrorOccurredAction {
   }
 }
 
-class ErrorHandledAction {}
+class NotificationHandledAction {}
