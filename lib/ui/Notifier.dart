@@ -1,28 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lbp/data/NotifyModel.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ErrorActions.dart';
 import 'package:redux/redux.dart';
 
-class ErrorNotifier extends StatelessWidget {
+class Notifier extends StatelessWidget {
   final Widget child;
 
-  ErrorNotifier({@required this.child});
+  Notifier({@required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ErrorNotifierModel>(
+    return StoreConnector<AppState, _NotifierModel>(
       distinct: true,
-      converter: (store) => _ErrorNotifierModel.fromStore(store),
+      converter: (store) => _NotifierModel.fromStore(store),
       builder: (context, model) => child,
       onWillChange: (model) {
-        if(model.error != null) {
+        if(model.notify != null) {
           model.markErrorAsHandled();
 
           Scaffold.of(context)
               .showSnackBar(SnackBar(
-            content: Text(model.error.toString()),
+            content: Text(model.notify.message),
             backgroundColor: Theme.of(context).errorColor,
           ));
         }
@@ -31,26 +32,26 @@ class ErrorNotifier extends StatelessWidget {
   }
 }
 
-class _ErrorNotifierModel {
+class _NotifierModel {
   final Function markErrorAsHandled;
-  final Exception error;
+  final NotifyModel notify;
 
-  _ErrorNotifierModel({this.markErrorAsHandled, this.error});
+  _NotifierModel({this.markErrorAsHandled, this.notify});
 
-  static _ErrorNotifierModel fromStore(Store<AppState> store) {
-    return _ErrorNotifierModel(
+  static _NotifierModel fromStore(Store<AppState> store) {
+    return _NotifierModel(
       markErrorAsHandled: () => store.dispatch(ErrorHandledAction()),
-      error: store.state.error,
+      notify: store.state.notify,
     );
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _ErrorNotifierModel &&
+          other is _NotifierModel &&
               runtimeType == other.runtimeType &&
-              error == other.error;
+              notify == other.notify;
 
   @override
-  int get hashCode => error.hashCode;
+  int get hashCode => notify.hashCode;
 }

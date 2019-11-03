@@ -1,11 +1,11 @@
 class ErrorOccurredAction {
-  ErrorOccurredAction(this.exception);
+  final String message;
 
-  final Exception exception;
+  ErrorOccurredAction(this.message);
 
   @override
   String toString() {
-    return 'ErrorOccurredAction{exception: $exception}';
+    return 'ErrorOccurredAction{message $message}';
   }
 }
 

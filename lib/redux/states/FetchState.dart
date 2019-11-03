@@ -1,6 +1,6 @@
 class FetchState<T> {
   final bool loading;
-  final Exception error;
+  final String error;
   final T data;
 
   FetchState(this.data, this.loading, this.error);

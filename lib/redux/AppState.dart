@@ -1,4 +1,5 @@
 import 'package:lbp/data/GeneralData.dart';
+import 'package:lbp/data/NotifyModel.dart';
 import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/login/LoginData.dart';
@@ -14,7 +15,7 @@ class AppState {
   final FetchState<SetDataResponse> setData;
   final FetchState<SetNoteResponse> setNote;
   final GeneralData general;
-  final Exception error;
+  final NotifyModel notify;
   final ConfigState config;
   final int forceReloadCounter;
   final FeedbackState feedback;
@@ -25,7 +26,7 @@ class AppState {
     this.setData,
     this.setNote,
     this.general,
-    this.error,
+    this.notify,
     this.config,
     this.forceReloadCounter,
     this.feedback,
@@ -38,7 +39,7 @@ class AppState {
       setData: FetchState<SetDataResponse>.initial(),
       setNote: FetchState<SetNoteResponse>.initial(),
       general: generalData ?? GeneralData.initial(),
-      error: null,
+      notify: null,
       config: ConfigState.initial(),
       forceReloadCounter: 0,
       feedback: FeedbackState.initial(),

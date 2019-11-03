@@ -7,7 +7,7 @@ import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/states/FetchState.dart';
-import 'package:lbp/ui/ErrorNotifier.dart';
+import 'package:lbp/ui/Notifier.dart';
 import 'package:lbp/ui/LoadingButton.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
           title: Text(Strings.getCapitalize("login")),
           actions: <Widget>[Image(image: AssetImage("assets/img/icon.jpg"))],
         ),
-        body: ErrorNotifier(
+        body: Notifier(
             child: Container(
           child: _LoginScreen(),
         )));

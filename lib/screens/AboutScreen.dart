@@ -19,7 +19,7 @@ class AboutScreen extends StatelessWidget {
     return StoreConnector<AppState, _AboutScreenState>(
       distinct: true,
       converter: (store) => _AboutScreenState(
-        error: (ex) => store.dispatch(ErrorOccurredAction(ex)),
+        error: (msg) => store.dispatch(ErrorOccurredAction(msg)),
         osl: () =>
             store.dispatch(NavigatePushAction(RouteNames.openSourceLicenses)),
       ),
@@ -58,13 +58,13 @@ class AboutScreen extends StatelessWidget {
         if (await canLaunch(url)) {
           await launch(url);
         } else {
-          error(Exception(Strings.getCapitalize("a_COULD_NOT_OPEN_LINK")));
+          error(Strings.getCapitalize("a_COULD_NOT_OPEN_LINK"));
         }
       };
 }
 
 class _AboutScreenState {
-  final Function(Exception ex) error;
+  final Function(String msg) error;
   final Function() osl;
 
   _AboutScreenState({this.error, this.osl});

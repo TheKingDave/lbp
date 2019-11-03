@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lbp/ui/ErrorNotifier.dart';
+import 'package:lbp/ui/Notifier.dart';
 import 'package:lbp/ui/NavDrawer.dart';
 
 class DefaultScaffold extends StatelessWidget {
@@ -18,7 +18,7 @@ class DefaultScaffold extends StatelessWidget {
         title: name != null ? Text(name) : null,
         actions: <Widget>[Image(image: AssetImage("assets/img/icon.jpg"))],
       ),
-      body: ErrorNotifier(
+      body: Notifier(
         child: child,
       ),
     );

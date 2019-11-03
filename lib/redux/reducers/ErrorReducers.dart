@@ -1,21 +1,22 @@
+import 'package:lbp/data/NotifyModel.dart';
 import 'package:lbp/redux/actions/ErrorActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:redux/redux.dart';
 
-final Reducer<Exception> errorReducer = combineReducers<Exception>([
-  TypedReducer<Exception, ErrorOccurredAction>(_errorOccurredReducer),
-  TypedReducer<Exception, FetchActionFailure>(_fetchActionFailureReducer),
-  TypedReducer<Exception, ErrorHandledAction>(_errorHandledReducer),
+final Reducer<NotifyModel> notifyReducer = combineReducers<NotifyModel>([
+  TypedReducer<NotifyModel, ErrorOccurredAction>(_errorOccurredReducer),
+  TypedReducer<NotifyModel, FetchActionFailure>(_fetchActionFailureReducer),
+  TypedReducer<NotifyModel, ErrorHandledAction>(_errorHandledReducer),
 ]);
 
-Exception _errorOccurredReducer(Exception _, ErrorOccurredAction action) {
-  return action.exception;
+NotifyModel _errorOccurredReducer(NotifyModel _, ErrorOccurredAction action) {
+  return NotifyModel(NotifyModel.type_error, action.message);
 }
 
-Exception _fetchActionFailureReducer(Exception _, FetchActionFailure action) {
-  return action.error;
+NotifyModel _fetchActionFailureReducer(NotifyModel _, FetchActionFailure action) {
+  return NotifyModel(NotifyModel.type_error, action.error.toString());
 }
 
-Exception _errorHandledReducer(Exception _, ErrorHandledAction action) {
+NotifyModel _errorHandledReducer(NotifyModel _, ErrorHandledAction action) {
   return null;
 }

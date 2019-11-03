@@ -24,7 +24,7 @@ class FetchDataAction<T extends ApiResponses>
     next(getStartAction());
     final res = await PostRequest<T>().send(request, sessKey);
     if(res.hasError()) {
-      next(FetchActionFailure<T>(Exception(res.error)));
+      next(FetchActionFailure<T>(res.error));
       request.onFailure(store, next);
     } else {
       next(FetchActionSuccess<T>(res.resp));
@@ -42,7 +42,7 @@ class FetchActionSuccess<T> implements FetchAction<T> {
 }
 
 class FetchActionFailure<T> implements FetchAction<T> {
-  Exception error;
+  String error;
 
   FetchActionFailure(this.error);
 }

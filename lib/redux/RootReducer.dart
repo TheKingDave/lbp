@@ -21,7 +21,7 @@ AppState rootReducer(AppState state, action) {
       setData: fetchReducer<SetDataResponse>(state.setData, action),
       setNote: fetchReducer<SetNoteResponse>(state.setNote, action),
       general: generalReducer(state.general, action),
-      error: errorReducer(state.error, action),
+      notify: notifyReducer(state.notify, action),
       config: state.config,
       forceReloadCounter:
           state.forceReloadCounter + (action is ForceReloadAction ? 1 : 0),
