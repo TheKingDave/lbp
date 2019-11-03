@@ -15,7 +15,7 @@ class SettingsScreen extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: Text("Select Langauge"),
+            title: Text(Strings.getCapitalize("a_language_select")),
             children: Language.languages.map((lang) {
               return RadioListTile<Language>(
                 title: Text(lang.name),
