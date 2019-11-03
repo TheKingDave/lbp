@@ -28,8 +28,8 @@ class Class extends ApiResponses {
   }
 
   Lesson getSelectedLesson() {
-    for(final l in lessons) {
-      if(l.selected) {
+    for (final l in lessons) {
+      if (l.selected) {
         return l;
       }
     }

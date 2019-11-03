@@ -26,8 +26,6 @@ final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<LoginData>>(_loginSuccessLogic),
   TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(
       _setDataSuccessLogic),
-  TypedLogic<AppState, FetchActionSuccess<SetNoteResponse>>(
-      _setNoteSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
   TypedLogic<AppState, SetLanguageAction>(_updateLanguage),
   TypedLogic<AppState, FetchActionSuccess<SetLanguageResponse>>(
@@ -56,11 +54,6 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<ValidationResponse> action) {
-  store.dispatch(ApiGetDataAction());
-}
-
-void _setNoteSuccessLogic(Store<AppState> store, NextDispatcher next,
-    FetchActionSuccess<SetNoteResponse> action) {
   store.dispatch(ApiGetDataAction());
 }
 
