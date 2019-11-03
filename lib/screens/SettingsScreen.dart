@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/GeneralSelectors.dart';
@@ -37,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
         language: languageSelector(store.state),
         darkMode: darkModeSelector(store.state),
         setDarkMode: (darkMode) => store.dispatch(SetDarkModeAction(darkMode)),
-        setLanguage: (lang) => store.dispatch(SetLanguageAction(lang)),
+        setLanguage: (lang) => store.dispatch(ApiSetLanguageAction(lang)),
       ),
       builder: (context, state) {
         return ListView(

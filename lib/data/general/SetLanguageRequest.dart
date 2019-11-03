@@ -10,7 +10,7 @@ class SetLanguageRequest extends ApiRequestWithKey {
 
   Map<String, dynamic> toJson() {
     return {
-      "theme": language.short,
+      "lang": language.short,
       "sess_key": sessKey,
     };
   }
