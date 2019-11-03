@@ -16,7 +16,7 @@ import 'package:lbp/redux/selectors/GeneralSelectors.dart';
 import 'package:lbp/screens/AboutScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/NotFoundScreen.dart';
-import 'package:lbp/screens/OverviewScreen.dart';
+import 'package:lbp/screens/Overview/OverviewScreen.dart';
 import 'package:lbp/screens/SettingsScreen.dart';
 import 'package:lbp/screens/TeacherOverview.dart';
 import 'package:lbp/settings/Themes.dart';
