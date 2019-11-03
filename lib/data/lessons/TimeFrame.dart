@@ -1,5 +1,3 @@
-import 'package:lbp/data/strings/Strings.dart';
-
 class TimeFrame {
   DateTime begin;
   DateTime end;
@@ -41,4 +39,20 @@ class TimeFrame {
 
     return "${b.hour}:${pad(b.minute)} - ${e.hour}:${pad(e.minute)}";
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is TimeFrame &&
+              runtimeType == other.runtimeType &&
+              begin == other.begin &&
+              end == other.end &&
+              name == other.name;
+
+  @override
+  int get hashCode =>
+      begin.hashCode ^
+      end.hashCode ^
+      name.hashCode;
+
 }
