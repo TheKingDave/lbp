@@ -6,7 +6,7 @@ import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ApiActions.dart';
-import 'package:lbp/redux/actions/ErrorActions.dart';
+import 'package:lbp/redux/actions/NotifyActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/selectors/OverviewSelectors.dart';
 

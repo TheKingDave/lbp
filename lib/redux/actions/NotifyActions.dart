@@ -1,3 +1,5 @@
+import 'package:lbp/data/NotifyModel.dart';
+
 class ErrorOccurredAction {
   final String message;
 
@@ -10,3 +12,14 @@ class ErrorOccurredAction {
 }
 
 class NotificationHandledAction {}
+
+class NotifyAction {
+  final NotifyModel notify;
+
+  NotifyAction(this.notify);
+
+  @override
+  String toString() {
+    return 'NotifyAction{notify: $notify}';
+  }
+}

@@ -4,7 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
-import 'package:lbp/redux/actions/ErrorActions.dart';
+import 'package:lbp/redux/actions/NotifyActions.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';

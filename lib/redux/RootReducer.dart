@@ -6,7 +6,7 @@ import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/ForceReloadAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/reducers/DaysReducer.dart';
-import 'package:lbp/redux/reducers/ErrorReducers.dart';
+import 'package:lbp/redux/reducers/NotifyReducers.dart';
 import 'package:lbp/redux/reducers/FeedbackReducer.dart';
 import 'package:lbp/redux/reducers/FetchReducer.dart';
 import 'package:lbp/redux/reducers/GeneralReducer.dart';

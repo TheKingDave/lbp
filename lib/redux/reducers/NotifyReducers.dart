@@ -7,6 +7,7 @@ final Reducer<NotifyModel> notifyReducer = combineReducers<NotifyModel>([
   TypedReducer<NotifyModel, ErrorOccurredAction>(_errorOccurredReducer),
   TypedReducer<NotifyModel, FetchActionFailure>(_fetchActionFailureReducer),
   TypedReducer<NotifyModel, NotificationHandledAction>(_errorHandledReducer),
+  TypedReducer<NotifyModel, NotifyAction>(_notifyActionReducer),
 ]);
 
 NotifyModel _errorOccurredReducer(NotifyModel _, ErrorOccurredAction action) {
@@ -19,4 +20,8 @@ NotifyModel _fetchActionFailureReducer(NotifyModel _, FetchActionFailure action)
 
 NotifyModel _errorHandledReducer(NotifyModel _, NotificationHandledAction action) {
   return null;
+}
+
+NotifyModel _notifyActionReducer(NotifyModel _, NotifyAction action) {
+  return action.notify;
 }
