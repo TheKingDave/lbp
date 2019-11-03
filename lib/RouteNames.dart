@@ -2,6 +2,7 @@ class RouteNames {
 
   // General routes
   static const login = "/login";
+  static const feedback = "/feedback";
   static const settings = "/settings";
   static const about = "/about";
   static const openSourceLicenses = "/about/openSourceLicenses";

@@ -63,7 +63,7 @@ class NavDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.feedback),
               title: Text(Strings.getCapitalize("feedback")),
-              onTap: () => cPrint("NAV: Issue"),
+              onTap: () => state.push(RouteNames.feedback),
             ),
             ListTile(
               leading: Icon(Icons.settings),

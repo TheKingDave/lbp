@@ -15,6 +15,7 @@ import 'package:lbp/redux/middleware/LogicMiddleware.dart';
 import 'package:lbp/redux/middleware/RouteMiddleware.dart';
 import 'package:lbp/redux/selectors/GeneralSelectors.dart';
 import 'package:lbp/screens/AboutScreen.dart';
+import 'package:lbp/screens/FeedbackScreen.dart';
 import 'package:lbp/screens/LoginScreen.dart';
 import 'package:lbp/screens/NotFoundScreen.dart';
 import 'package:lbp/screens/Overview/OverviewScreen.dart';
@@ -102,6 +103,13 @@ class LBPApp extends StatelessWidget {
           settings: settings,
           maintainState: false,
           builder: (_) => DayContainer(settings.arguments),
+        );
+      case RouteNames.feedback:
+        return MaterialPageRoute(
+          settings: settings,
+          maintainState: false,
+          builder: (_) => DefaultScaffold(
+              name: Strings.getCapitalize("feedback"), child: FeedbackScreen()),
         );
       case RouteNames.settings:
         return MaterialPageRoute(
