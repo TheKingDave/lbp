@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
         language: languageSelector(store.state),
         darkMode: darkModeSelector(store.state),
         setDarkMode: (darkMode) => store.dispatch(SetDarkModeAction(darkMode)),
-        setLanguage: (lang) => store.dispatch(ApiSetLanguageAction(lang)),
+        setLanguage: (lang) => store.dispatch(SetLanguageAction(lang)),
       ),
       builder: (context, state) {
         return ListView(

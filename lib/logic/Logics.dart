@@ -1,5 +1,6 @@
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/general/SetDarkModeRequest.dart';
+import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/ValidationResponse.dart';
@@ -25,11 +26,11 @@ final List<Logic> logics = [
   TypedLogic<AppState, FetchActionSuccess<SetDataResponse>>(
       _setDataSuccessLogic),
   TypedLogic<AppState, LogoutAction>(_logout),
-  TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
-  TypedLogic<AppState, GeneralAction>(_syncGeneralSetting),
   TypedLogic<AppState, SetLanguageAction>(_updateLanguage),
   TypedLogic<AppState, FetchActionSuccess<SetLanguageResponse>>(
       _updateLanguageFromApi),
+  TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
+  TypedLogic<AppState, GeneralAction>(_syncGeneralSetting),
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
@@ -90,6 +91,8 @@ void _syncGeneralSetting(
   if (action is SetDarkModeAction) {
     store.dispatch(FetchDataAction<ValidationResponse>(
         SetDarkModeRequest(darkMode: action.darkMode)));
+  } else if (action is SetLanguageAction) {
+    store.dispatch(ApiSetLanguageAction(action.language));
   }
 }
 

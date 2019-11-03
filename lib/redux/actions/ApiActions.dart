@@ -68,7 +68,6 @@ class ApiSetLanguageAction extends ApiActionWithApiCall<AppState> {
 
   @override
   void call(Store<AppState> store, next) {
-    next(SetLanguageAction(language));
     next(FetchDataAction<SetLanguageResponse>(SetLanguageRequest(
       language: language,
     )));
