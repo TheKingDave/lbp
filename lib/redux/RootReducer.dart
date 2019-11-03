@@ -7,6 +7,7 @@ import 'package:lbp/redux/actions/ForceReloadAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/reducers/DaysReducer.dart';
 import 'package:lbp/redux/reducers/ErrorReducers.dart';
+import 'package:lbp/redux/reducers/FeedbackReducer.dart';
 import 'package:lbp/redux/reducers/FetchReducer.dart';
 import 'package:lbp/redux/reducers/GeneralReducer.dart';
 
@@ -24,6 +25,7 @@ AppState rootReducer(AppState state, action) {
       config: state.config,
       forceReloadCounter:
           state.forceReloadCounter + (action is ForceReloadAction ? 1 : 0),
+      feedback: feedbackReducer(state.feedback, action),
     );
   }
 }

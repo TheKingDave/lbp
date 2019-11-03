@@ -1,9 +1,11 @@
 import 'package:lbp/data/GeneralData.dart';
+import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/lessons/Days.dart';
 import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/note/SetNoteResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/states/ConfigState.dart';
+import 'package:lbp/redux/states/FeedbackState.dart';
 import 'package:lbp/redux/states/FetchState.dart';
 
 class AppState {
@@ -15,6 +17,7 @@ class AppState {
   final Exception error;
   final ConfigState config;
   final int forceReloadCounter;
+  final FeedbackState feedback;
 
   AppState({
     this.login,
@@ -25,6 +28,7 @@ class AppState {
     this.error,
     this.config,
     this.forceReloadCounter,
+    this.feedback,
   });
 
   factory AppState.initial([GeneralData generalData]) {
@@ -37,6 +41,7 @@ class AppState {
       error: null,
       config: ConfigState.initial(),
       forceReloadCounter: 0,
+      feedback: FeedbackState.initial(),
     );
   }
 }

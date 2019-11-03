@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
 import 'package:lbp/data/lessons/Class.dart';
 import 'package:lbp/data/lessons/Days.dart';
@@ -18,6 +19,7 @@ class ApiResponses {
     SetDataResponse: (json) => SetDataResponse.fromJson(json),
     SetLanguageResponse: (json) => SetLanguageResponse.fromJson(json),
     SetNoteResponse: (json) => SetNoteResponse.fromJson(json),
+    FeedbackResponse: (json) => FeedbackResponse.fromJson(json),
   };
 
   static final Map<dynamic, Function(List<dynamic> json)> _constructorsList = {
