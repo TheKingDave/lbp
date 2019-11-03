@@ -61,6 +61,8 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
   SharedPreferences.getInstance().then((sp) {
     sp.remove(Constants.sp_username);
     sp.remove(Constants.sp_sess_key);
+    sp.remove(Constants.sp_language);
+    sp.remove(Constants.sp_dark_mode);
   });
   next(NavigatePushNamedAndRemoveUntilAction(RouteNames.login));
   next(InitAction());

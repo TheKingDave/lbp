@@ -1,3 +1,4 @@
+import 'package:devicelocale/devicelocale.dart';
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/etc/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,8 @@ class GeneralData {
       sessKey: sp.getString(Constants.sp_sess_key),
       initUsername: sp.getString(Constants.sp_username),
       darkMode: sp.getBool(Constants.sp_dark_mode) ?? false,
-      language: Language(sp.getString(Constants.sp_language)),
+      language: Language(sp.getString(Constants.sp_language) ??
+          (await Devicelocale.currentLocale).substring(0, 2)),
     );
   }
 
