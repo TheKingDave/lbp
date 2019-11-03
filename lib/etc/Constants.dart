@@ -11,4 +11,14 @@ class Constants {
 
   static const strings_day_times_key = "dayTimes";
   static const strings_lessons_key = "subject";
+
+  static const api_web_url = "https://lb-planer.tgm.ac.at";
+  static const api_url = "api/v1/";
+
+  static const api_path_set_theme = "setTheme";
+  static const api_path_set_lang = "lang";
+  static const api_path_login_sess_key = "getLoginData";
+  static const api_path_login_userdata = "login";
+  static const api_path_set_note = "setNote";
+  static const api_path_set_data = "setData";
 }

@@ -1,3 +1,5 @@
+import 'package:lbp/etc/Constants.dart';
+
 class ConfigState {
 
   final String webUrl;
@@ -6,6 +8,6 @@ class ConfigState {
   ConfigState({this.webUrl, this.apiUrl});
 
   factory ConfigState.initial() =>
-      ConfigState(webUrl: "https://lb-planer.tgm.ac.at", apiUrl: "api/v1/");
+      ConfigState(webUrl: Constants.api_web_url, apiUrl: Constants.api_url);
 
 }

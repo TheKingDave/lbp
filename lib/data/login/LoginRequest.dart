@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/api/ApiRequestWithKey.dart';
+import 'package:lbp/etc/Constants.dart';
 import 'package:lbp/etc/helpers.dart';
 
 class LoginRequest extends ApiRequest {
@@ -25,7 +26,7 @@ class LoginRequest extends ApiRequest {
 
   @override
   String getEndpoint() {
-    return "login";
+    return Constants.api_path_login_userdata;
   }
 
   @override
@@ -48,7 +49,7 @@ class LoginRequestWithSessKey extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "getLoginData";
+    return Constants.api_path_login_sess_key;
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:lbp/api/ApiRequestWithKey.dart';
+import 'package:lbp/etc/Constants.dart';
 
 class SetDataRequest extends ApiRequestWithKey {
   DateTime begin;
@@ -25,7 +26,7 @@ class SetDataRequest extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "setData";
+    return Constants.api_path_set_data;
   }
 
 }

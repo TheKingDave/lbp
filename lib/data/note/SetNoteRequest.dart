@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/api/ApiRequestWithKey.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
+import 'package:lbp/etc/Constants.dart';
 
 class SetNoteRequest extends ApiRequestWithKey {
   final TimeFrame period;
@@ -26,7 +27,7 @@ class SetNoteRequest extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "setNote";
+    return Constants.api_path_set_note;
   }
 
 }

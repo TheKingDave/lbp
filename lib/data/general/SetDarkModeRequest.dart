@@ -22,7 +22,7 @@ class SetDarkModeRequest extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "setTheme";
+    return Constants.api_path_set_theme;
   }
 
 }

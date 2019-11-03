@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:lbp/api/ApiRequestWithKey.dart';
 import 'package:lbp/data/Language.dart';
+import 'package:lbp/etc/Constants.dart';
 
 class SetLanguageRequest extends ApiRequestWithKey {
   Language language;
@@ -22,7 +23,7 @@ class SetLanguageRequest extends ApiRequestWithKey {
 
   @override
   String getEndpoint() {
-    return "lang";
+    return Constants.api_path_set_lang;
   }
 
 }
