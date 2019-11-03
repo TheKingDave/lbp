@@ -4,11 +4,11 @@ Lernbüro Plan
 
 ## Roadmap
 * [x] Save session key/username between app restart
-* [ ] Localization
+* [x] Localization
     * [x] Local localization
     * [x] Save language locally (between app restarts)
-    * [ ] Sync language change to API
-    * [ ] Load language data from Api 
+    * [x] Sync language change to API
+    * [x] Load language data from Api 
 * [x] Theme
     * [x] Local theme change
     * [x] Save theme locally (between app restarts)
