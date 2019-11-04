@@ -9,3 +9,5 @@ String sessKeySelector(AppState state) => state.general.sessKey;
 String initUsernameSelector(AppState state) => state.general.initUsername;
 
 Language languageSelector(AppState state) => state.general.language;
+
+bool overviewReturnSelector(AppState state) => state.general.overviewReturn;
