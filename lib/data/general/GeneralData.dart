@@ -34,7 +34,7 @@ class GeneralData {
       darkMode: sp.getBool(Constants.sp_dark_mode) ?? false,
       language: Language(sp.getString(Constants.sp_language) ??
           (await Devicelocale.currentLocale).substring(0, 2)),
-      overviewReturn: sp.getBool(Constants.sp_overview_return),
+      overviewReturn: sp.getBool(Constants.sp_overview_return) ?? false,
     );
   }
 
