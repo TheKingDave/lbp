@@ -30,3 +30,9 @@ class SetLanguageAction extends GeneralAction {
 
   SetLanguageAction(this.language);
 }
+
+class SetOverviewReturnAction extends GeneralAction {
+  final bool overviewReturn;
+
+  SetOverviewReturnAction(this.overviewReturn);
+}

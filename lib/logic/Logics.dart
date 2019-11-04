@@ -63,6 +63,7 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
     sp.remove(Constants.sp_sess_key);
     sp.remove(Constants.sp_language);
     sp.remove(Constants.sp_dark_mode);
+    sp.remove(Constants.sp_overview_return);
   });
   next(NavigatePushNamedAndRemoveUntilAction(RouteNames.login));
   next(InitAction());
@@ -70,23 +71,19 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
 
 void _saveGeneralSetting(
     Store<AppState> store, NextDispatcher next, GeneralAction action) {
-  if (action is SetInitUsernameAction) {
-    SharedPreferences.getInstance().then((sp) {
+  SharedPreferences.getInstance().then((sp) {
+    if (action is SetInitUsernameAction) {
       sp.setString(Constants.sp_username, action.initUsername);
-    });
-  } else if (action is SetSessKeyAction) {
-    SharedPreferences.getInstance().then((sp) {
+    } else if (action is SetSessKeyAction) {
       sp.setString(Constants.sp_sess_key, action.sessKey);
-    });
-  } else if (action is SetDarkModeAction) {
-    SharedPreferences.getInstance().then((sp) {
+    } else if (action is SetDarkModeAction) {
       sp.setBool(Constants.sp_dark_mode, action.darkMode);
-    });
-  } else if (action is SetLanguageAction) {
-    SharedPreferences.getInstance().then((sp) {
+    } else if (action is SetLanguageAction) {
       sp.setString(Constants.sp_language, action.language.short);
-    });
-  }
+    } else if (action is SetOverviewReturnAction) {
+      sp.setBool(Constants.sp_overview_return, action.overviewReturn);
+    }
+  });
 }
 
 void _syncGeneralSetting(

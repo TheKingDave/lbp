@@ -41,6 +41,8 @@ class SettingsScreen extends StatelessWidget {
         setLanguage: (lang) => store.dispatch(SetLanguageAction(lang)),
       ),
       builder: (context, state) {
+        ThemeData t = Theme.of(context);
+
         return ListView(
           children: <Widget>[
             ListTile(
@@ -61,6 +63,16 @@ class SettingsScreen extends StatelessWidget {
                 if (lang != null) state.setLanguage(lang);
               },
             ),
+            Divider(),
+            ListTile(
+              title: Text("Return to overview"),
+              subtitle: Text("Return to overview after selecting a subject"),
+              leading: Icon(Icons.arrow_back),
+              trailing: Switch(
+                value: false,
+                onChanged: (val) {},
+              ),
+            )
           ],
         );
       },
