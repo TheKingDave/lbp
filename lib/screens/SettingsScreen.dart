@@ -37,8 +37,10 @@ class SettingsScreen extends StatelessWidget {
       converter: (store) => _State(
         language: languageSelector(store.state),
         darkMode: darkModeSelector(store.state),
+        overviewReturn: overviewReturnSelector(store.state),
         setDarkMode: (darkMode) => store.dispatch(SetDarkModeAction(darkMode)),
         setLanguage: (lang) => store.dispatch(SetLanguageAction(lang)),
+        setOverviewReturn: (or) => store.dispatch(SetOverviewReturnAction(or)),
       ),
       builder: (context, state) {
         ThemeData t = Theme.of(context);
@@ -68,9 +70,10 @@ class SettingsScreen extends StatelessWidget {
               title: Text("Return to overview"),
               subtitle: Text("Return to overview after selecting a subject"),
               leading: Icon(Icons.arrow_back),
+              onTap: () => state.setOverviewReturn(!state.overviewReturn),
               trailing: Switch(
-                value: false,
-                onChanged: (val) {},
+                value: state.overviewReturn,
+                onChanged: state.setOverviewReturn,
               ),
             )
           ],
@@ -83,26 +86,37 @@ class SettingsScreen extends StatelessWidget {
 class _State {
   Language language;
   bool darkMode;
+  bool overviewReturn;
   Function(bool darkMode) setDarkMode;
   Function(Language language) setLanguage;
+  Function(bool overviewReturn) setOverviewReturn;
 
-  _State({this.language, this.darkMode, this.setDarkMode, this.setLanguage});
+  _State(
+      {this.language,
+      this.darkMode,
+      this.overviewReturn,
+      this.setDarkMode,
+      this.setLanguage,
+      this.setOverviewReturn});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _State &&
-              runtimeType == other.runtimeType &&
-              language == other.language &&
-              darkMode == other.darkMode &&
-              setDarkMode == other.setDarkMode &&
-              setLanguage == other.setLanguage;
+      other is _State &&
+          runtimeType == other.runtimeType &&
+          language == other.language &&
+          darkMode == other.darkMode &&
+          overviewReturn == other.overviewReturn &&
+          setDarkMode == other.setDarkMode &&
+          setLanguage == other.setLanguage &&
+          setOverviewReturn == other.setOverviewReturn;
 
   @override
   int get hashCode =>
       language.hashCode ^
       darkMode.hashCode ^
+      overviewReturn.hashCode ^
       setDarkMode.hashCode ^
-      setLanguage.hashCode;
-
+      setLanguage.hashCode ^
+      setOverviewReturn.hashCode;
 }
