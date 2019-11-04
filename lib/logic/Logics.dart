@@ -17,6 +17,7 @@ import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
 import 'package:lbp/redux/middleware/LogicMiddleware.dart';
+import 'package:lbp/redux/selectors/GeneralSelectors.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,6 +56,9 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<ValidationResponse> action) {
   store.dispatch(ApiGetDataAction());
+  if(overviewReturnSelector(store.state)) {
+    next(NavigatePopAction());
+  }
 }
 
 void _logout(Store<AppState> store, NextDispatcher next, action) {
