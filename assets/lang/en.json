@@ -200,6 +200,8 @@
   "a_not_implemented": "not implemented",
   "a_no_teacher_page": "Teacher functionality is not implemented yet.",
   "a_language_select": "Select Langauge",
+  "a_setting_overview_return": "Return to overview",
+  "a_setting_overview_return_sub": "Return to overview after selecting a subject",
 
   "a_COULD_NOT_OPEN_LINK": "Could not open link."
 }

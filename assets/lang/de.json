@@ -200,6 +200,8 @@
   "a_not_implemented": "nicht implementiert",
   "a_no_teacher_page": "Lehrer Funktionen sind noch nicht implementiert.",
   "a_language_select": "Sprache auswählen",
+  "a_setting_overview_return": "Zurück zum Overview",
+  "a_setting_overview_return_sub": "Kehre zurück zum overview nachdem du eine Klasse ausgewählt hast",
 
   "a_COULD_NOT_OPEN_LINK": "Konnte den link nicht öffnen."
 }
