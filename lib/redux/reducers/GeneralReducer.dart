@@ -7,6 +7,7 @@ final Reducer<GeneralData> generalReducer = combineReducers<GeneralData>([
   TypedReducer<GeneralData, SetInitUsernameAction>(_setInitUsername),
   TypedReducer<GeneralData, SetDarkModeAction>(_setDarkMode),
   TypedReducer<GeneralData, SetLanguageAction>(_setLanguage),
+  TypedReducer<GeneralData, SetOverviewReturnAction>(_setOverviewReturn),
 ]);
 
 GeneralData _setSessKey(GeneralData state, SetSessKeyAction action) {
@@ -23,4 +24,8 @@ GeneralData _setDarkMode(GeneralData state, SetDarkModeAction action) {
 
 GeneralData _setLanguage(GeneralData state, SetLanguageAction action) {
   return state.copyWith(language: action.language);
+}
+
+GeneralData _setOverviewReturn(GeneralData state, SetOverviewReturnAction action) {
+  return state.copyWith(overviewReturn: action.overviewReturn);
 }
