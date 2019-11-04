@@ -67,8 +67,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             Divider(),
             ListTile(
-              title: Text("Return to overview"),
-              subtitle: Text("Return to overview after selecting a subject"),
+              title: Text(Strings.getString("a_setting_overview_return")),
+              subtitle: Text(Strings.getString("a_setting_overview_return_sub")),
               leading: Icon(Icons.arrow_back),
               onTap: () => state.setOverviewReturn(!state.overviewReturn),
               trailing: Switch(
