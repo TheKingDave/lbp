@@ -1,4 +1,4 @@
-import 'package:lbp/data/GeneralData.dart';
+import 'package:lbp/data/general/GeneralData.dart';
 import 'package:lbp/data/NotifyModel.dart';
 import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/lessons/Days.dart';

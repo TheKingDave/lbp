@@ -8,8 +8,14 @@ class GeneralData {
   final String initUsername;
   final bool darkMode;
   final Language language;
+  final bool overviewReturn;
 
-  GeneralData({this.sessKey, this.initUsername, this.darkMode, this.language});
+  GeneralData(
+      {this.sessKey,
+      this.initUsername,
+      this.darkMode,
+      this.language,
+      this.overviewReturn});
 
   factory GeneralData.initial() {
     return GeneralData(
@@ -28,16 +34,22 @@ class GeneralData {
       darkMode: sp.getBool(Constants.sp_dark_mode) ?? false,
       language: Language(sp.getString(Constants.sp_language) ??
           (await Devicelocale.currentLocale).substring(0, 2)),
+      overviewReturn: sp.getBool(Constants.sp_overview_return),
     );
   }
 
   GeneralData copyWith(
-      {String sessKey, String initUsername, bool darkMode, Language language}) {
+      {String sessKey,
+      String initUsername,
+      bool darkMode,
+      Language language,
+      bool overviewReturn}) {
     return GeneralData(
       sessKey: sessKey ?? this.sessKey,
       initUsername: initUsername ?? this.initUsername,
       darkMode: darkMode ?? this.darkMode,
       language: language ?? this.language,
+      overviewReturn: overviewReturn ?? this.overviewReturn,
     );
   }
 }

@@ -5,6 +5,7 @@ class Constants {
   static const sp_sess_key = "sp_sess_key";
   static const sp_dark_mode = "sp_dark_mode";
   static const sp_language = "sp_language";
+  static const sp_overview_return = "sp_overview_return";
 
   static const theme_light = "light";
   static const theme_dark = "dark";

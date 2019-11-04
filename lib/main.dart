@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/RouteNames.dart';
-import 'package:lbp/data/GeneralData.dart';
+import 'package:lbp/data/general/GeneralData.dart';
 import 'package:lbp/etc/helpers.dart';
 import 'package:lbp/logic/Logics.dart';
 import 'package:lbp/redux/AppState.dart';

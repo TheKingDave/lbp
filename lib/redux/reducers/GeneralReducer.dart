@@ -1,4 +1,4 @@
-import 'package:lbp/data/GeneralData.dart';
+import 'package:lbp/data/general/GeneralData.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:redux/redux.dart';
 
