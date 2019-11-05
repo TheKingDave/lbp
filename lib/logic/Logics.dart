@@ -67,7 +67,6 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
     sp.remove(Constants.sp_sess_key);
     sp.remove(Constants.sp_language);
     sp.remove(Constants.sp_dark_mode);
-    sp.remove(Constants.sp_overview_return);
   });
   next(NavigatePushNamedAndRemoveUntilAction(RouteNames.login));
   next(InitAction());
