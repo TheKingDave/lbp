@@ -15,7 +15,8 @@ Lernbüro Plan
     * [x] Sync theme change to API
 * [x] Notes
 * [ ] Feedback
-* [ ] Teacher view 
+* [ ] Teacher view
+* [ ] History 
 
 ## Make the API great again
 
