@@ -57,7 +57,7 @@ void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<ValidationResponse> action) {
   store.dispatch(ApiGetDataAction());
   if(overviewReturnSelector(store.state)) {
-    next(NavigatePopAction());
+    next(NavigatePushAction(RouteNames.studentOverview));
   }
 }
 
