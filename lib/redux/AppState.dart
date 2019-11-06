@@ -18,7 +18,7 @@ class AppState {
   final NotifyModel notify;
   final ConfigState config;
   final int forceReloadCounter;
-  final FeedbackState feedback;
+  final FetchState<FeedbackResponse> feedback;
 
   AppState({
     this.login,
@@ -42,7 +42,7 @@ class AppState {
       notify: null,
       config: ConfigState.initial(),
       forceReloadCounter: 0,
-      feedback: FeedbackState.initial(),
+      feedback: FetchState<FeedbackResponse>.initial(),
     );
   }
 }
