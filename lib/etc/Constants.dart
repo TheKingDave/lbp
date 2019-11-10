@@ -16,6 +16,10 @@ class Constants {
   static const api_web_url = "https://lb-planer.tgm.ac.at";
   static const api_url = "api/v1/";
 
+  static const feedback_url = "https://sendmailtome.thekingdave.com";
+  static const feedback_application = "lbp";
+  static const feedback_subject = "Feedback to LBP from ";
+
   static const api_path_set_theme = "setTheme";
   static const api_path_set_lang = "lang";
   static const api_path_login_sess_key = "getLoginData";
