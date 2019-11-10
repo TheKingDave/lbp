@@ -3,7 +3,6 @@ import 'package:lbp/api/ApiRequest.dart';
 import 'package:lbp/api/ApiRequestWithKey.dart';
 import 'package:lbp/api/ApiResponse.dart';
 import 'package:lbp/api/requests/Request.dart';
-import 'package:lbp/settings/Api.dart';
 
 import '../../etc/helpers.dart';
 
@@ -16,7 +15,7 @@ class PostRequest<T extends ApiResponses>
       req.setSesKey(sessKey);
     }
     try {
-      res = await http.post(Api.getApiUrl(req.getEndpoint()),
+      res = await http.post(req.getUrl(),
           headers: req.getHeaders(),
           body: req?.getBody(),
           encoding: req.getEncoding());
