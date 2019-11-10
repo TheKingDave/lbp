@@ -18,7 +18,7 @@ class Constants {
 
   static const feedback_url = "https://sendmailtome.thekingdave.com";
   static const feedback_application = "lbp";
-  static const feedback_subject = "Feedback to LBP from ";
+  static const feedback_subject = "Feedback from ";
 
   static const api_path_set_theme = "setTheme";
   static const api_path_set_lang = "lang";
