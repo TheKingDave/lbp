@@ -1,4 +1,6 @@
 import 'package:lbp/data/Language.dart';
+import 'package:lbp/data/NotifyModel.dart';
+import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/general/SetDarkModeRequest.dart';
 import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
@@ -13,6 +15,7 @@ import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/actions/ForceReloadAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
+import 'package:lbp/redux/actions/NotifyActions.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
@@ -33,6 +36,7 @@ final List<Logic> logics = [
       _updateLanguageFromApi),
   TypedLogic<AppState, GeneralAction>(_saveGeneralSetting),
   TypedLogic<AppState, GeneralAction>(_syncGeneralSetting),
+  TypedLogic<AppState, FetchActionSuccess<FeedbackResponse>>(_feedbackSuccess)
 ];
 
 void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
@@ -56,7 +60,7 @@ void _loginSuccessLogic(Store<AppState> store, NextDispatcher next,
 void _setDataSuccessLogic(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<ValidationResponse> action) {
   store.dispatch(ApiGetDataAction());
-  if(overviewReturnSelector(store.state)) {
+  if (overviewReturnSelector(store.state)) {
     next(NavigatePushAction(RouteNames.studentOverview));
   }
 }
@@ -72,8 +76,8 @@ void _logout(Store<AppState> store, NextDispatcher next, action) {
   next(InitAction());
 }
 
-void _saveGeneralSetting(
-    Store<AppState> store, NextDispatcher next, GeneralAction action) {
+void _saveGeneralSetting(Store<AppState> store, NextDispatcher next,
+    GeneralAction action) {
   SharedPreferences.getInstance().then((sp) {
     if (action is SetInitUsernameAction) {
       sp.setString(Constants.sp_username, action.initUsername);
@@ -89,8 +93,8 @@ void _saveGeneralSetting(
   });
 }
 
-void _syncGeneralSetting(
-    Store<AppState> store, NextDispatcher next, GeneralAction action) {
+void _syncGeneralSetting(Store<AppState> store, NextDispatcher next,
+    GeneralAction action) {
   if (action is SetDarkModeAction) {
     store.dispatch(FetchDataAction<ValidationResponse>(
         SetDarkModeRequest(darkMode: action.darkMode)));
@@ -99,8 +103,8 @@ void _syncGeneralSetting(
   }
 }
 
-void _updateLanguage(
-    Store<AppState> store, NextDispatcher next, SetLanguageAction action) {
+void _updateLanguage(Store<AppState> store, NextDispatcher next,
+    SetLanguageAction action) {
   Strings.loadFromAssets(action.language);
   next(ForceReloadAction());
 }
@@ -109,4 +113,11 @@ void _updateLanguageFromApi(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<SetLanguageResponse> action) {
   Strings.setFromJson(action.data.json);
   next(ForceReloadAction());
+}
+
+void _feedbackSuccess(Store<AppState> store, NextDispatcher next,
+    FetchActionSuccess<FeedbackResponse> action) {
+  next(NotifyAction(
+    NotifyModel(NotifyModel.type_ok, "Feedback successfully sent"),
+  ));
 }
