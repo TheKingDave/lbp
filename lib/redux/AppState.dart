@@ -6,7 +6,6 @@ import 'package:lbp/data/login/LoginData.dart';
 import 'package:lbp/data/note/SetNoteResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/states/ConfigState.dart';
-import 'package:lbp/redux/states/FeedbackState.dart';
 import 'package:lbp/redux/states/FetchState.dart';
 
 class AppState {
@@ -19,6 +18,7 @@ class AppState {
   final ConfigState config;
   final int forceReloadCounter;
   final FetchState<FeedbackResponse> feedback;
+  final bool resetFeedback;
 
   AppState({
     this.login,
@@ -30,6 +30,7 @@ class AppState {
     this.config,
     this.forceReloadCounter,
     this.feedback,
+    this.resetFeedback,
   });
 
   factory AppState.initial([GeneralData generalData]) {
@@ -43,6 +44,7 @@ class AppState {
       config: ConfigState.initial(),
       forceReloadCounter: 0,
       feedback: FetchState<FeedbackResponse>.initial(),
+      resetFeedback: false,
     );
   }
 }

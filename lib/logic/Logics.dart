@@ -16,6 +16,7 @@ import 'package:lbp/redux/actions/FetchAction.dart';
 import 'package:lbp/redux/actions/ForceReloadAction.dart';
 import 'package:lbp/redux/actions/InitAction.dart';
 import 'package:lbp/redux/actions/NotifyActions.dart';
+import 'package:lbp/redux/actions/ResetFeedbackActions.dart';
 import 'package:lbp/redux/actions/RouteActions.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/actions/UserActions.dart';
@@ -117,6 +118,7 @@ void _updateLanguageFromApi(Store<AppState> store, NextDispatcher next,
 
 void _feedbackSuccess(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<FeedbackResponse> action) {
+  next(ResetFeedbackAction());
   next(NotifyAction(
     NotifyModel(NotifyModel.type_ok, "Feedback successfully sent"),
   ));

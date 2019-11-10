@@ -1,0 +1,3 @@
+class ResetFeedbackAction {}
+
+class ResetFeedbackHandledAction {}

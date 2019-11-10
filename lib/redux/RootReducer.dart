@@ -9,6 +9,7 @@ import 'package:lbp/redux/reducers/DaysReducer.dart';
 import 'package:lbp/redux/reducers/NotifyReducers.dart';
 import 'package:lbp/redux/reducers/FetchReducer.dart';
 import 'package:lbp/redux/reducers/GeneralReducer.dart';
+import 'package:lbp/redux/reducers/ResetFeedbackReducer.dart';
 
 AppState rootReducer(AppState state, action) {
   if (action is InitAction) {
@@ -25,6 +26,7 @@ AppState rootReducer(AppState state, action) {
       forceReloadCounter:
           state.forceReloadCounter + (action is ForceReloadAction ? 1 : 0),
       feedback: fetchReducer(state.feedback, action),
+      resetFeedback: resetFeedbackReducer(state.resetFeedback, action),
     );
   }
 }
