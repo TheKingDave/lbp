@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/data/Language.dart';
 import 'package:lbp/data/feedback/FeedbackRequest.dart';
+import 'package:lbp/data/feedback/FeedbackResponse.dart';
 import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
 import 'package:lbp/data/note/SetNoteRequest.dart';
@@ -99,9 +100,9 @@ class ApiSendFeedbackAction extends ApiActionWithApiCall<AppState> {
 
   @override
   void call(Store<AppState> store, next) {
-    next(FeedbackRequest(
+    next(FetchDataAction<FeedbackResponse>(FeedbackRequest(
       user: emailSelector(store.state),
       body: feedback,
-    ));
+    )));
   }
 }
