@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lbp/data/Language.dart';
+import 'package:lbp/data/feedback/FeedbackRequest.dart';
 import 'package:lbp/data/general/SetLanguageRequest.dart';
 import 'package:lbp/data/general/SetLanguageResponse.dart';
 import 'package:lbp/data/note/SetNoteRequest.dart';
@@ -10,11 +11,11 @@ import 'package:lbp/data/lessons/DaysRequest.dart';
 import 'package:lbp/data/lessons/TimeFrame.dart';
 import 'package:lbp/data/login/LoginRequest.dart';
 import 'package:lbp/data/login/LoginData.dart';
-import 'package:lbp/data/ValidationResponse.dart';
 import 'package:lbp/data/setData/SetDataResponse.dart';
 import 'package:lbp/redux/AppState.dart';
 import 'package:lbp/redux/actions/GeneralActions.dart';
 import 'package:lbp/redux/middleware/ApiMiddleware.dart';
+import 'package:lbp/redux/selectors/UserSelectors.dart';
 import 'package:redux/redux.dart';
 
 import 'FetchAction.dart';
@@ -88,5 +89,19 @@ class ApiSetNoteAction extends ApiActionWithApiCall<AppState> {
       period: period,
       note: note,
     )));
+  }
+}
+
+class ApiSendFeedbackAction extends ApiActionWithApiCall<AppState> {
+  final String feedback;
+
+  ApiSendFeedbackAction(this.feedback);
+
+  @override
+  void call(Store<AppState> store, next) {
+    next(FeedbackRequest(
+      user: emailSelector(store.state),
+      body: feedback,
+    ));
   }
 }
