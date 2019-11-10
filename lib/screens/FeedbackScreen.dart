@@ -21,6 +21,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     return StoreConnector<AppState, _FeedbackScreenModel>(
         converter: (store) => _FeedbackScreenModel(
               sendFeedback: (fb) => store.dispatch(ApiSendFeedbackAction(fb)),
+              loading: store.state.feedback.loading,
             ),
         builder: (_, model) {
           return SingleChildScrollView(
@@ -41,7 +42,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   ),
                   Padding(padding: EdgeInsets.only(top: 16)),
                   LoadingButton(
-                    loading: false,
+                    loading: model.loading,
                     onPressed: () =>
                         model.sendFeedback(_feedbackController.value.text),
                     child: Text(Strings.getCapitalize("submit")),
@@ -56,6 +57,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
 class _FeedbackScreenModel {
   final void Function(String feedback) sendFeedback;
+  bool loading;
 
-  _FeedbackScreenModel({this.sendFeedback});
+  _FeedbackScreenModel({this.sendFeedback, this.loading});
 }
