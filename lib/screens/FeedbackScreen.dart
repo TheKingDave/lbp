@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lbp/data/strings/Strings.dart';
 import 'package:lbp/redux/AppState.dart';
+import 'package:lbp/redux/actions/ApiActions.dart';
 import 'package:lbp/ui/LoadingButton.dart';
 
 class FeedbackScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _FeedbackScreenModel>(
         converter: (store) => _FeedbackScreenModel(
-              sendFeedback: (fb) => store.dispatch("replace me"),
+              sendFeedback: (fb) => store.dispatch(ApiSendFeedbackAction(fb)),
             ),
         builder: (_, model) {
           return SingleChildScrollView(
