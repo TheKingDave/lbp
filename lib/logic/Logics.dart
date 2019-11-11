@@ -120,6 +120,6 @@ void _feedbackSuccess(Store<AppState> store, NextDispatcher next,
     FetchActionSuccess<FeedbackResponse> action) {
   next(ResetFeedbackAction());
   next(NotifyAction(
-    NotifyModel(NotifyModel.type_ok, "Feedback successfully sent"),
+    NotifyModel(NotifyModel.type_ok, Strings.getString("feedback_suc")),
   ));
 }

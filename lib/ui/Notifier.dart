@@ -20,15 +20,15 @@ class Notifier extends StatelessWidget {
       onWillChange: (model) {
         final colorMap = {
           NotifyModel.type_error: Theme.of(context).errorColor,
-          NotifyModel.type_ok: Colors.lightGreenAccent,
+          NotifyModel.type_ok: Color(0xFF00C851),
         };
 
-        if(model.notify != null) {
+        if (model.notify != null) {
           model.markNotificationAsHandled();
 
-          Scaffold.of(context)
-              .showSnackBar(SnackBar(
-            content: Text(model.notify.message),
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(model.notify.message,
+                style: TextStyle(color: Colors.white)),
             backgroundColor: colorMap[model.notify.type],
           ));
         }
@@ -45,7 +45,8 @@ class _NotifierModel {
 
   static _NotifierModel fromStore(Store<AppState> store) {
     return _NotifierModel(
-      markNotificationAsHandled: () => store.dispatch(NotificationHandledAction()),
+      markNotificationAsHandled: () =>
+          store.dispatch(NotificationHandledAction()),
       notify: store.state.notify,
     );
   }
@@ -53,9 +54,9 @@ class _NotifierModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _NotifierModel &&
-              runtimeType == other.runtimeType &&
-              notify == other.notify;
+      other is _NotifierModel &&
+          runtimeType == other.runtimeType &&
+          notify == other.notify;
 
   @override
   int get hashCode => notify.hashCode;
