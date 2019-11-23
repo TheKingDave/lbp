@@ -84,7 +84,8 @@ class _LoginScreenState extends State<_LoginScreen> {
           _usernameController.value = TextEditingValue(text: model.initUsername);
         }
 
-        return Padding(
+        return SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(32.0),
             child: Form(
                 key: _formKey,
@@ -169,7 +170,7 @@ class _LoginScreenState extends State<_LoginScreen> {
                           child: Text(Strings.getCapitalize("login")),
                         )),
                   ],
-                )));
+                ))));
       },
     );
   }
